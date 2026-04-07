@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ex 6</title>
-    <h1> Chào mừng đến với website của tôi</h1>
-    <nav> 
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
 </head>
-<hr />
 <body>
-    <h2>Danh sách các bài biết mới nhất</h2>
-    <section>
-        <article>
-            <h3>Bài viết 1</h3>
-            <p>Nội dung của bài viết 1</p>
-        </article>
-        <article>
-            <h3>Bài viết 2</h3>
-            <p>Nội dung của bài viết 2</p>
-        </article>
-    </section>
+    <h1>Hồ sơ thông tin cá nhân</h1>
+    <form action="/submit-profile" method="POST">
+        <fieldset>
+            <legend>Thông tin cá nhân</legend>
+            <label for="fullname">Họ và tên:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên..." required><br><br>
+
+            <label for="dob">Ngày sinh:</label>
+            <input type="date" id="dob" name="dob" required><br><br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Thông tin liên hệ</legend>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required><br><br>
+
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" placeholder="0912345678" required><br><br>
+        </fieldset>
+        <br>
+        <label for="notes">Ghi chú bổ sung:</label><br><br>
+        <textarea name="notes" id="notes" cols="30" rows="5" placeholder="Nhập ghi chú của bạn tại đây..."></textarea><br><br>
+        <button type="submit">Lưu hồ sơ</button>
+    </form>
 </body>
-<footer>
-    <p>&copy; Nguyễn Tùng Sơn - Học viên Rikkei</p>
 </html>

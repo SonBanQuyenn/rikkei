@@ -3,29 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+    <title>Ex 8</title>
 </head>
 <body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
-    </div>
+    <h1>Đăng Ký Đặt Vé Sự Kiện Âm Nhạc</h1>
+    <form action="/submit-event-registration" method="POST">
+        <label for="fullname">Họ và tên:</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên..." minlength="3" maxlength="50" required><br><br>
+
+        <label for="number-of-tickets">Số lượng vé:</label>
+        <input type="number" id="number-of-tickets" name="number-of-tickets" min="1" max="5" required><br><br>
+
+        <label for="VIP-ticket">Mã vé VIP (Đã cấp sẵn):</label>
+        <input type="text" id="VIP-ticket" name="VIP-ticket" value="MUSIC-VIP-2026" readonly><br><br>
+
+        <label for="internal-discount">Mã giảm giá nội bộ:</label>
+        <input type="text" id="internal-discount" name="internal-discount" value="NOT-ELIGIBLE" disabled><br><br>
+
+        <button type="submit">Xác nhận đặt vé</button>
+    </form>
 </body>
 </html>

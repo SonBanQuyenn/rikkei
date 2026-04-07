@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ex 5</title>
-    <h1> Chào mừng đến với website của tôi</h1>
-    <nav> 
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
 </head>
-<hr />
 <body>
-    <p>Đây là phần nội dung chính của trang web</p>
+    <h1>Khảo sát dịch vụ khách hàng</h1>
+    <form action="/submit-survey" method="POST">
+        <label for="age">Độ tuổi của bạn:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <fieldset>
+            <legend>Giới tính của bạn là gì?</legend>
+            <label><input type="radio" name="gender" value="male" required> Nam</label>
+            <label><input type="radio" name="gender" value="female"> Nữ</label>
+            <label><input type="radio" name="gender" value="other"> Khác</label>
+        </fieldset>
+        <br>
+
+        <fieldset>
+            <legend>Dịch vụ bạn đang quan tâm (có thể chọn nhiều):</legend>
+            <label><input type="checkbox" name="service" value="website"> Website</label>
+            <label><input type="checkbox" name="service" value="mobile-app"> Mobile App</label>
+            <label><input type="checkbox" name="service" value="marketing"> Marketing</label>
+        </fieldset>
+        <br>
+
+        <label for="country">Quốc gia đang sinh sống:</label>
+        <select id="country" name="country" required>
+            <option value="">-- Vui lòng chọn --</option>
+            <option value="vietnam">Việt Nam</option>
+            <option value="japan">Nhật Bản</option>
+            <option value="usa">Hoa Kỳ</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Gửi thông tin</button>
+    </form>
 </body>
 </html>
