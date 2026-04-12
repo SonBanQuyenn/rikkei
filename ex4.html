@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .container > p {
+            color: #999;
+            font-style: italic;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        
+        ul {
+            list-style: disc;
+            margin-left: 20px;
+            color: #d9534f;
+        }
+        
+        li {
+            color: #d9534f;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+        }
+        
+        li + li {
+            margin-top: 8px;
+        }
+        
+        li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+        
+        li a:hover {
+            text-decoration: underline;
+            letter-spacing: 0.5px;
+        }
+        
+        ul ul {
+            margin-top: 8px;
+        }
+        
+        ul ul li {
+            color: #666;
+            font-weight: normal;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lộ trình học Lập trình Web Frontend</h2>
+        <p>Bắt đầu Hành trình trở thành lập trình viên Frontend chuyên nghiệp với các khóa học dưới đây</p>
+        <ul>
+            <li><a href="#">Nhập môn HTML và CSS</a></li>
+            <li>Lập trình JavaScript cơ bản</li>
+            <li>Lập trình ReactJS (khóa chính)
+                <ul>
+                    <li>React Router cho điều hướng</li>
+                    <li>Quản lý state với Redux</li>
+                </ul>
+            </li>
+            <li>Xây dựng dự án thực tế</li>
+        </ul>
+    </div>
+</body>
+</html>
