@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f4f7fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1f2937;
+            display: grid;
+            place-items: center;
+            padding: 32px;
+        }
+
+        .pricing-wrapper {
+            width: min(1080px, 100%);
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 24px;
+            box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            border-color: #2563eb;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        .card:nth-child(2) {
+            background: #e7f0ff;
+            border-color: #4f8cf5;
+        }
+
+        .card:nth-child(2) .title {
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        .title {
+            margin: 0 0 20px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .price {
+            margin: 0;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-align: center;
+        }
+
+        .price span {
+            display: inline-block;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            margin-left: 6px;
+        }
+
+        .feature-list {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #c3c3c3;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .button {
+            margin-top: auto;
+            width: 70%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 20px;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background 0.25s ease;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-wrapper">
+        <article class="card">
+            <h2 class="title">Gói Cơ Bản</h2>
+            <p class="price">199.000<span>đ/tháng</span></p><br>
+            <ul class="feature-list">
+                <li>1 Tài khoản người dùng</li>
+                <li>Hỗ trợ qua thư điện tử</li>
+                <li>5GB Dung lượng lưu trữ</li>
+            </ul>
+            <a href="#" class="button">Chọn gói này</a>
+        </article>
+
+        <article class="card">
+            <h2 class="title">Gói Chuyên Nghiệp</h2>
+            <p class="price">499.000<span>đ/tháng</span></p><br>
+            <ul class="feature-list">
+                <li>5 Tài khoản người dùng</li>
+                <li>Hỗ trợ ưu tiên 24/7</li>
+                <li>50GB Dung lượng lưu trữ</li>
+            </ul>
+            <a href="#" class="button">Chọn gói này</a>
+        </article>
+
+        <article class="card">
+            <h2 class="title">Gói Doanh Nghiệp</h2>
+            <p class="price">999.000<span>đ/tháng</span></p><br>
+            <ul class="feature-list">
+                <li>Không giới hạn tài khoản</li>
+                <li>Hỗ trợ kỹ thuật riêng</li>
+                <li>Không giới hạn dung lượng</li>
+            </ul>
+            <a href="#" class="button">Chọn gói này</a>
+        </article>
+    </div>
+</body>
+</html>

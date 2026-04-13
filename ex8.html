@@ -1,31 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ex 8</title>
+<style>
+    * {
+    box-sizing: border-box;
+    }
+
+    body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #edf2f7 0%, #f8fafc 100%);
+    color: #2d3748;
+    padding: 24px;
+    }
+
+    .quote-card {
+    max-width: 560px;
+    width: 100%;
+    background: #ffffff;
+    padding: 48px 56px;
+    position: relative;
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
+    border-left: 8px solid #2f6fb8;
+    }
+
+    .quote-card::before,
+    .quote-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    }
+
+    blockquote {
+    margin: 0;
+    padding: 0;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+    position: relative;
+    color: #334155;
+    }
+
+    blockquote::before,
+    blockquote::after {
+    position: absolute;
+    color: #94a3b8;
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1;
+    }
+
+    blockquote::before {
+    content: '"';
+    left: -40px;
+    }
+
+    blockquote::after {
+    content: '"';
+    bottom: -20px;
+    right: -10px;
+    }
+
+    blockquote p {
+    margin: 0;
+    }
+
+    blockquote p:first-child::first-letter {
+    font-size: 3.5rem;
+    font-weight: 800;
+    float: left;
+    line-height: 0.75;
+    margin-right: 0.25rem;
+    color: #22559c;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .author {
+    margin-top: 32px;
+    text-align: right;
+    font-size: 0.95rem;
+    color: #64748b;
+    letter-spacing: 0.05em;
+    }
+
+    .author span {
+    display: inline-block;
+    font-weight: 600;
+    color: #1e293b;
+    }
+</style>
 </head>
 <body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
-    </div>
+<article class="quote-card">
+    <blockquote>
+    <p>Đột phá không đến từ việc cố gắng tạo ra thứ gì đó lớn lao, mà từ việc liên tục giải quyết các vấn đề nhỏ nhặt xung quanh cuộc sống của bạn. Khi bạn tập trung xây dựng sản phẩm mang lại giá trị thực sự cho người dùng, những điều vĩ đại sẽ tự nhiên theo sau.</p>
+    </blockquote>
+    <div class="author">- <span>Tỷ phú công nghệ</span> -</div>
+</article>
 </body>
 </html>
