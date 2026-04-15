@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Ex 8</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            float: left;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav {
+            float: right;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+        }
+    </style>
 </head>
+
 <body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
+
+    <div class="header">
+        <div class="logo">TechZone</div>
+
+        <div class="nav">
+            <a href="#">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Liên hệ</a>
+        </div>
+
+        <div class="clearfix"></div>
     </div>
+
+    <div class="content">
+        <h2>Chào mừng bạn đến với TechZone!</h2>
+        <p>Đây là nội dung trang web không bị tràn lên phần Header phía trên nhờ kỹ thuật clear float.</p>
+    </div>
+
 </body>
+
 </html>

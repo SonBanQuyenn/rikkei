@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Ex 7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,6 +33,7 @@
             border: 1px solid #ccc;
             vertical-align: top;
             background: white;
+            margin-bottom: 10px;
         }
 
         .product h3 {
@@ -63,6 +64,13 @@
 
         .btn:hover {
             background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                width: 100%;
+                display: block;
+            }
         }
     </style>
 </head>

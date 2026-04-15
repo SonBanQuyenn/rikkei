@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu cửa hàng - TechStore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-box {
+            width: 100%;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-box {
+            padding: 30px 24px 35px 24px;
+        }
+
+        .text-box h2 {
+            font-size: 28px;
+            color: #1e3c4c;
+            margin-bottom: 18px;
+            padding-left: 15px;
+            border-left: 5px solid #2c7a4b;
+        }
+
+        .text-box p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 18px;
+        }
+
+        .text-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            .about-box {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            .image-box {
+                width: 40%;
+                display: flex;
+            }
+
+            .image-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .text-box {
+                width: 60%;
+                padding: 40px 35px 40px 30px;
+            }
+
+            .text-box h2 {
+                font-size: 32px;
+            }
+
+            .text-box p {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="about-box">
+            <div class="image-box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT7IVT_-zoI81OoWVJ9eaZyvsgVdInIbe13A&s"
+                    alt="Cửa hàng công nghệ TechStore">
+            </div>
+            <div class="text-box">
+                <h2>Giới thiệu Cửa Hàng</h2>
+                <p>
+                    Chào mừng bạn đến với hệ thống cửa hàng công nghệ hiện đại nhất.
+                    Chúng tôi cung cấp đa dạng các thiết bị điện tử, từ máy tính, laptop đến điện thoại, phụ kiện thông
+                    minh.
+                    Mọi sản phẩm đều được cam kết chính hãng 100%, bảo hành uy tín và dịch vụ chăm sóc khách hàng tận
+                    tâm nhất.
+                </p>
+                <p>
+                    Hãy cùng khám phá các sản phẩm tuyệt vời của hàng trăm thương hiệu được trang bày tại TechStore.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

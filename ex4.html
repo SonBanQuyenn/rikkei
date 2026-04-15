@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Ex 4</title>
+    <style>
+        .row1 {
+            display: flex;
+            gap: 20px;
+        }
+
+        .product {
+            background-color: rgb(236, 171, 7);
+            border: 2px solid black;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+        .product:nth-child(2) {
+            display: none;
+        }
+
+        .row2 {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-2 {
+            background-color: rgb(236, 171, 7);
+            border: 2px solid black;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+        
+        .product-2:nth-child(2) {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="row1">
+        <p class="product">Sản phẩm 1</p>
+        <p class="product">Sản phẩm 2</p>
+        <p class="product">Sản phẩm 3</p>
+    </div>
+    <div class="row2">
+        <p class="product-2">Sản phẩm 4</p>
+        <p class="product-2">Sản phẩm 5</p>
+        <p class="product-2">Sản phẩm 6</p>
+    </div>
+</body>
+</html>
