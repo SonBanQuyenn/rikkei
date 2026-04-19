@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPortfolio - Flexbox Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Container chính cho thanh điều hướng - KHỞI TẠO MÔI TRƯỜNG FLEXBOX */
+        .navbar {
+            display: flex;
+            /* CĂN CHỈNH CÁC PHẦN TỬ VỀ HAI PHÍA TRÊN TRỤC CHÍNH (MAIN AXIS) */
+            justify-content: space-between;
+            /* CĂN GIỮA CÁC PHẦN TỬ THEO CHIỀU DỌC (CROSS AXIS) - logo và chữ luôn ngang hàng */
+            align-items: center;
+
+            background: white;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            flex-wrap: wrap;
+        }
+
+        /* Logo bên trái */
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e3c5c;
+            letter-spacing: -0.5px;
+            transition: transform 0.2s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* Danh sách liên kết bên phải */
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2c4b6e;
+            padding: 0.5rem 0;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #e67e22;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #e67e22;
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            max-width: 900px;
+            margin: 4rem auto;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #1e3c5c;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #4a627a;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">MyPortfolio</div>
+        <ul class="nav-links">
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Kỹ năng</a></li>
+            <li><a href="#">Dự án</a></li>
+            <li><a href="#">Liên hệ</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Xin chào, tôi là Nhà phát triển</h1>
+        <p>Flexbox giúp căn chỉnh logo và menu hoàn hảo: justify-content: space-between đẩy logo sang trái, các link
+            sang phải. align-items: center giữ mọi thứ thẳng hàng theo chiều dọc.</p>
+    </div>
+</body>
+
+</html>

@@ -1,31 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+    <title>PHOTO GALLERY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 40px 20px;
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px 25px 40px 25px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .gallery-header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #333;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+            justify-content: space-between;
+            min-height: 550px;
+            background: white;
+        }
+
+        /* Mỗi item ảnh */
+        .photo {
+            width: 23%;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        @media (max-width: 650px) {
+            .photo {
+                width: 48%;
+            }
+
+            .gallery {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
+    <div class="wrapper">
+        <div class="gallery-header">
+            <h1>Ex 8</h1>
+        </div>
+        <div class="gallery">
+            <div class="photo">
+                <img src="https://picsum.photos/id/101/400/400" alt="Ảnh 1">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/104/400/400" alt="Ảnh 2">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/106/400/400" alt="Ảnh 3">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/107/400/400" alt="Ảnh 4">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/116/400/400" alt="Ảnh 5">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/119/400/400" alt="Ảnh 6">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/20/400/400" alt="Ảnh 7">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/26/400/400" alt="Ảnh 8">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/28/400/400" alt="Ảnh 9">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/36/400/400" alt="Ảnh 10">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/42/400/400" alt="Ảnh 11">
+            </div>
+            <div class="photo">
+                <img src="https://picsum.photos/id/55/400/400" alt="Ảnh 12">
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
