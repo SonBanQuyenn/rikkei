@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 10</title>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Inter", "Roboto", "Segoe UI", sans-serif;
+            background: #0f1724;
+            color: #edf2f7;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-image: linear-gradient(rgba(15, 23, 36, 0.75), rgba(15, 23, 36, 0.75)), url("https://img.freepik.com/free-vector/modern-abstract-dark-violate-pink-background_84443-2788.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(94, 234, 212, 0.22), transparent 28%), radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.16), transparent 30%);
+            pointer-events: none;
+        }
+
+        .hero__content {
+            position: relative;
+            max-width: 860px;
+            width: 100%;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .hero__title {
+            position: relative;
+            font-size: 4rem;
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .hero__title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -1rem;
+            transform: translateX(-50%);
+            width: 6rem;
+            height: 4px;
+            background-color: rgba(56, 189, 248, 0.95);
+            border-radius: 999px;
+        }
+
+        .hero__subtitle {
+            font-size: 18px;
+            color: rgba(226, 232, 240, 0.85);
+            margin-bottom: 1rem;
+        }
+
+        .hero__description {
+            font-size: 0.94rem;
+            color: rgba(226, 232, 240, 0.72);
+            margin: 0 auto 2rem;
+            max-width: 620px;
+            line-height: 1.8;
+        }
+
+        .hero__strong {
+            display: block;
+            margin-bottom: 1rem;
+            color: #22d3ee;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            font-size: 0.77rem;
+        }
+
+        .hero__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            padding: 0.95rem 2rem;
+            border: 1px solid rgba(56, 189, 248, 0.85);
+            border-radius: 0.75rem;
+            background: transparent;
+            color: #e0f2fe;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+        }
+
+        .hero__button:hover {
+            background-color: rgba(56, 189, 248, 0.18);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">Nguyễn Tùng Sơn</h1>
+            <p class="hero__subtitle">Frontend Developer</p>
+            <p class="hero__description">Thiết kế trải nghiệm người dùng, sáng tạo giao diện độc đáo, tối ưu hoá tương tác.</p>
+            <div class="hero__strong">Sáng tạo để dẫn đầu</div>
+            <a href="#" class="hero__button">Tải CV</a>
+        </div>
+    </section>
+</body>
+</html>

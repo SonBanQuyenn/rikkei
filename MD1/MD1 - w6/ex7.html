@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 7</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-4 fw-bold text-primary text-center">📚 Quản lý sách</h1>
+
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên sách</th>
+                                    <th>Tác giả</th>
+                                    <th class="text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Đắc Nhân Tâm</td>
+                                    <td>Dale Carnegie</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal" data-book-title="Đắc Nhân Tâm">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Nhà Giả Kim</td>
+                                    <td>Paulo Coelho</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal" data-book-title="Nhà Giả Kim">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Trên Đường Băng</td>
+                                    <td>Tony Buổi Sáng</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal" data-book-title="Trên Đường Băng">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fs-5 mb-0">⚠️ Bạn có chắc chắn muốn xóa cuốn sách này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentBookTitle = '';
+        const deleteButtons = document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#deleteModal"]');
+        const confirmBtn = document.getElementById('confirmDeleteBtn');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                currentBookTitle = this.getAttribute('data-book-title');
+            });
+        });
+
+        confirmBtn.addEventListener('click', function () {
+            const modalElement = document.getElementById('deleteModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+
+            const rows = document.querySelectorAll('tbody tr');
+            for (let row of rows) {
+                const titleCell = row.cells[1];
+                if (titleCell && titleCell.innerText === currentBookTitle) {
+                    row.remove();
+                    break;
+                }
+            }
+
+            modal.hide();
+        });
+    </script>
+
+</body>
+
+</html>

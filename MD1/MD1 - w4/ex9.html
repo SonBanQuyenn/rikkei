@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: 50px auto;
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            display: inline-block;
+            width: 32%;
+            height: 180px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+            background: white;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .price {
+            color: red;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                width: 100%;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Danh Sách Sản Phẩm Nổi Bật</h2>
+
+        <div class="product">
+            <h3>Laptop Gaming Cao Cấp</h3>
+            <p>Hiệu năng vượt trội, màn hình 144Hz cho trải nghiệm chơi game mượt mà.</p>
+            <div class="price">25.000.000 VND</div>
+            <a href="#" class="btn">Mua ngay</a>
+        </div>
+
+        <div class="product">
+            <h3>Điện Thoại Chụp Ảnh Khủng</h3>
+            <p>Camera 108MP, pin trâu 5000mAh, sạc nhanh 65W.</p>
+            <div class="price">12.500.000 VND</div>
+            <a href="#" class="btn">Mua ngay</a>
+        </div>
+
+        <div class="product">
+            <h3>Tai Nghe Chống Ồn Chủ Động</h3>
+            <p>Cách âm tuyệt đối, âm thanh vòm 360 độ, nghe nhạc cực đã.</p>
+            <div class="price">4.200.000 VND</div>
+            <a href="#" class="btn">Mua ngay</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

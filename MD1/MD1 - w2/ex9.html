@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
+</head>
+<body>
+    <h1>Nộp hồ sơ ứng tuyển</h1>
+    <form action="/submit-application" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Thông tin liên hệ</legend>
+            <div>
+                <label for="fullname">Họ và tên:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <br>
+            <div>
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" name="phone" placeholder="0912345678" pattern="^0[1-9][0-9]{8}$" required>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Hồ sơ đính kèm</legend>
+            <div>
+                <label for="cv-file">Tải lên CV (Định dạng PDF/Word):</label>
+                <input type="file" id="cv-file" name="cv-file" accept=".pdf,.doc,.docx" required>
+            </div>
+        </fieldset>
+        <br>
+        <button type="submit">Nộp hồ sơ</button>
+    </form>
+</body>
+</html>

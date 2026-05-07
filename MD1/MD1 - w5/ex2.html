@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #e8eef4 0%, #d4dee8 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(2px);
+            padding: 2.8rem 2.5rem;
+            border-radius: 3rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+            max-width: 480px;
+            width: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.02);
+        }
+
+        .name {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #1f2e3a;
+            letter-spacing: -0.3px;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .quote {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #e67e22;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: #fff6ed;
+            border-radius: 3rem;
+            font-weight: 500;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .quote::before {
+            content: "“";
+            font-size: 1.3rem;
+            margin-right: 0.2rem;
+            color: #e67e22;
+        }
+
+        .quote::after {
+            content: "”";
+            font-size: 1.3rem;
+            margin-left: 0.2rem;
+            color: #e67e22;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-card">
+        <img class="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu75yQ7oHYDk7vpHD841TKK9U-NKOogVwp7A&s" alt="Ảnh đại diện">
+        <div class="name">Nguyễn Văn A</div>
+        <div class="quote">Thái độ quyết định trình độ</div>
+    </div>
+</body>
+
+</html>

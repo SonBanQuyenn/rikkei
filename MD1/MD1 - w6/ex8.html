@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f7fb;
+        }
+
+        .book-cover {
+            background: #e9ecef;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-box {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            height: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e67e22;
+        }
+
+        .btn-custom {
+            border-radius: 2rem;
+            padding: 0.5rem 1.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-5">
+        <div class="row g-4">
+            <div class="col-12 text-center mb-3">
+                <h1 class="display-5 fw-bold text-primary">📖 Chi tiết sản phẩm</h1>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="book-cover">
+                    <img src="https://picsum.photos/id/20/300/400" alt="Bìa sách" class="img-fluid rounded-3 shadow-sm">
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <h2 class="fw-bold text-dark">Hành Trình Về Phương Đông</h2>
+                    <div class="price">120.000đ</div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <div class="section-box">
+                            <h5 class="fw-bold text-primary border-bottom pb-2">📘 Tóm tắt nội dung</h5>
+                            <p class="mt-2 text-secondary">Một trong những tác phẩm hay nhất về phương đông. Cuốn sách
+                                kể về hành trình khám phá những giá trị tâm linh, triết lý ứng xử của các nhân viên hóa
+                                phương đông qua góc nhìn của các nhà khoa học phương Tây.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="section-box">
+                            <h5 class="fw-bold text-primary border-bottom pb-2">✍️ Thông tin tác giả</h5>
+                            <p class="mt-2 text-secondary mb-1"><strong>Tác giả:</strong> Baird T. Spalding</p>
+                            <p class="mb-1"><strong>Dịch giải:</strong> Nguyễn Phong</p>
+                            <p class="mb-1"><strong>Nhà xuất bản:</strong> NXB Tổng hợp TP.HCM</p>
+                            <p class="mb-0"><strong>Năm xuất bản:</strong> 2021</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex gap-3 flex-wrap">
+                    <button class="btn btn-success btn-custom px-4 py-2 fw-semibold">🛒 Thêm vào giỏ</button>
+                    <button class="btn btn-outline-primary btn-custom px-4 py-2 fw-semibold">📖 Đọc thử</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 2</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9fafb;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .card{
+            width: 240px;
+            padding: 10px;
+            border: 2px solid #006eff;
+            border-radius: 12px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .title {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .description {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+
+        .price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <article class="card">
+        <h2 class="title">Điện thoại thông minh X</h2>
+        <p class="description">Màn hình 6.5 inch, camera sắc nét, pin dung lượng cao phù hợp cho cả ngày dài</p>
+        <p class="price">Giá: 15.000.000 VNĐ</p>
+    </article>
+</body>
+</html>

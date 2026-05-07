@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 10</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f4f8;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 3rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1a3e50;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #e67e22;
+            border-radius: 2px;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .member-card {
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 280px;
+
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.15);
+            border-color: #e67e2240;
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e2f3a;
+            margin-bottom: 0.3rem;
+        }
+
+        .member-role {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e67e22;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #f0e2d0;
+            display: inline-block;
+        }
+
+        .member-desc {
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: #4a5b68;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 1.8rem 1rem;
+            }
+
+            .member-card {
+                flex-basis: 240px;
+                padding: 1.4rem;
+            }
+
+            .member-name {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .member-card {
+                flex-basis: 100%;
+            }
+
+            .team-grid {
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="section-title">Đội Ngũ Phát Triển</div>
+
+        <div class="team-grid">
+            <div class="member-card">
+                <div class="member-name">Trần Tuấn Anh</div>
+                <div class="member-role">FRONTEND DEVELOPER</div>
+                <div class="member-desc">Chuyên gia về ReactJS và UI/UX với hơn 5 năm kinh nghiệm. Được nhiều giải nhất
+                    trong công nghệ phần tử của hệ thống.</div>
+            </div>
+
+            <div class="member-card">
+                <div class="member-name">Nguyễn Ngọc Mai</div>
+                <div class="member-role">PROJECT MANAGER</div>
+                <div class="member-desc">Điều phổ biến trên các ứng dụng hàng đầu tại Việt Nam. Được nhiều giải nhất
+                    trong công nghệ phần tử của hệ thống.</div>
+            </div>
+
+            <div class="member-card">
+                <div class="member-name">Lê Bá Khánh</div>
+                <div class="member-role">BACKEND ENGINEER</div>
+                <div class="member-desc">Xây dựng hệ thống Data Science từ scratch. Được nhiều giải nhất trong công nghệ
+                    phần tử của hệ thống.</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

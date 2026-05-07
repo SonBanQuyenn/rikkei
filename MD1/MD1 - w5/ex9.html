@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ex 9</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eaf4f0;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.2rem;
+            line-height: 1.5;
+        }
+
+        .booking-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .booking-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .info-col {
+            flex: 1;
+            background: linear-gradient(135deg, #0b4f6c 0%, #1b7b5e 100%);
+            color: white;
+            padding: 2.2rem 2rem;
+        }
+
+        .form-col {
+            flex: 1;
+            background: #ffffff;
+            padding: 2.2rem 2rem;
+        }
+
+        .clinic-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            border-left: 5px solid #f9b23f;
+            padding-left: 1rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            opacity: 0.9;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .description {
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-list li {
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.95rem;
+        }
+
+        .highlight-list li::before {
+            content: "✓";
+            background: #f9b23f;
+            color: #0b4f6c;
+            font-weight: bold;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* form styles */
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0b4f6c;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-sub {
+            color: #5a6874;
+            margin-bottom: 1.8rem;
+            font-size: 0.9rem;
+            border-left: 3px solid #f9b23f;
+            padding-left: 0.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1f2f3a;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid #d0dbdf;
+            border-radius: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #fefefe;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1b7b5e;
+            box-shadow: 0 0 0 3px rgba(27, 123, 94, 0.2);
+        }
+
+        .btn-submit {
+            background: #f9b23f;
+            color: #1e3b3a;
+            border: none;
+            width: 100%;
+            padding: 0.9rem;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 2rem;
+            margin-top: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: #e09d2c;
+            transform: scale(0.98);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 1rem;
+            }
+
+            .booking-container {
+                flex-direction: column;
+            }
+
+            .form-col {
+                order: 1;
+            }
+
+            .info-col {
+                order: 2;
+            }
+
+            .info-col,
+            .form-col {
+                padding: 1.8rem;
+            }
+
+            .clinic-name {
+                font-size: 1.7rem;
+            }
+
+            .form-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .info-col,
+            .form-col {
+                padding: 1.4rem;
+            }
+
+            .btn-submit {
+                padding: 0.75rem;
+            }
+        }
+
+        @media (min-width: 801px) and (max-width: 1000px) {
+
+            .info-col,
+            .form-col {
+                padding: 1.6rem;
+            }
+
+            .clinic-name {
+                font-size: 1.6rem;
+            }
+        }
+
+        hr {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="booking-wrapper">
+        <div class="booking-container">
+            <div class="form-col">
+                <div class="form-title">Đặt Lịch Khám Ngay</div>
+                <div class="form-sub">Điền thông tin, chúng tôi sẽ gọi lại tư vấn</div>
+
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" placeholder="Nhập tên của bạn" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" placeholder="Nhập số điện thoại cần liên hệ" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dịch vụ cần tư vấn</label>
+                        <select>
+                            <option selected>Khám tổng quát & Lấy cao răng</option>
+                            <option>Tẩy trắng răng</option>
+                            <option>Bọc răng sứ thẩm mỹ</option>
+                            <option>Niềng răng - chỉnh nha</option>
+                            <option>Trồng răng Implant</option>
+                            <option>Nhổ răng khôn & điều trị tủy</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Xác Nhận Đặt Lịch</button>
+                </form>
+            </div>
+
+            <div class="info-col">
+                <div class="clinic-name">Nhà Khoa Smile Care</div>
+                <div class="tagline">✨ Nụ cười tự tin là chìa khóa mở ra những cơ hội mới.</div>
+                <div class="description">
+                    Chúng tôi cam kết mang lại trải nghiệm chăm sóc răng miệng không đau với công nghệ tiên tiến nhất
+                    đến từ Châu Âu.
+                </div>
+
+                <ul class="highlight-list">
+                    <li>Đội ngũ bác sĩ chuyên khoa hơn 10 năm kinh nghiệm</li>
+                    <li>Trang thiết bị X-Quang 3D hiện đại nhất</li>
+                    <li>Vô trùng tuyệt đối theo tiêu chuẩn quốc tế</li>
+                    <li>Bảo hành trong đời dịch vụ Răng sứ</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

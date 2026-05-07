@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .faq-question {
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .faq-question:hover {
+            color: #555;
+        }
+
+        .faq-answer {
+            padding: 0;
+            margin: 0;
+            color: hsl(0, 0%, 60%);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .faq-answer.active {
+            color: hsl(7, 100%, 50%);
+        }
+
+        .faq-question.active {
+            color: hsl(200, 100%, 50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Câu hỏi thường gặp (FAQ)</h1>
+
+        <div class="faq-item">
+            <div class="faq-question">1. Khóa học có bắt buộc phải theo đúng lịch không?</div>
+            <div class="faq-answer">
+                Hầu hết các khóa học của chúng tôi đều là video quay sẵn, bạn hoàn toàn có thể chủ động sắp xếp thời gian tự học theo tiến độ của riêng mình.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">2. Tôi cần chuẩn bị gì trước khi học?</div>
+            <div class="faq-answer">
+                Bạn chỉ cần một chiếc máy tính có kết nối Internet ổn định. Không yêu cầu kinh nghiệm lập trình từ trước ở các bài giảng sẽ hướng dẫn từ con số 0.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">3. Làm sao để nhận được chứng chỉ sau khi học xong?</div>
+            <div class="faq-answer">
+                Sau khi hoàn thành 100% các bài học và vượt qua bài kiểm tra cuối khóa với số điểm tiêu chuẩn, hệ thống sẽ tự động cấp chứng chỉ điện tử cho bạn. Ngoài ra, bạn cũng có thể yêu cầu guiì bản cứng chứng chỉ về tận nhà (có tính phí vận chuyển).
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = document.querySelectorAll('.faq-question');
+
+        questions.forEach(question => {
+            question.addEventListener('mousedown', function() {
+                const answer = this.nextElementSibling;                this.classList.toggle('active');                answer.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

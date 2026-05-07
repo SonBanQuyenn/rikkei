@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 8</title>
+</head>
+<body>
+    <h1>Đăng Ký Đặt Vé Sự Kiện Âm Nhạc</h1>
+    <form action="/submit-event-registration" method="POST">
+        <label for="fullname">Họ và tên:</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên..." minlength="3" maxlength="50" required><br><br>
+
+        <label for="number-of-tickets">Số lượng vé:</label>
+        <input type="number" id="number-of-tickets" name="number-of-tickets" min="1" max="5" required><br><br>
+
+        <label for="VIP-ticket">Mã vé VIP (Đã cấp sẵn):</label>
+        <input type="text" id="VIP-ticket" name="VIP-ticket" value="MUSIC-VIP-2026" readonly><br><br>
+
+        <label for="internal-discount">Mã giảm giá nội bộ:</label>
+        <input type="text" id="internal-discount" name="internal-discount" value="NOT-ELIGIBLE" disabled><br><br>
+
+        <button type="submit">Xác nhận đặt vé</button>
+    </form>
+</body>
+</html>
