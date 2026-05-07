@@ -1,31 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+    <title>Ex 8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
-<body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
+
+<body
+    class="bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300">
+    <div class="max-w-md w-full">
+        <div class="flex justify-end mb-4">
+            <button id="darkModeToggle"
+                class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                🌙 Đổi Giao Diện
+            </button>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors duration-300">
+            <div class="p-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Tour Đà Lạt</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-3">3 Ngày 2 Đêm</p>
+                <div class="mb-4">
+                    <span class="text-3xl font-bold text-blue-600 dark:text-blue-400">2.500.000đ</span>
+                    <span class="text-gray-500 dark:text-gray-400">/khách</span>
+                </div>
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-center text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Khách sạn 4 sao trung tâm
+                    </li>
+                    <li class="flex items-center text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Xe Limousine đưa đón tận nơi
+                    </li>
+                    <li class="flex items-center text-gray-600 dark:text-gray-300">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        Vé tham quan tất cả các điểm
+                    </li>
+                </ul>
+                <button
+                    class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors duration-300">
+                    ĐẶT TOUR NGAY
+                </button>
+            </div>
+        </div>
     </div>
+
+    <script>
+        const toggleBtn = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.classList.add('dark');
+            toggleBtn.textContent = '☀️ Đổi Giao Diện';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                toggleBtn.textContent = '🌙 Đổi Giao Diện';
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                toggleBtn.textContent = '☀️ Đổi Giao Diện';
+            }
+        });
+    </script>
 </body>
+
 </html>
