@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ex8</title>
+    <title>Ex 8</title>
 </head>
+
 <body>
-    <h1> Học lập trình cùng tôi</h1>
-    <nav>
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
-    <hr />
-    <h2>Bài biết mới nhất</h2>
-    <div class="container" style="display: flex">
-        <section style="flex: 1;">
-            <article>
-                <h3>Lộ trình học Front-end Web</h3>
-                <p>Nội dung lộ trình học tập</p>
-            </article>
-        </section>
-        <aside style="width: 250px;">
-            <h3>Thông tin phụ</h3>
-            <p>Quảng cáo khóa học mới nhất tại Academy.</p>
-            <img src="https://rikkei.edu.vn/wp-content/uploads/2025/09/Logo.png" alt="Rikkei Edu Logo" width="100">
-        </aside>
-    </div>
+    <h1>Danh sách công việc</h1>
+
+    <ul id="task-list">
+        <li>Việc 1 <button class="delete-btn">Xóa</button></li>
+        <li>Việc 2 <button class="delete-btn">Xóa</button></li>
+        <li>Việc 3 <button class="delete-btn">Xóa</button></li>
+        <li>Việc 4 <button class="delete-btn">Xóa</button></li>
+        <li>Việc 5 <button class="delete-btn">Xóa</button></li>
+    </ul>
+
+    <script>
+        let deleteBtns = document.querySelectorAll(".delete-btn");
+
+        for (let i = 0; i < deleteBtns.length; i++) {
+            deleteBtns[i].addEventListener("click", function (event) {
+                let liElement = event.target.parentElement;
+                liElement.remove();
+                console.log("Đã xóa:", liElement);
+            });
+        }
+    </script>
 </body>
+
 </html>

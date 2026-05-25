@@ -1,30 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ex 6</title>
-    <h1> Chào mừng đến với website của tôi</h1>
-    <nav> 
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-top: 20px;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<hr />
+
 <body>
-    <h2>Danh sách các bài biết mới nhất</h2>
-    <section>
-        <article>
-            <h3>Bài viết 1</h3>
-            <p>Nội dung của bài viết 1</p>
-        </article>
-        <article>
-            <h3>Bài viết 2</h3>
-            <p>Nội dung của bài viết 2</p>
-        </article>
-    </section>
+    <h1>Thêm và Xóa phần tử động</h1>
+
+    <button id="add-btn">Add Item</button>
+    <button id="remove-btn">Remove Last</button>
+
+    <ul id="item-list"></ul>
+
+    <script>
+        let addBtn = document.getElementById("add-btn");
+        let removeBtn = document.getElementById("remove-btn");
+        let itemList = document.getElementById("item-list");
+
+        addBtn.addEventListener("click", function () {
+            let newItem = document.createElement("li");
+            newItem.textContent = "New Item";
+            itemList.appendChild(newItem);
+            console.log("Đã thêm New Item vào danh sách");
+        });
+
+        removeBtn.addEventListener("click", function () {
+            let lastItem = itemList.lastElementChild;
+            if (lastItem) {
+                itemList.removeChild(lastItem);
+                console.log("Đã xóa phần tử cuối cùng");
+            } else {
+                console.log("Danh sách đã rỗng, không thể xóa");
+            }
+        });
+    </script>
 </body>
-<footer>
-    <p>&copy; Nguyễn Tùng Sơn - Học viên Rikkei</p>
+
 </html>

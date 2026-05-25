@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .parent {
+            background-color: lightblue;
+            padding: 50px;
+            border: 2px solid blue;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .child {
+            background-color: lightcoral;
+            padding: 20px 40px;
+            border: 2px solid red;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Event Bubbling - stopPropagation</h1>
+    <p>Click vào ô màu đỏ (Child) và ô màu xanh (Parent) để xem sự khác biệt</p>
+
+    <div class="parent" id="parent">
+        Parent (Div màu xanh)
+        <div class="child" id="child">
+            Child (Div màu đỏ) - Click vào tôi
+        </div>
+    </div>
+
+    <script>
+        let parent = document.getElementById("parent");
+        let child = document.getElementById("child");
+
+        parent.addEventListener("click", function () {
+            console.log("Parent đã được click (Div xanh)");
+        });
+
+        child.addEventListener("click", function (event) {
+            console.log("Child đã được click (Div đỏ)");
+            event.stopPropagation();
+        });
+    </script>
+</body>
+
+</html>

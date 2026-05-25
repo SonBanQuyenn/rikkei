@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 10</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .color-code {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Color Switcher</h1>
+        <p>Nhấn nút để đổi màu nền</p>
+        <button id="change-color-btn">Change Background</button>
+        <div class="color-code" id="color-display">Màu hiện tại: --</div>
+    </div>
+
+    <script>
+        let colors = ["red", "blue", "green", "yellow", "purple"];
+        let btn = document.getElementById("change-color-btn");
+        let colorDisplay = document.getElementById("color-display");
+
+        btn.addEventListener("click", function () {
+            let randomIndex = Math.floor(Math.random() * colors.length);
+            let selectedColor = colors[randomIndex];
+
+            document.body.style.backgroundColor = selectedColor;
+            colorDisplay.textContent = "Màu hiện tại: " + selectedColor;
+
+            console.log("Đã đổi màu nền thành:", selectedColor);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ex 5</title>
-    <h1> Chào mừng đến với website của tôi</h1>
-    <nav> 
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
 </head>
-<hr />
+
 <body>
-    <p>Đây là phần nội dung chính của trang web</p>
+    <input type="text" id="user-input" placeholder="Nhập nội dung tại đây...">
+
+    <p id="key-display"></p>
+
+    <script>
+        let inputElement = document.getElementById("user-input");
+        let keyDisplay = document.getElementById("key-display");
+
+        inputElement.addEventListener("keydown", function (event) {
+            keyDisplay.textContent = "Bạn vừa nhấn phím: " + event.key;
+            console.log("Phím vừa nhấn:", event.key);
+        });
+    </script>
 </body>
+
 </html>
