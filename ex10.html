@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 10</title>
+</head>
+<body>
+    <h1>Xây dựng hệ thống Todo List cơ bản</h1>
+    <p>Có CRD cơ bản</p>
+    <input type="text" id="taskInput" placeholder="Nhập công việc mới">
+    <button onclick="addTask(document.getElementById('taskInput').value)">Thêm công việc</button>
+    <input type="number" id="removeIndex" placeholder="Nhập chỉ số công việc cần xóa">
+    <button onclick="removeTask(document.getElementById('removeIndex').value)">Xóa công việc</button>
+    <button onclick="displayTasks()">Hiển thị công việc</button>
+</body>
+<script>
+    tasks = [];
+    function addTask(task) {
+        tasks.push(task);
+        console.log("Đã thêm công việc: " + task);
+        alert("Đã thêm công việc: " + task);
+    }
+    function removeTask(index) {
+        index = index -1;
+        if (index >= 0 && index < tasks.length) {
+            let removedTask = tasks.splice(index, 1);
+            console.log("Đã xóa công việc: " + removedTask);
+            alert("Đã xóa công việc: " + removedTask);
+        } else {
+            console.log("Chỉ số không hợp lệ");
+            alert("Chỉ số không hợp lệ");
+        }
+    }
+    function displayTasks() {
+        tasks.forEach(function(task, index) {
+            console.log((index + 1) + ". " + task);
+        });
+    }
+</script>
+</html>

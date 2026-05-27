@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ex 5</title>
-    <h1> Chào mừng đến với website của tôi</h1>
-    <nav> 
-        <a href="index.html">Trang chủ</a>
-        <a href="news.html">Bài viết</a>
-        <a href="contact.html">Liên hệ</a>
-    </nav>
 </head>
-<hr />
+
 <body>
-    <p>Đây là phần nội dung chính của trang web</p>
+    <h1>Tìm kiếm phần tử trong mảng</h1>
+    <p>Mảng hiện tại: [3, 7, 2, 9, 5, 8, 1, 6, 4]</p>
+    <button onclick="search()">Tìm số</button>
+
+    <script>
+        let numbers = [3, 7, 2, 9, 5, 8, 1, 6, 4];
+
+        function checkNumber(searchValue) {
+            let index = numbers.indexOf(searchValue);
+
+            if (index !== -1) {
+                console.log("Vị trí của " + searchValue + " trong mảng là: " + index);
+                alert("Vị trí của " + searchValue + " trong mảng là: " + index);
+            } else {
+                console.log("Not found");
+                alert("Not found");
+            }
+        }
+
+        function search() {
+            let searchValue = parseInt(prompt("Nhập số cần tìm:"));
+            checkNumber(searchValue);
+        }
+    </script>
 </body>
+
 </html>

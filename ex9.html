@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 9</title>
+</head>
+<body>
+    <h1>Tích lũy giá trị với Reduce</h1>
+    <p>Mảng hiện tại: [100, 200, 300, 400]</p>
+    <button onclick="accumulate()">Tích lũy</button>
+</body>
+<script>
+    let numbers = [100, 200, 300, 400];
+
+    function accumulate() {
+        const total = numbers.reduce(function(accumulator, currentValue) {
+            return accumulator + currentValue;
+        }, 0);
+        const VAT = 0.1;
+        console.log("Tổng thanh toán là: " + total * (1-VAT));
+        alert("Tổng thanh toán là: " + total * (1-VAT));
+    }
+</script>
+</html>
