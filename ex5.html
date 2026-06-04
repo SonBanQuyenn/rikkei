@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 5</title>
+</head>
+<body>
+    <h1>Ex 5</h1>
+    <p>Tong cua arr[1, 2, 3, 4] la:</p>
+    <p id="result"></p>
+    <p>Tong cua arr[32, 35, 93] la:</p>
+    <p id="result2"></p>
+    <script>
+        function sumAllNumbers(...numbers) {
+            return numbers.reduce((a, b) => a + b, 0);
+        }
+        console.log(sumAllNumbers(1, 2, 3, 4));
+        result.textContent = sumAllNumbers(1, 2, 3, 4);
+        console.log(sumAllNumbers(32, 35, 93));
+        result2.textContent = sumAllNumbers(32, 35, 93);
+    </script>
+</body>
+</html>
