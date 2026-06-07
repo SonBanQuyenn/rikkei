@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 5</title>
+</head>
+<body>
+    <script>
+        class Employee {
+            name;
+            #salary;
+
+            constructor(name, salary) {
+                this.name = name;
+                this.#salary = salary;
+            }
+
+            getInfo() {
+                console.log("Tên: " + this.name);
+                console.log("Lương: " + this.#salary + " VND");
+            }
+
+            getSalary() {
+                return this.#salary;
+            }
+
+            setSalary(newSalary) {
+                if (newSalary > 0) {
+                    this.#salary = newSalary;
+                    console.log("Đã cập nhật lương thành: " + newSalary);
+                } else {
+                    console.log("Lương không hợp lệ!");
+                }
+            }
+        }
+
+        let emp = new Employee("Nguyễn Văn A", 15000000);
+
+        console.log("✅ Truy cập public name:", emp.name);
+
+        emp.getInfo();
+
+        console.log("✅ Đọc lương qua getter:", emp.getSalary());
+
+        emp.setSalary(18000000);
+        emp.getInfo();
+
+        console.log("❌ Thử truy cập private salary:");
+        console.log(emp.#salary); 
+
+        console.log("Dòng này sẽ không được thực thi");
+    </script>
+</body>
+</html>
