@@ -1,0 +1,8 @@
+CREATE DATABASE LibraryDB;
+USE LibraryDB;
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(100),
+    PublishedYear INT
+);
