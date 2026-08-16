@@ -1,0 +1,14 @@
+{
+  "name": "project-esm",
+  "version": "1.0.0",
+  "description": "Bai 10 - phien ban ESM cua he thong xu ly don hang",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

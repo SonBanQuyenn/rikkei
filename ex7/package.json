@@ -1,0 +1,13 @@
+{
+  "name": "ex7-logger-cjs-env",
+  "version": "1.0.0",
+  "description": "Bai 7 - Logger da module ket hop CJS va bien moi truong",
+  "main": "logger.js",
+  "scripts": {
+    "start": "node check.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

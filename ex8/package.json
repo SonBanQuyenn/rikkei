@@ -1,0 +1,10 @@
+{
+  "name": "ex8-pubsub-nangcao",
+  "version": "1.0.0",
+  "description": "Bai 8 - He thong Pub/Sub nang cao voi nhieu loai su kien",
+  "main": "notificationCenter.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT"
+}

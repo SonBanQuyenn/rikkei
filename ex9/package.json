@@ -1,0 +1,13 @@
+{
+  "name": "ex9-mini-order-system",
+  "version": "1.0.0",
+  "description": "Bai 9 - Mini he thong xu ly don hang ket hop toan bo kien thuc (CommonJS)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

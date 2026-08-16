@@ -1,0 +1,10 @@
+{
+  "name": "ex5-order-notification",
+  "version": "1.0.0",
+  "description": "Bai 5 - He thong thong bao voi EventEmitter",
+  "main": "orderService.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT"
+}
