@@ -1,0 +1,407 @@
+{
+    "info": {
+        "name": "Books API",
+        "description": "API quản lý sách với header versioning và deprecation",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "GET Books - Version 1",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v1"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response đúng cấu trúc v1\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', true);",
+                            "    pm.expect(jsonData).to.have.property('version', 'v1');",
+                            "    pm.expect(jsonData.data).to.be.an('array');",
+                            "    ",
+                            "    if (jsonData.data.length > 0) {",
+                            "        const book = jsonData.data[0];",
+                            "        pm.expect(book).to.have.all.keys('id', 'title', 'author');",
+                            "        pm.expect(book.author).to.be.a('string');",
+                            "    }",
+                            "});",
+                            "",
+                            "pm.test(\"Response có Deprecation header\", function () {",
+                            "    pm.response.to.have.header('Deprecation');",
+                            "    pm.expect(pm.response.headers.get('Deprecation')).to.equal('true');",
+                            "});",
+                            "",
+                            "pm.test(\"Response có Sunset header\", function () {",
+                            "    pm.response.to.have.header('Sunset');",
+                            "    const sunset = pm.response.headers.get('Sunset');",
+                            "    pm.expect(sunset).to.include('2025');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GET Books - Version 2",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v2"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response đúng cấu trúc v2\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', true);",
+                            "    pm.expect(jsonData).to.have.property('version', 'v2');",
+                            "    pm.expect(jsonData.data).to.be.an('array');",
+                            "    ",
+                            "    if (jsonData.data.length > 0) {",
+                            "        const book = jsonData.data[0];",
+                            "        pm.expect(book).to.have.all.keys('id', 'title', 'author', 'publishedYear');",
+                            "        pm.expect(book.author).to.be.an('object');",
+                            "        pm.expect(book.author).to.have.all.keys('id', 'name');",
+                            "        pm.expect(book.publishedYear).to.be.a('number');",
+                            "    }",
+                            "});",
+                            "",
+                            "pm.test(\"Response không có Deprecation header\", function () {",
+                            "    pm.response.to.not.have.header('Deprecation');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GET Books - Default Version (v1)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Mặc định trả về version v1\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('version', 'v1');",
+                            "    pm.expect(jsonData.data).to.be.an('array');",
+                            "});",
+                            "",
+                            "pm.test(\"Response có Deprecation header\", function () {",
+                            "    pm.response.to.have.header('Deprecation');",
+                            "    pm.expect(pm.response.headers.get('Deprecation')).to.equal('true');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GET Books - Unsupported Version (v9)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v9"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "",
+                            "pm.test(\"Response trả về lỗi unsupported version\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', false);",
+                            "    pm.expect(jsonData).to.have.property('message', 'Unsupported API version');",
+                            "    pm.expect(jsonData).to.have.property('code', 'UNSUPPORTED_API_VERSION');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GET Books - Non-existent Route",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v1"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/books/nonexistent",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books",
+                        "nonexistent"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 404\", function () {",
+                            "    pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Response trả về lỗi 404\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', false);",
+                            "    pm.expect(jsonData).to.have.property('message');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "POST Books - Empty Body",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v1"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "",
+                            "pm.test(\"Response trả về lỗi body rỗng\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', false);",
+                            "    pm.expect(jsonData).to.have.property('message');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "POST Books - Invalid JSON Format",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v1"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ title: 'Invalid JSON', author: 'Test' }"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/books",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "",
+                            "pm.test(\"Response trả về lỗi JSON sai format\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', false);",
+                            "    pm.expect(jsonData).to.have.property('message');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GET Books - Limit Exceeds Maximum",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Api-Version",
+                        "value": "v1"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/books?limit=999",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "api",
+                        "books"
+                    ],
+                    "query": [
+                        {
+                            "key": "limit",
+                            "value": "999"
+                        }
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code là 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "",
+                            "pm.test(\"Response trả về lỗi limit vượt giới hạn\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property('success', false);",
+                            "    pm.expect(jsonData).to.have.property('message');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3000",
+            "type": "string"
+        }
+    ]
+}

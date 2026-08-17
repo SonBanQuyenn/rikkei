@@ -1,0 +1,21 @@
+{
+    "name": "versioning-api",
+    "version": "1.0.0",
+    "description": "API Header Versioning and Deprecation with Newman testing",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "test:api": "newman run postman/collection.json -e postman/environment.json --reporters cli,htmlextra --reporter-htmlextra-export reports/report.html",
+        "test:api:json": "newman run postman/collection.json -e postman/environment.json --reporters json --reporter-json-export reports/report.json",
+        "test:api:junit": "newman run postman/collection.json -e postman/environment.json --reporters junit --reporter-junit-export reports/report.xml"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1",
+        "newman": "^6.0.0",
+        "newman-reporter-htmlextra": "^1.23.0"
+    }
+}
