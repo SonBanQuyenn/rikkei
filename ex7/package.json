@@ -1,0 +1,16 @@
+{
+    "name": "knex-query-builder",
+    "version": "1.0.0",
+    "description": "Query Builder với Knex.js - Migration và truy vấn thống kê",
+    "main": "report.js",
+    "scripts": {
+        "migrate": "npx knex migrate:latest",
+        "rollback": "npx knex migrate:rollback --all",
+        "seed": "npx knex seed:run",
+        "report": "node report.js"
+    },
+    "dependencies": {
+        "knex": "^2.5.1",
+        "mysql2": "^3.6.0"
+    }
+}

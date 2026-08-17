@@ -1,0 +1,21 @@
+{
+    "name": "n1-query-demo",
+    "version": "1.0.0",
+    "description": "Phát hiện và khắc phục N+1 query",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "seed": "node seeders/seed.js",
+        "test:slow": "curl http://localhost:3000/api/v1/report/slow",
+        "test:fast": "curl http://localhost:3000/api/v1/report/fast"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "mysql2": "^3.6.0",
+        "sequelize": "^6.32.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
