@@ -1,0 +1,21 @@
+{
+    "name": "mongodb-missing-fields",
+    "version": "1.0.0",
+    "description": "Xử lý dữ liệu khuyết thiếu trong MongoDB",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "seed": "node seeders/seed.js",
+        "migrate": "node scripts/migrateStock.js",
+        "test:missing": "curl http://localhost:3000/products/missing-stock",
+        "test:migrate": "curl -X POST http://localhost:3000/products/migrate-stock"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^7.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}

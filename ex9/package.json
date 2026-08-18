@@ -1,0 +1,17 @@
+{
+    "name": "mongoose-populate-demo",
+    "version": "1.0.0",
+    "description": "Thiết kế quan hệ 1-N và Populate dữ liệu",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "seed": "node seeders/seed.js",
+        "dev": "nodemon app.js"
+    },
+    "dependencies": {
+        "mongoose": "^7.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}

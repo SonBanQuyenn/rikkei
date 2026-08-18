@@ -1,0 +1,16 @@
+{
+    "name": "mongoose-embedded-demo",
+    "version": "1.0.0",
+    "description": "Lưu trữ cấu trúc lồng nhau (Embedded Document)",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "dependencies": {
+        "mongoose": "^7.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
