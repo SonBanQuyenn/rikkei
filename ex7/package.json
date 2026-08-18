@@ -1,0 +1,20 @@
+{
+    "name": "rate-limit-demo",
+    "version": "1.0.0",
+    "description": "Ngăn chặn tấn công Brute-force với Rate Limit",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "express-rate-limit": "^6.10.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^7.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
