@@ -1,0 +1,11 @@
+/dist
+/node_modules
+/build
+*.log
+.DS_Store
+/coverage
+/.nyc_output
+.env
+.env.local
+.vscode/*
+!.vscode/settings.json
