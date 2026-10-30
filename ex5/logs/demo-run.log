@@ -1,0 +1,113 @@
+
+=== 0. Ket noi khong hop le bi chan ngay khi bat tay ===
+[+  0.40s] khong token bi tu choi: UNAUTHORIZED: Thieu token
+[+  0.40s] token gia  bi tu choi: UNAUTHORIZED: Token khong hop le
+
+=== 1. Ca 3 nhom nguoi dung ket noi dong thoi ===
+[+  0.42s] DieuPhoi   <- dispatch:snapshot {orders: 0, drivers: 2}
+[+  0.42s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"off_duty","location":null,"lastSeenAt":null,"activeOrderId":null}
+[+  0.42s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"off_duty","location":null,"lastSeenAt":null,"activeOrderId":null}
+[+  0.42s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"available","location":null,"lastSeenAt":null,"activeOrderId":null}
+[+  0.42s] TX Cuong   -> driver:set_status {"status":"available"} => OK
+[+  0.43s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"available","location":null,"lastSeenAt":null,"activeOrderId":null}
+[+  0.43s] TX Dung    -> driver:set_status {"status":"available"} => OK
+[+  0.43s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"available","location":{"lat":10.776,"lng":106.7},"lastSeenAt":1793374073988,"activeOrde...
+[+  0.43s] TX Cuong   -> driver:location {"lat":10.776,"lng":106.7} => OK
+
+=== 2. Khach dat don ===
+[+  0.43s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0001","customerId":"C01","customerName":"Khach An","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","status":"pending","driverI...
+[+  0.43s] Khach An   <- customer:order_status {"orderId":"DH-0001","status":"pending","driverName":null,"updatedAt":1793374073989}
+[+  0.43s] Khach An   -> customer:place_order {"pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1"} => OK
+[+  0.43s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"pending","dr...
+[+  0.43s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"pending","driverName":null,"updatedAt":1793374073990}
+[+  0.43s] Khach Binh -> customer:place_order {"pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1"} => OK
+
+=== 3. Dieu phoi vien gan don; tai xe Dung tu choi ===
+[+  0.64s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"busy","location":{"lat":10.776,"lng":106.7},"lastSeenAt":1793374073988,"activeOrderId":...
+[+  0.64s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0001","customerId":"C01","customerName":"Khach An","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","status":"offered","driverI...
+[+  0.64s] DieuPhoi   -> dispatch:assign {"orderId":"DH-0001","driverId":"D01"} => OK
+[+  0.64s] Khach An   <- customer:order_status {"orderId":"DH-0001","status":"offered","driverName":null,"updatedAt":1793374074199}
+[+  0.64s] TX Cuong   <- driver:task {"orderId":"DH-0001","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","customerName":"Khach An","status":"offered"}
+[+  0.64s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"busy","location":null,"lastSeenAt":null,"activeOrderId":"DH-0002"}
+[+  0.64s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"offered","dr...
+[+  0.64s] DieuPhoi   -> dispatch:assign {"orderId":"DH-0002","driverId":"D02"} => OK
+[+  0.64s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"offered","driverName":null,"updatedAt":1793374074201}
+[+  0.64s] TX Dung    <- driver:task {"orderId":"DH-0002","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","customerName":"Khach Binh","status":"offered"}
+[+  0.75s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0001","customerId":"C01","customerName":"Khach An","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","status":"accepted","driver...
+[+  0.75s] Khach An   <- customer:order_status {"orderId":"DH-0001","status":"accepted","driverName":"Tai xe Cuong","updatedAt":1793374074307}
+[+  0.75s] TX Cuong   <- driver:task {"orderId":"DH-0001","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","customerName":"Khach An","status":"accepted"}
+[+  0.75s] TX Cuong   -> driver:respond {"orderId":"DH-0001","accept":true} => OK
+[+  0.75s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"available","location":null,"lastSeenAt":1793374074309,"activeOrderId":null}
+[+  0.75s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"pending","dr...
+[+  0.75s] DieuPhoi   <- dispatch:alert {"type":"DRIVER_REJECTED","message":"Tai xe Dung tu choi don DH-0002","orderId":"DH-0002","driverId":"D02","at":1793374074309}
+[+  0.75s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"pending","driverName":null,"updatedAt":1793374074309}
+[+  0.75s] TX Dung    <- driver:task_revoked {"orderId":"DH-0002","reason":"Tai xe Dung tu choi don DH-0002"}
+[+  0.75s] TX Dung    -> driver:respond {"orderId":"DH-0002","accept":false} => OK
+
+=== 4. Don bi tac: cho gan qua nguong -> canh bao ORDER_STUCK ===
+[+  2.96s] DieuPhoi   <- dispatch:alert {"type":"ORDER_STUCK","message":"Don DH-0002 cho gan tai xe qua 2s","orderId":"DH-0002","driverId":null,"at":1793374076518}
+
+=== 5. Can thiep: gan don cho tai xe dang ban bi tu choi, gan lai cho Dung ===
+[+  3.36s] DieuPhoi   -> dispatch:assign {"orderId":"DH-0002","driverId":"D01"} => LOI: Tai xe Cuong dang ban don khac, khong the nhan don
+[+  3.36s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"busy","location":null,"lastSeenAt":1793374074309,"activeOrderId":"DH-0002"}
+[+  3.37s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"offered","dr...
+[+  3.37s] DieuPhoi   -> dispatch:assign {"orderId":"DH-0002","driverId":"D02"} => OK
+[+  3.37s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"offered","driverName":null,"updatedAt":1793374076926}
+[+  3.37s] TX Dung    <- driver:task {"orderId":"DH-0002","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","customerName":"Khach Binh","status":"offered"}
+[+  3.37s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"busy","location":{"lat":10.85,"lng":106.77},"lastSeenAt":1793374076927,"activeOrderId":...
+[+  3.37s] Khach An   <- customer:driver_location {"orderId":"DH-0001","location":{"lat":10.85,"lng":106.77}}
+[+  3.37s] TX Cuong   -> driver:location {"lat":10.85,"lng":106.77} => OK
+
+=== 6. Dung khong phan hoi -> het han de nghi, don tu ve hang cho (OFFER_TIMEOUT) ===
+[+  6.52s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"available","location":null,"lastSeenAt":1793374074309,"activeOrderId":null}
+[+  6.52s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"pending","dr...
+[+  6.52s] DieuPhoi   <- dispatch:alert {"type":"OFFER_TIMEOUT","message":"Tai xe Dung khong phan hoi don DH-0002, don da ve hang cho","orderId":"DH-0002","driverId":"D02","at":...
+[+  6.52s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"pending","driverName":null,"updatedAt":1793374080083}
+[+  6.52s] TX Dung    <- driver:task_revoked {"orderId":"DH-0002","reason":"Tai xe Dung khong phan hoi don DH-0002, don da ve hang cho"}
+[+  6.88s] DieuPhoi   <- dispatch:driver_updated {"id":"D02","name":"Tai xe Dung","availability":"busy","location":null,"lastSeenAt":1793374074309,"activeOrderId":"DH-0002"}
+[+  6.88s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"offered","dr...
+[+  6.88s] DieuPhoi   -> dispatch:assign {"orderId":"DH-0002","driverId":"D02"} => OK
+[+  6.88s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"offered","driverName":null,"updatedAt":1793374080440}
+[+  6.88s] TX Dung    <- driver:task {"orderId":"DH-0002","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","customerName":"Khach Binh","status":"offered"}
+[+  6.88s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0002","customerId":"C02","customerName":"Khach Binh","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","status":"accepted","d...
+[+  6.88s] Khach Binh <- customer:order_status {"orderId":"DH-0002","status":"accepted","driverName":"Tai xe Dung","updatedAt":1793374080441}
+[+  6.88s] TX Dung    <- driver:task {"orderId":"DH-0002","pickup":"Kho Thu Duc","dropoff":"5 Nguyen Hue, Q1","customerName":"Khach Binh","status":"accepted"}
+[+  6.88s] TX Dung    -> driver:respond {"orderId":"DH-0002","accept":true} => OK
+
+=== 7. Cuong lay hang va di giao: chi Khach An thay vi tri ===
+[+  6.88s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0001","customerId":"C01","customerName":"Khach An","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","status":"picked_up","drive...
+[+  6.88s] Khach An   <- customer:order_status {"orderId":"DH-0001","status":"picked_up","driverName":"Tai xe Cuong","updatedAt":1793374080443}
+[+  6.88s] TX Cuong   <- driver:task {"orderId":"DH-0001","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","customerName":"Khach An","status":"picked_up"}
+[+  6.88s] TX Cuong   -> driver:progress {"orderId":"DH-0001","status":"picked_up"} => OK
+[+  6.88s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"busy","location":{"lat":10.774,"lng":106.701},"lastSeenAt":1793374080444,"activeOrderId...
+[+  6.88s] Khach An   <- customer:driver_location {"orderId":"DH-0001","location":{"lat":10.774,"lng":106.701}}
+[+  6.88s] TX Cuong   -> driver:location {"lat":10.774,"lng":106.701} => OK
+
+=== 8. Cuong im lang qua lau -> DRIVER_SILENT; roi mat ket noi -> DRIVER_DISCONNECTED ===
+[+ 10.89s] DieuPhoi   <- dispatch:alert {"type":"DRIVER_SILENT","message":"Tai xe Cuong khong cap nhat vi tri/tien do don DH-0001 qua 4s","orderId":"DH-0001","driverId":"D01","a...
+[+ 10.89s] DieuPhoi   <- dispatch:alert {"type":"DRIVER_SILENT","message":"Tai xe Dung khong cap nhat vi tri/tien do don DH-0002 qua 4s","orderId":"DH-0002","driverId":"D02","at...
+[+ 11.50s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"offline","location":{"lat":10.774,"lng":106.701},"lastSeenAt":1793374080444,"activeOrde...
+[+ 11.50s] DieuPhoi   <- dispatch:alert {"type":"DRIVER_DISCONNECTED","message":"Tai xe Cuong mat ket noi khi dang xu ly don DH-0001 (picked_up)","orderId":"DH-0001","driverId":...
+
+=== 9. Cuong noi lai (thiet bi moi) -> nhan lai nhiem vu dang lam, giao xong ===
+[+ 11.81s] TX Cuong   <- driver:task {"orderId":"DH-0001","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","customerName":"Khach An","status":"picked_up"}
+[+ 11.81s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"busy","location":{"lat":10.774,"lng":106.701},"lastSeenAt":1793374080444,"activeOrderId...
+[+ 11.92s] DieuPhoi   <- dispatch:order_updated {"id":"DH-0001","customerId":"C01","customerName":"Khach An","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","status":"delivered","drive...
+[+ 11.92s] DieuPhoi   <- dispatch:driver_updated {"id":"D01","name":"Tai xe Cuong","availability":"available","location":{"lat":10.774,"lng":106.701},"lastSeenAt":1793374085479,"activeOr...
+[+ 11.92s] Khach An   <- customer:order_status {"orderId":"DH-0001","status":"delivered","driverName":"Tai xe Cuong","updatedAt":1793374085479}
+[+ 11.92s] TX Cuong   <- driver:task {"orderId":"DH-0001","pickup":"Kho Thu Duc","dropoff":"12 Le Loi, Q1","customerName":"Khach An","status":"delivered"}
+[+ 11.92s] TX Cuong   -> driver:progress {"orderId":"DH-0001","status":"delivered"} => OK
+
+=== 10. Du lieu loi / sai quyen: tra loi than thien, server khong crash ===
+[+ 12.03s] Khach An   -> dispatch:assign {"orderId":"DH-0002","driverId":"D01"} => LOI: Ban khong co quyen thuc hien thao tac nay
+[+ 12.03s] Khach An   -> customer:place_order {"pickup":"   ","dropoff":"x"} => LOI: Diem lay hang khong duoc de trong
+[+ 12.03s] Khach An   -> customer:place_order  => LOI: Diem lay hang khong duoc de trong
+[+ 12.03s] TX Dung    -> driver:location {"lat":"abc"} => LOI: Toa do khong hop le
+[+ 12.03s] TX Dung    -> driver:progress {"orderId":"DH-0001","status":"delivered"} => LOI: Don nay khong phai cua ban
+[+ 12.03s] DieuPhoi   -> dispatch:assign {"orderId":"DH-9999","driverId":"D01"} => LOI: Don hang khong ton tai
+
+=== 11. Kiem tra pham vi du lieu ===
+[+ 12.03s] KIEM TRA   Khach Binh nhan 7 cap nhat, 0 cap nhat cua don nguoi khac
+[+ 12.03s] KIEM TRA   Khach Binh nhan 0 vi tri tai xe (don cua Binh chua lay hang)
+[+ 12.03s] KIEM TRA   Tai xe Dung nhan nhiem vu: DH-0002
+[+ 12.03s] KIEM TRA   Dieu phoi vien nhan 6 canh bao: DRIVER_REJECTED, ORDER_STUCK, OFFER_TIMEOUT, DRIVER_SILENT, DRIVER_SILENT, DRIVER_DISCONNECTED

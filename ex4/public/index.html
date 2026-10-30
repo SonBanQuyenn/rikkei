@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopFast - Bang dieu khien kho</title>
+  <style>
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; background: #1e293b; }
+    h1 { margin: 0; font-size: 28px; }
+    #status { padding: 6px 16px; border-radius: 999px; font-weight: 600; }
+    #status.online { background: #166534; }
+    #status.offline { background: #b91c1c; }
+    main { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 32px; }
+    .card { background: #1e293b; border-radius: 16px; padding: 24px; }
+    .label { font-size: 20px; color: #94a3b8; }
+    .value { font-size: 72px; font-weight: 700; margin-top: 8px; }
+    #alerts { grid-column: span 2; }
+    #alerts ul { list-style: none; padding: 0; margin: 12px 0 0; }
+    #alerts li { font-size: 24px; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; background: #7f1d1d; }
+    #alerts li.new { animation: flash 1s ease-in-out 5; }
+    @keyframes flash { 50% { background: #ef4444; } }
+    footer { padding: 0 32px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ShopFast - Van hanh kho</h1>
+    <span id="status" class="offline">Dang ket noi...</span>
+  </header>
+  <main>
+    <div class="card"><div class="label">Don moi hom nay</div><div class="value" id="orders">-</div></div>
+    <div class="card"><div class="label">Doanh thu</div><div class="value" id="revenue">-</div></div>
+    <div class="card" id="alerts"><div class="label">Canh bao ton kho</div><ul id="alert-list"></ul></div>
+  </main>
+  <footer>Tin hieu cuoi tu server: <span id="last-signal">-</span></footer>
+
+  <script>
+    const HEARTBEAT_MS = 20000;
+    const STALE_MS = HEARTBEAT_MS * 2.5; // qua 50s khong co gi (ke ca heartbeat) -> ket noi da chet im lang
+    const RETRY_MS = 3000;
+
+    const $ = (id) => document.getElementById(id);
+    const money = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+    let es = null;
+    let lastEventId = null;
+    let lastSignal = Date.now();
+    const alerts = new Map();
+
+    function setStatus(online, text) {
+      $('status').className = online ? 'online' : 'offline';
+      $('status').textContent = text;
+    }
+
+    function renderMetrics(m) {
+      $('orders').textContent = m.newOrders.toLocaleString('vi-VN');
+      $('revenue').textContent = money.format(m.revenue);
+    }
+
+    function renderAlert(a, isNew) {
+      alerts.set(a.sku, a);
+      const li = document.createElement('li');
+      li.textContent = `${new Date(a.raisedAt).toLocaleTimeString('vi-VN')} - ${a.name} (${a.sku}) chi con ${a.remaining}`;
+      if (isNew) li.className = 'new';
+      $('alert-list').querySelector(`[data-sku="${a.sku}"]`)?.remove();
+      li.dataset.sku = a.sku;
+      $('alert-list').prepend(li);
+    }
+
+    function touch(e) {
+      lastSignal = Date.now();
+      if (e && e.lastEventId) lastEventId = e.lastEventId;
+      $('last-signal').textContent = new Date(lastSignal).toLocaleTimeString('vi-VN');
+    }
+
+    function connect() {
+      const url = '/dashboard/stream' + (lastEventId ? `?lastEventId=${encodeURIComponent(lastEventId)}` : '');
+      es = new EventSource(url);
+      es.onopen = () => { touch(); setStatus(true, 'Truc tuyen'); };
+      es.addEventListener('snapshot', (e) => {
+        touch(e);
+        const s = JSON.parse(e.data);
+        renderMetrics(s);
+        $('alert-list').innerHTML = '';
+        s.alerts.slice().reverse().forEach((a) => renderAlert(a, false));
+      });
+      es.addEventListener('metrics', (e) => { touch(e); renderMetrics(JSON.parse(e.data)); });
+      es.addEventListener('stock_alert', (e) => { touch(e); renderAlert(JSON.parse(e.data), true); });
+      es.addEventListener('heartbeat', () => touch());
+      es.onerror = () => {
+        setStatus(false, 'Mat ket noi - dang tu ket noi lai...');
+        // Trinh duyet tu noi lai khi CONNECTING; neu da CLOSED (vd. LB tra 502) thi tu mo lai.
+        if (es.readyState === EventSource.CLOSED) reopen();
+      };
+    }
+
+    function reopen() {
+      es?.close();
+      setTimeout(connect, RETRY_MS);
+    }
+
+    // Man hinh chay 24/7 khong co nguoi: tu phat hien ket noi chet im lang va mo lai.
+    setInterval(() => {
+      if (Date.now() - lastSignal > STALE_MS) {
+        setStatus(false, 'Khong nhan duoc tin hieu - dang ket noi lai...');
+        lastSignal = Date.now();
+        reopen();
+      }
+    }, 5000);
+
+    connect();
+  </script>
+</body>
+</html>

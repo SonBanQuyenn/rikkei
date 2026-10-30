@@ -1,0 +1,82 @@
+[+  0.2s] NET    === server/mang hoat dong ===
+[+  0.3s] SERVER TX01 ONLINE (socket qwKiz4samb5M6PrIAAAA)
+[+  0.3s] APP    Dang truc tuyen - san sang nhan don
+[+  0.3s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+  1.8s] APP    >>> NHAN DON MOI DH-1001 (khu vuc Q1)
+[+  2.8s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+  2.8s] NET    === MAT KET NOI (tat server / mat song) ===
+[+  2.8s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+  3.7s] APP    Dang ket noi lai (lan 1)...
+[+  5.0s] APP    Dang ket noi lai (lan 2)...
+[+  7.7s] APP    Dang ket noi lai (lan 3)...
+[+ 10.8s] NET    === server/mang hoat dong ===
+[+ 17.7s] APP    Dang ket noi lai (lan 4)...
+[+ 17.7s] SERVER TX01 ONLINE (socket xeDJwji7jOutY7vcAAAB)
+[+ 17.7s] APP    Dang truc tuyen - san sang nhan don
+[+ 17.7s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 18.2s] APP    >>> NHAN DON MOI DH-1002 (khu vuc Q3)
+[+ 19.2s] NET    === BAT DAU MO PHONG MANG CHAP CHON: 10 lan trong 30s ===
+[+ 19.2s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+ 19.3s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 19.3s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+ 20.1s] APP    Dang ket noi lai (lan 1)...
+[+ 20.8s] NET    === server/mang hoat dong ===
+[+ 21.9s] APP    Dang ket noi lai (lan 2)...
+[+ 21.9s] SERVER TX01 ONLINE (socket aOGnliQWhRDq1ZVSAAAC)
+[+ 21.9s] APP    Dang truc tuyen - san sang nhan don
+[+ 21.9s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 22.3s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+ 22.3s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 22.3s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+ 23.3s] APP    Dang ket noi lai (lan 1)...
+[+ 23.8s] NET    === server/mang hoat dong ===
+[+ 24.9s] APP    Dang ket noi lai (lan 2)...
+[+ 24.9s] SERVER TX01 ONLINE (socket kDwJmNTyLb5uRl1VAAAD)
+[+ 24.9s] APP    Dang truc tuyen - san sang nhan don
+[+ 24.9s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 25.3s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+ 25.3s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 25.3s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+ 26.1s] APP    Dang ket noi lai (lan 1)...
+[+ 26.8s] NET    === server/mang hoat dong ===
+[+ 28.3s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 28.5s] APP    Dang ket noi lai (lan 2)...
+[+ 29.9s] NET    === server/mang hoat dong ===
+[+ 30.7s] APP    Dang ket noi lai (lan 3)...
+[+ 30.7s] SERVER TX01 ONLINE (socket 1lFmFFt7LQxjwT1AAAAE)
+[+ 30.7s] APP    Dang truc tuyen - san sang nhan don
+[+ 30.7s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 31.4s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+ 31.4s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 31.4s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+ 32.6s] APP    Dang ket noi lai (lan 1)...
+[+ 32.9s] NET    === server/mang hoat dong ===
+[+ 34.4s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 35.6s] APP    Dang ket noi lai (lan 2)...
+[+ 35.9s] NET    === server/mang hoat dong ===
+[+ 37.4s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 39.0s] NET    === server/mang hoat dong ===
+[+ 39.8s] APP    Dang ket noi lai (lan 3)...
+[+ 39.8s] SERVER TX01 ONLINE (socket uVV5UqYkgBo3aKDfAAAF)
+[+ 39.8s] APP    Dang truc tuyen - san sang nhan don
+[+ 39.8s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 40.5s] SERVER TX01 OFFLINE (0 thiet bi con lai)
+[+ 40.5s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 40.5s] APP    Mat ket noi (transport close) - dang tu ket noi lai...
+[+ 41.7s] APP    Dang ket noi lai (lan 1)...
+[+ 42.0s] NET    === server/mang hoat dong ===
+[+ 43.5s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 44.6s] APP    Dang ket noi lai (lan 2)...
+[+ 45.0s] NET    === server/mang hoat dong ===
+[+ 46.5s] NET    === MAT KET NOI (tat server / mat song) ===
+[+ 47.7s] APP    Dang ket noi lai (lan 3)...
+[+ 48.1s] NET    === server/mang hoat dong ===
+[+ 53.0s] APP    Dang ket noi lai (lan 4)...
+[+ 53.0s] SERVER TX01 ONLINE (socket esHhilBDlocu1TMHAAAG)
+[+ 53.0s] APP    Dang truc tuyen - san sang nhan don
+[+ 53.0s] SERVER TX01 dang ky khu vuc: Q1, Q3
+[+ 53.5s] NET    Pha chap chon: app thu ket noi lai tong cong 14 lan trong ~30s
+[+ 53.5s] NET    Server chi nhan 7 lan bat tay ca buoi chay (khong co bao request)
+[+ 53.5s] APP    >>> NHAN DON MOI DH-1003 (khu vuc Q1)
+[+ 54.5s] APP    Da dang xuat
+[+ 54.5s] SERVER TX01 OFFLINE (0 thiet bi con lai)
