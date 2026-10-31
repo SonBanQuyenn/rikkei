@@ -1,0 +1,36 @@
+# ShopFast - 6000 request, 50 request dong thoi, 2026-10-31T06:29:47.305Z
+
+## TRUOC - khong co tang dem
+thoi gian: 10939 ms | thong luong: 548 req/s | loi: 0 | doc gia sai: 0
+do tre (ms): p50=31.2 p95=405.8 p99=408.2
+truy van CSDL: tong 6587 | categories=1529 products=2911 carts=1236 orders=911
+thoi gian CSDL ban (chi phi): 500850 ms
+trang thai Redis: closed
+
+## SAU - co tang tang toc
+thoi gian: 1377 ms | thong luong: 4356 req/s | loi: 0 | doc gia sai: 0
+do tre (ms): p50=0.0 p95=52.2 p99=107.3
+truy van CSDL: tong 1227 | categories=1 products=371 carts=849 orders=6
+thoi gian CSDL ban (chi phi): 26285 ms
+trang thai Redis: closed
+  product    requests=2804 hit=2170 miss=634 bypass=0 ti le trung=77.4%
+  user       requests=1057 hit=383 miss=674 bypass=0 ti le trung=36.2%
+  static     requests=1529 hit=1516 miss=13 bypass=0 ti le trung=99.2%
+  aggregate  requests=911 hit=854 miss=57 bypass=0 ti le trung=93.7%
+
+## SAU - Redis treo hoan toan
+thoi gian: 7559 ms | thong luong: 794 req/s | loi: 0 | doc gia sai: 0
+do tre (ms): p50=31.1 p95=326.1 p99=405.2
+truy van CSDL: tong 4317 | categories=231 products=2749 carts=1236 orders=101
+thoi gian CSDL ban (chi phi): 146030 ms
+trang thai Redis: open
+  product    requests=2804 hit=0 miss=0 bypass=2804 ti le trung=0.0%
+  user       requests=1057 hit=0 miss=0 bypass=1057 ti le trung=0.0%
+  static     requests=1529 hit=0 miss=0 bypass=1529 ti le trung=0.0%
+  aggregate  requests=911 hit=0 miss=0 bypass=911 ti le trung=0.0%
+
+## Tong ket
+truy van CSDL giam: 6587 -> 1227 (81.4%)
+chi phi CSDL giam: 500850 -> 26285 ms (94.8%)
+p95 do tre: 405.8 -> 52.2 ms
+Redis treo: 0 loi, p95 326.1 ms (xap xi khong co tang dem 405.8 ms)

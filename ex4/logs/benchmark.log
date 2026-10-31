@@ -1,0 +1,31 @@
+# Flash sale: 400 don/giay x 2s, kho 600, dong products chiu ~150 ghi/giay, 2026-10-31T06:24:35.259Z
+
+## (a) Ghi thang CSDL
+don gui: 800 | thanh cong: 600 | het hang: 200 | loi: 0
+do tre (ms): p50=1153 p95=2121 p99=2214 max=2230
+so lan ghi dong products: 800
+ton kho CSDL cuoi: 0 | da ban (don CONFIRMED): 600 | 600 - 600 = 0 -> KHOP
+ban vuot ton kho: khong
+
+## (b) Ghi dong thoi Redis + CSDL
+don gui: 800 | thanh cong: 600 | het hang: 200 | loi: 0
+do tre (ms): p50=525 p95=1491 p99=1584 max=1614
+so lan ghi dong products: 600
+ton kho CSDL cuoi: 0 | da ban (don CONFIRMED): 600 | 600 - 600 = 0 -> KHOP
+ban vuot ton kho: khong
+
+## (c) DA CHON: Redis tru kho nguyen tu + ghi don CSDL + dong bo dong ton kho theo lo
+don gui: 800 | thanh cong: 600 | het hang: 200 | loi: 0
+do tre (ms): p50=28 p95=31 p99=34 max=53
+so lan ghi dong products: 3
+ton kho CSDL cuoi: 0 | da ban (don CONFIRMED): 600 | 600 - 600 = 0 -> KHOP
+ban vuot ton kho: khong
+
+## (c) DA CHON + bay: Redis khoi dong lai, huy don giua chung
+don gui: 800 | thanh cong: 600 | het hang: 102 | loi: 0
+do tre (ms): p50=28 p95=33 p99=43 max=62
+so lan ghi dong products: 4
+ton kho CSDL cuoi: 0 | da ban (don CONFIRMED): 600 | 600 - 600 = 0 -> KHOP
+ban vuot ton kho: khong
+Redis khoi dong lai giua chung: co | don bi huy: 98
+ton kho kha dung trong Redis cuoi: 0 (phai bang ton kho CSDL)

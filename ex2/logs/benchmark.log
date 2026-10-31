@@ -1,0 +1,17 @@
+# Do tai: 200 request dong thoi, 4 instance, DB tre 300 ms, 2026-10-31T06:07:36.004Z
+
+## TRUOC - ham goc chua co khoa
+lan 1: 200 truy van DB | 200/200 request thanh cong | 307 ms
+lan 2: 200 truy van DB | 200/200 request thanh cong | 307 ms
+lan 3: 200 truy van DB | 200/200 request thanh cong | 314 ms
+lan 4: 200 truy van DB | 200/200 request thanh cong | 312 ms
+lan 5: 200 truy van DB | 200/200 request thanh cong | 313 ms
+=> trung binh 200.0 truy van DB / lan het han
+
+## SAU - khoa phan tan + do lech TTL
+lan 1: 1 truy van DB | 200/200 request thanh cong | 371 ms
+lan 2: 1 truy van DB | 200/200 request thanh cong | 318 ms
+lan 3: 1 truy van DB | 200/200 request thanh cong | 372 ms
+lan 4: 1 truy van DB | 200/200 request thanh cong | 316 ms
+lan 5: 1 truy van DB | 200/200 request thanh cong | 371 ms
+=> trung binh 1.0 truy van DB / lan het han
