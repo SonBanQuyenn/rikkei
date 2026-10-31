@@ -1,0 +1,15 @@
+{
+  "name": "md6-l3-ex4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --expose-gc --test \"dist/test/**/*.test.js\"",
+    "compare": "tsc && node --expose-gc dist/src/compare/simulate.js",
+    "demo": "tsc && node dist/src/cluster/demo.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^6.0.3"
+  }
+}
