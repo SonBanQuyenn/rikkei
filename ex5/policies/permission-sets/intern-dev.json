@@ -1,0 +1,43 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SandboxObjectsReadWrite",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::shopfast-dev-sandbox-*",
+        "arn:aws:s3:::shopfast-dev-sandbox-*/*"
+      ]
+    },
+    {
+      "Sid": "ReadDevLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:FilterLogEvents",
+        "logs:GetLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "arn:aws:logs:ap-southeast-1:111111111111:log-group:/shopfast/dev/*"
+    },
+    {
+      "Sid": "DeployOwnDevLambdaOnly",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:UpdateFunctionCode",
+        "lambda:InvokeFunction",
+        "lambda:GetFunction"
+      ],
+      "Resource": "arn:aws:lambda:ap-southeast-1:111111111111:function:shopfast-dev-*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/Owner": "${aws:PrincipalTag/username}"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PassApplicationRolesOnly",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": [
+        "arn:aws:iam::123456789012:role/shopfast-dev-app-*",
+        "arn:aws:iam::123456789012:role/shopfast-prod-app-*"
+      ]
+    },
+    {
+      "Sid": "ReadRolesAndInstanceProfiles",
+      "Effect": "Allow",
+      "Action": ["iam:GetRole", "iam:ListInstanceProfiles", "iam:GetInstanceProfile"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AssumeIamAdminRole",
+      "Effect": "Allow",
+      "Action": ["sts:AssumeRole", "sts:SetSourceIdentity"],
+      "Resource": "arn:aws:iam::123456789012:role/ShopFast-IamAdmin"
+    }
+  ]
+}

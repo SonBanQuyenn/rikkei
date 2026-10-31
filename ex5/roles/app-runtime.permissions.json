@@ -1,0 +1,29 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MediaUploads",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "arn:aws:s3:::shopfast-prod-media/*"
+    },
+    {
+      "Sid": "CleanupOnlyTemporaryUploads",
+      "Effect": "Allow",
+      "Action": "s3:DeleteObject",
+      "Resource": "arn:aws:s3:::shopfast-prod-media/tmp/*"
+    },
+    {
+      "Sid": "OrdersTableItemsOnly",
+      "Effect": "Allow",
+      "Action": ["dynamodb:GetItem", "dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:Query"],
+      "Resource": "arn:aws:dynamodb:ap-southeast-1:222222222222:table/shopfast-prod-orders"
+    },
+    {
+      "Sid": "DbSecret",
+      "Effect": "Allow",
+      "Action": "secretsmanager:GetSecretValue",
+      "Resource": "arn:aws:secretsmanager:ap-southeast-1:222222222222:secret:shopfast/prod/db-app-??????"
+    }
+  ]
+}

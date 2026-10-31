@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadApplicationLogsForDebugging",
+      "Effect": "Allow",
+      "Action": ["logs:FilterLogEvents", "logs:GetLogEvents", "logs:DescribeLogStreams", "logs:StartQuery", "logs:GetQueryResults"],
+      "Resource": "arn:aws:logs:ap-southeast-1:222222222222:log-group:/shopfast/prod/app/*"
+    }
+  ]
+}

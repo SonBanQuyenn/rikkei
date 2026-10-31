@@ -1,0 +1,7 @@
+{
+  "_ghi_chu": "Bản sao arn:aws:iam::aws:policy/AdministratorAccess - chỉ dùng trong mô phỏng tình huống cấu hình sai.",
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Effect": "Allow", "Action": "*", "Resource": "*" }
+  ]
+}

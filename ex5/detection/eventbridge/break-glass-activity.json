@@ -1,0 +1,20 @@
+{
+  "detail-type": ["AWS API Call via CloudTrail"],
+  "$or": [
+    {
+      "detail": {
+        "userIdentity": {
+          "sessionContext": {
+            "sessionIssuer": { "userName": [{ "prefix": "AWSReservedSSO_BreakGlass_" }] }
+          }
+        }
+      }
+    },
+    {
+      "detail": {
+        "eventSource": ["sso.amazonaws.com"],
+        "eventName": ["CreateAccountAssignment", "DeleteAccountAssignment"]
+      }
+    }
+  ]
+}

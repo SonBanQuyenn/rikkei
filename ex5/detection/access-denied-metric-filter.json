@@ -1,0 +1,24 @@
+{
+  "logGroupName": "/shopfast/org-cloudtrail",
+  "filterName": "AccessDeniedBurst",
+  "filterPattern": "{ ($.errorCode = \"AccessDenied*\") || ($.errorCode = \"*UnauthorizedOperation\") }",
+  "metricTransformations": [
+    {
+      "metricName": "AccessDeniedCount",
+      "metricNamespace": "ShopFast/Security",
+      "metricValue": "1",
+      "defaultValue": 0
+    }
+  ],
+  "alarm": {
+    "AlarmName": "shopfast-access-denied-burst",
+    "MetricName": "AccessDeniedCount",
+    "Namespace": "ShopFast/Security",
+    "Statistic": "Sum",
+    "Period": 300,
+    "EvaluationPeriods": 1,
+    "Threshold": 10,
+    "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+    "TreatMissingData": "notBreaching"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvestigateFindingsAndTrails",
+      "Effect": "Allow",
+      "Action": [
+        "cloudtrail:LookupEvents",
+        "cloudtrail:GetTrailStatus",
+        "guardduty:GetFindings",
+        "guardduty:ListFindings",
+        "access-analyzer:ListFindings",
+        "athena:StartQueryExecution",
+        "athena:GetQueryResults"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

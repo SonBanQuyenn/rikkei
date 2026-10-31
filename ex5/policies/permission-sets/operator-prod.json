@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OperateComputeWithoutDestroying",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:RebootInstances",
+        "ecs:UpdateService",
+        "ecs:RunTask",
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:UpdateAutoScalingGroup"
+      ],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "aws:ResourceTag/Environment": "prod" } }
+    },
+    {
+      "Sid": "DatabaseCareNotDeletion",
+      "Effect": "Allow",
+      "Action": ["rds:RebootDBInstance", "rds:CreateDBSnapshot", "rds:CreateDBClusterSnapshot", "rds:ModifyDBInstance"],
+      "Resource": "arn:aws:rds:ap-southeast-1:222222222222:*:shopfast-prod-*"
+    },
+    {
+      "Sid": "BackupAndRestore",
+      "Effect": "Allow",
+      "Action": ["backup:StartBackupJob", "backup:StartRestoreJob", "backup:DescribeRecoveryPoint", "backup:ListRecoveryPointsByBackupVault"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "PassOnlyBackupServiceRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::222222222222:role/shopfast-platform-backup-service",
+      "Condition": { "StringEquals": { "iam:PassedToService": "backup.amazonaws.com" } }
+    },
+    {
+      "Sid": "ShellIntoProdThroughSsmOnly",
+      "Effect": "Allow",
+      "Action": "ssm:StartSession",
+      "Resource": "arn:aws:ec2:ap-southeast-1:222222222222:instance/*",
+      "Condition": { "StringEquals": { "aws:ResourceTag/Environment": "prod" } }
+    },
+    {
+      "Sid": "AlarmsAndLogs",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:SetAlarmState",
+        "logs:FilterLogEvents",
+        "logs:GetLogEvents",
+        "logs:StartQuery",
+        "logs:GetQueryResults"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

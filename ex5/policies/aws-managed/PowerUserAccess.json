@@ -1,0 +1,23 @@
+{
+  "_ghi_chu": "Bản sao arn:aws:iam::aws:policy/PowerUserAccess - chỉ dùng cho mô phỏng; triển khai thật gắn ARN của AWS.",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "NotAction": ["iam:*", "organizations:*", "account:*"],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "account:GetAccountInformation",
+        "account:ListRegions",
+        "iam:CreateServiceLinkedRole",
+        "iam:DeleteServiceLinkedRole",
+        "iam:ListRoles",
+        "organizations:DescribeOrganization"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

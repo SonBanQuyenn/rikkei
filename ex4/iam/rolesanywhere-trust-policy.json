@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyCronCertificateFromOurTrustAnchor",
+      "Effect": "Allow",
+      "Principal": { "Service": "rolesanywhere.amazonaws.com" },
+      "Action": ["sts:AssumeRole", "sts:TagSession", "sts:SetSourceIdentity"],
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalTag/x509Subject/CN": "shopfast-invoice-cron",
+          "aws:PrincipalTag/x509Subject/O": "ShopFast"
+        },
+        "ArnEquals": {
+          "aws:SourceArn": "arn:aws:rolesanywhere:ap-southeast-1:123456789012:trust-anchor/0a1b2c3d-4e5f-4789-abcd-ef0123456789"
+        }
+      }
+    }
+  ]
+}

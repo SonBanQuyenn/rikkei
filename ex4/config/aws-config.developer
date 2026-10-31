@@ -1,0 +1,15 @@
+# ~/.aws/config trên MÁY CÁ NHÂN của lập trình viên (bẫy 1).
+# Không có access key nào. Đăng nhập:  aws sso login --profile shopfast-dev
+# Chạy ứng dụng:                       AWS_PROFILE=shopfast-dev npm run dev
+# SDK tự lấy credential tạm (8 giờ) từ cache SSO - mã nguồn không đổi một dòng nào.
+
+[sso-session shopfast]
+sso_start_url = https://shopfast.awsapps.com/start
+sso_region = ap-southeast-1
+sso_registration_scopes = sso:account:access
+
+[profile shopfast-dev]
+sso_session = shopfast
+sso_account_id = 123456789012
+sso_role_name = ShopFastInvoiceDev
+region = ap-southeast-1

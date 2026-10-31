@@ -1,0 +1,85 @@
+DEMO NỀN TẢNG QUẢN TRỊ TRUY CẬP SHOPFAST
+Tài khoản: dev=111111111111, prod=222222222222. Thứ tự đánh giá: Deny tường minh (mọi lớp) > SCP Allow > identity/resource Allow.
+
+== PHẦN 1. THAO TÁC ĐƯỢC PHÉP ==========================================================================================
+A1   Intern@dev                 Thực tập sinh ghi file vào sandbox dev               => ALLOW              OK
+     s3:PutObject arn:aws:s3:::shopfast-dev-sandbox-binh/test.json
+     quyết định bởi: identity:Intern-inline#SandboxObjectsReadWrite
+A2   Developer@dev              Lập trình viên cập nhật Lambda dev                   => ALLOW              OK
+     lambda:UpdateFunctionCode arn:aws:lambda:ap-southeast-1:111111111111:function:shopfast-dev-cart
+     quyết định bởi: identity:aws:PowerUserAccess#Statement[0]
+A3   DeveloperProdView@prod     Lập trình viên đọc log ứng dụng prod để gỡ lỗi       => ALLOW              OK
+     logs:FilterLogEvents arn:aws:logs:ap-southeast-1:222222222222:log-group:/shopfast/prod/app/api
+     quyết định bởi: identity:DeveloperProdView-inline#ReadApplicationLogsForDebugging
+A4   Operator@prod              Vận hành khởi động lại CSDL prod                     => ALLOW              OK
+     rds:RebootDBInstance arn:aws:rds:ap-southeast-1:222222222222:db:shopfast-prod-main
+     quyết định bởi: identity:Operator-inline#DatabaseCareNotDeletion
+A5   Operator@prod              Vận hành khôi phục từ bản sao lưu                    => ALLOW              OK
+     backup:StartRestoreJob arn:aws:backup:ap-southeast-1:222222222222:recovery-point:abc
+     quyết định bởi: identity:Operator-inline#BackupAndRestore
+A6   shopfast-prod-app-api      Ứng dụng xoá file tạm của chính nó                   => ALLOW              OK
+     s3:DeleteObject arn:aws:s3:::shopfast-prod-media/tmp/upload-123.part
+     quyết định bởi: identity:shopfast-prod-app-api#CleanupOnlyTemporaryUploads
+A7   BreakGlass@prod            BreakGlass (đã duyệt) xoá bảng cũ                    => ALLOW              OK
+     dynamodb:DeleteTable arn:aws:dynamodb:ap-southeast-1:222222222222:table/shopfast-prod-legacy-carts
+     quyết định bởi: identity:aws:PowerUserAccess#Statement[0]
+
+== PHẦN 2. BỊ CHẶN BỞI ĐẶC QUYỀN TỐI THIỂU (không ai cấp quyền -> Deny ngầm định) ===========================================
+B1   Intern@prod                Thực tập sinh đọc dữ liệu khách hàng prod            => DENY (ngầm định)   OK
+     s3:GetObject arn:aws:s3:::shopfast-prod-customer-data/customers.csv
+     quyết định bởi: không có chính sách nào Allow
+B2   Intern@dev                 Thực tập sinh xoá bucket dùng chung ở dev            => DENY (ngầm định)   OK
+     s3:DeleteBucket arn:aws:s3:::shopfast-dev-assets
+     quyết định bởi: không có chính sách nào Allow
+B3   DeveloperProdView@prod     Lập trình viên đọc dữ liệu khách hàng prod           => DENY (ngầm định)   OK
+     s3:GetObject arn:aws:s3:::shopfast-prod-customer-data/customers.csv
+     quyết định bởi: không có chính sách nào Allow
+B4   DeveloperProdView@prod     Lập trình viên sửa cấu hình máy prod                 => DENY (ngầm định)   OK
+     ec2:ModifyInstanceAttribute arn:aws:ec2:ap-southeast-1:222222222222:instance/i-prod01
+     quyết định bởi: không có chính sách nào Allow
+B5   Operator@prod              Vận hành huỷ máy chủ prod                            => DENY (ngầm định)   OK
+     ec2:TerminateInstances arn:aws:ec2:ap-southeast-1:222222222222:instance/i-prod01
+     quyết định bởi: không có chính sách nào Allow
+B6   shopfast-prod-app-api      Ứng dụng xoá ảnh sản phẩm thật                       => DENY (ngầm định)   OK
+     s3:DeleteObject arn:aws:s3:::shopfast-prod-media/products/123.jpg
+     quyết định bởi: không có chính sách nào Allow
+
+== PHẦN 3. IDENTITY CHO PHÉP NHƯNG BỊ CHẶN BỞI LỚP KIỂM SOÁT BỔ SUNG (Deny tường minh) =====================================
+C1   shopfast-legacy-admin      Role lỡ gắn AdministratorAccess xoá bucket prod      => DENY (tường minh)  OK
+     s3:DeleteBucket arn:aws:s3:::shopfast-prod-orders-archive
+     quyết định bởi: SCP:shopfast-prod-data#OnlyBreakGlassMayDestroyProdData
+C2   shopfast-legacy-admin      Role admin xoá CSDL prod                             => DENY (tường minh)  OK
+     rds:DeleteDBInstance arn:aws:rds:ap-southeast-1:222222222222:db:shopfast-prod-main
+     quyết định bởi: SCP:shopfast-prod-data#OnlyBreakGlassMayDestroyProdData
+C3   BreakGlass@prod            BreakGlass xoá file trong bucket sao lưu             => DENY (tường minh)  OK
+     s3:DeleteObject arn:aws:s3:::shopfast-prod-backup/db/2026-10-30.sql.gz
+     quyết định bởi: resource:shopfast-prod-backup bucket policy#NobodyDeletesBackups
+C4   BreakGlass@prod            BreakGlass xoá bucket sao lưu                        => DENY (tường minh)  OK
+     s3:DeleteBucket arn:aws:s3:::shopfast-prod-backup
+     quyết định bởi: SCP:shopfast-prod-data#BackupsCannotBeDestroyedByAnyone | resource:shopfast-prod-backup bucket policy#NobodyDeletesBackups
+C5   shopfast-legacy-admin      Role admin tạo access key dài hạn                    => DENY (tường minh)  OK
+     iam:CreateAccessKey arn:aws:iam::222222222222:user/svc-legacy
+     quyết định bởi: SCP:shopfast-baseline#NoLongTermCredentialsAnywhere
+C6   shopfast-legacy-admin      Role admin tắt CloudTrail                            => DENY (tường minh)  OK
+     cloudtrail:StopLogging arn:aws:cloudtrail:ap-southeast-1:999999999999:trail/shopfast-org-trail
+     quyết định bởi: SCP:shopfast-baseline#ProtectAuditAndDetection
+C7   shopfast-legacy-admin      Role admin sửa trust của role ứng dụng               => DENY (tường minh)  OK
+     iam:UpdateAssumeRolePolicy arn:aws:iam::222222222222:role/shopfast-prod-app-api
+     quyết định bởi: SCP:shopfast-baseline#OnlyPlatformIacManagesExemptedRoles
+C8   Developer@dev              Phiên cũ của người vừa bị thu hồi ghi S3 dev         => DENY (tường minh)  OK
+     s3:PutObject arn:aws:s3:::shopfast-dev-assets/x
+     quyết định bởi: SCP:shopfast-revoked-sessions#KillActiveSessionsOfRevokedPeople
+
+== PHẦN 4. MÁY: PIPELINE KHÔNG CÓ KHOÁ DÀI HẠN =============================================================================
+M1   GitHub OIDC                repo:shopfast/backend:ref:refs/heads/main            => ALLOW              OK
+M2   GitHub OIDC                repo:shopfast/backend:ref:refs/heads/feature-x       => DENY (ngầm định)   OK
+M3   GitHub OIDC                repo:shopfast-evil/backend:ref:refs/heads/main       => DENY (ngầm định)   OK
+
+== PHẦN 5. TÁI HIỆN SỰ CỐ: THỰC TẬP SINH XOÁ BUCKET SAO LƯU - TỪNG LỚP CÓ TỰ CHẶN ĐƯỢC KHÔNG? ==================================
+     SCP                              -> DENY (tường minh)
+     Đặc quyền tối thiểu (identity)   -> DENY (ngầm định)
+     Resource policy                  -> DENY (tường minh)
+     + Object Lock COMPLIANCE 35 ngày (ngoài IAM): object còn hạn lưu giữ không thể xoá -> bucket không thể rỗng -> không thể xoá
+     + Nếu vẫn có người thử: rule EventBridge "prod-destructive-actions" + "guardrail-tampering" cảnh báo trong vài phút, CloudTrail ghi rõ email.
+
+Tổng: mọi kịch bản đúng như thiết kế.

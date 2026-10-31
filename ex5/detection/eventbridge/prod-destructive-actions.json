@@ -1,0 +1,31 @@
+{
+  "source": ["aws.s3", "aws.rds", "aws.dynamodb", "aws.backup", "aws.ec2", "aws.kms"],
+  "detail-type": ["AWS API Call via CloudTrail"],
+  "detail": {
+    "eventName": [
+      "DeleteBucket",
+      "DeleteObject",
+      "DeleteObjects",
+      "PutBucketLifecycle",
+      "PutBucketVersioning",
+      "DeleteDBInstance",
+      "DeleteDBCluster",
+      "DeleteDBSnapshot",
+      "DeleteTable",
+      "DeleteBackup",
+      "DeleteBackupVault",
+      "DeleteRecoveryPoint",
+      "DeleteSnapshot",
+      "DeleteVolume",
+      "ScheduleKeyDeletion",
+      "DisableKey"
+    ],
+    "userIdentity": {
+      "sessionContext": {
+        "sessionIssuer": {
+          "userName": [{ "anything-but": { "prefix": "shopfast-prod-app-" } }]
+        }
+      }
+    }
+  }
+}

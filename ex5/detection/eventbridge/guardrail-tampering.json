@@ -1,0 +1,27 @@
+{
+  "detail-type": ["AWS API Call via CloudTrail", "AWS Console Sign In via CloudTrail"],
+  "$or": [
+    {
+      "detail": {
+        "eventName": [
+          "StopLogging",
+          "DeleteTrail",
+          "UpdateTrail",
+          "PutEventSelectors",
+          "DeleteDetector",
+          "DisableRule",
+          "DeleteRule",
+          "DetachPolicy",
+          "UpdatePolicy",
+          "DeletePolicy",
+          "CreateUser",
+          "CreateAccessKey",
+          "CreateLoginProfile",
+          "PutBucketPolicy",
+          "DeleteBucketPolicy"
+        ]
+      }
+    },
+    { "detail": { "userIdentity": { "type": ["Root"] } } }
+  ]
+}

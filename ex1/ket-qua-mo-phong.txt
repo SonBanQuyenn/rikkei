@@ -1,0 +1,52 @@
+KẾT QUẢ MÔ PHỎNG CHÍNH SÁCH IAM - nhóm shopfast-developer
+Principal: arn:aws:iam::123456789012:user/dev-an
+======================================================================================================================
+ID    | Tình huống                                                 | Chính sách CŨ        | Chính sách MỚI       | Đạt?
+----------------------------------------------------------------------------------------------------------------------
+TH1   | Đọc object trong bucket dev                                | ALLOW                | ALLOW                | OK
+      s3:GetObject -> arn:aws:s3:::shopfast-dev-assets/img/logo.png
+      mới: identity:shopfast-developer (mới)#ReadWriteObjectsInDevBuckets
+TH2   | Ghi object vào bucket dev                                  | ALLOW                | ALLOW                | OK
+      s3:PutObject -> arn:aws:s3:::shopfast-dev-assets/build/app.zip
+      mới: identity:shopfast-developer (mới)#ReadWriteObjectsInDevBuckets
+TH3   | Liệt kê object trong bucket dev                            | ALLOW                | ALLOW                | OK
+      s3:ListBucket -> arn:aws:s3:::shopfast-dev-assets
+      mới: identity:shopfast-developer (mới)#ListObjectsInDevBuckets
+TH4   | Xem danh sách máy chủ                                      | ALLOW                | ALLOW                | OK
+      ec2:DescribeInstances -> *
+      mới: identity:shopfast-developer (mới)#ViewServerList
+TH5   | [KK1] Xoá bucket sao lưu CSDL production                   | ALLOW                | DENY (ngầm định)     | OK
+      s3:DeleteBucket -> arn:aws:s3:::shopfast-prod-db-backup
+      mới: không có chính sách nào Allow
+TH6   | [KK1] Xoá file sao lưu CSDL production                     | ALLOW                | DENY (ngầm định)     | OK
+      s3:DeleteObject -> arn:aws:s3:::shopfast-prod-db-backup/2026-10-30.sql.gz
+      mới: không có chính sách nào Allow
+TH7   | [KK2] Tải dữ liệu khách hàng production                    | ALLOW                | DENY (ngầm định)     | OK
+      s3:GetObject -> arn:aws:s3:::shopfast-prod-customer-data/customers.csv
+      mới: không có chính sách nào Allow
+TH8   | [KK3] Sửa bucket policy để công khai bucket                | ALLOW                | DENY (ngầm định)     | OK
+      s3:PutBucketPolicy -> arn:aws:s3:::shopfast-dev-assets
+      mới: không có chính sách nào Allow
+TH9   | [KK3] Xoá chính bucket dev                                 | ALLOW                | DENY (ngầm định)     | OK
+      s3:DeleteBucket -> arn:aws:s3:::shopfast-dev-assets
+      mới: không có chính sách nào Allow
+TH10  | [KK4] Tự gắn AdministratorAccess cho mình                  | ALLOW                | DENY (tường minh)    | OK
+      iam:AttachUserPolicy -> arn:aws:iam::123456789012:user/dev-an
+      mới: identity:shopfast-developer (mới)#DenyAllIam
+TH11  | [KK4] Tạo access key cho user khác                         | ALLOW                | DENY (tường minh)    | OK
+      iam:CreateAccessKey -> arn:aws:iam::123456789012:user/ops-admin
+      mới: identity:shopfast-developer (mới)#DenyAllIam
+TH12  | [KK4] Tạo user "cửa hậu"                                   | ALLOW                | DENY (tường minh)    | OK
+      iam:CreateUser -> arn:aws:iam::123456789012:user/backdoor
+      mới: identity:shopfast-developer (mới)#DenyAllIam
+TH13  | [KK5] Huỷ máy chủ production                               | ALLOW                | DENY (ngầm định)     | OK
+      ec2:TerminateInstances -> arn:aws:ec2:ap-southeast-1:123456789012:instance/i-0prod1234
+      mới: không có chính sách nào Allow
+TH14  | [KK5] Mở security group ra 0.0.0.0/0                       | ALLOW                | DENY (ngầm định)     | OK
+      ec2:AuthorizeSecurityGroupIngress -> arn:aws:ec2:ap-southeast-1:123456789012:security-group/sg-0db
+      mới: không có chính sách nào Allow
+TH15  | [Bẫy tiền tố] Đọc bucket shopfast-devops-secrets           | ALLOW                | DENY (ngầm định)     | OK
+      s3:GetObject -> arn:aws:s3:::shopfast-devops-secrets/db-password.txt
+      mới: không có chính sách nào Allow
+----------------------------------------------------------------------------------------------------------------------
+Tổng: 15 tình huống, 15 đạt, 0 sai.

@@ -1,0 +1,28 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadPaymentGatewayLogsUntilExpiry",
+      "Effect": "Allow",
+      "Action": ["logs:DescribeLogStreams", "logs:GetLogEvents", "logs:FilterLogEvents"],
+      "Resource": [
+        "arn:aws:logs:ap-southeast-1:123456789012:log-group:/shopfast/prod/payment-gateway",
+        "arn:aws:logs:ap-southeast-1:123456789012:log-group:/shopfast/prod/payment-gateway:*"
+      ],
+      "Condition": { "DateLessThan": { "aws:CurrentTime": "2027-01-29T00:00:00Z" } }
+    },
+    {
+      "Sid": "DenyEverythingAfterExpiry",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": { "DateGreaterThanEquals": { "aws:CurrentTime": "2027-01-29T00:00:00Z" } }
+    },
+    {
+      "Sid": "DenyLongTermKeysForPartners",
+      "Effect": "Deny",
+      "Action": ["iam:CreateAccessKey", "iam:UpdateAccessKey"],
+      "Resource": "*"
+    }
+  ]
+}

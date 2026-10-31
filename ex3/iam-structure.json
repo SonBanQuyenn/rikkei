@@ -1,0 +1,54 @@
+{
+  "account": "123456789012",
+  "region": "ap-southeast-1",
+  "groups": {
+    "All-Staff": {
+      "mo_ta": "Mọi người (kể cả đối tác) - tự quản lý mật khẩu/MFA + rào chắn chung",
+      "custom": ["ShopFast-SelfService", "ShopFast-Guardrails"],
+      "aws_managed": []
+    },
+    "Backend-Developers": {
+      "mo_ta": "6 lập trình viên backend - đọc ghi dev, chỉ đọc prod",
+      "custom": ["ShopFast-Dev-ReadWrite"],
+      "aws_managed": ["ReadOnlyAccess"]
+    },
+    "Ops-Engineers": {
+      "mo_ta": "3 kỹ sư vận hành - toàn quyền hạ tầng hai môi trường, xoá prod phải có MFA",
+      "custom": ["ShopFast-Ops-PassRole"],
+      "aws_managed": ["PowerUserAccess"]
+    },
+    "Data-Engineers": {
+      "mo_ta": "2 kỹ sư dữ liệu - chỉ đọc bucket phân tích",
+      "custom": ["ShopFast-Data-AnalyticsRead"],
+      "aws_managed": []
+    },
+    "Accountants": {
+      "mo_ta": "1 kế toán - chỉ xem chi phí, hoá đơn",
+      "custom": [],
+      "aws_managed": ["AWSBillingReadOnlyAccess"]
+    },
+    "External-Partners": {
+      "mo_ta": "3 đối tác - chỉ đọc log payment-gateway, hết hạn sau 90 ngày",
+      "custom": ["ShopFast-Partner-LogRead"],
+      "aws_managed": []
+    }
+  },
+  "job_groups": ["Backend-Developers", "Ops-Engineers", "Data-Engineers", "Accountants", "External-Partners"],
+  "users": [
+    { "name": "dev-an", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "dev-binh", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "dev-chi", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "dev-dung", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "dev-giang", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "dev-hoa", "team": "backend", "groups": ["All-Staff", "Backend-Developers"] },
+    { "name": "ops-khanh", "team": "ops", "groups": ["All-Staff", "Ops-Engineers"] },
+    { "name": "ops-lam", "team": "ops", "groups": ["All-Staff", "Ops-Engineers"] },
+    { "name": "ops-minh", "team": "ops", "groups": ["All-Staff", "Ops-Engineers"] },
+    { "name": "data-nam", "team": "data", "groups": ["All-Staff", "Data-Engineers"] },
+    { "name": "data-oanh", "team": "data", "groups": ["All-Staff", "Data-Engineers"] },
+    { "name": "ketoan-phuong", "team": "finance", "groups": ["All-Staff", "Accountants"] },
+    { "name": "partner-quang", "team": "partner", "groups": ["All-Staff", "External-Partners"], "expires": "2027-01-29" },
+    { "name": "partner-son", "team": "partner", "groups": ["All-Staff", "External-Partners"], "expires": "2027-01-29" },
+    { "name": "partner-tuan", "team": "partner", "groups": ["All-Staff", "External-Partners"], "expires": "2027-01-29" }
+  ]
+}

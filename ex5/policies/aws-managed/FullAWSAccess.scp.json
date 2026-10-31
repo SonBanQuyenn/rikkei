@@ -1,0 +1,7 @@
+{
+  "_ghi_chu": "SCP mặc định FullAWSAccess của AWS Organizations (gắn sẵn ở root) - các SCP Deny của ShopFast chồng lên trên.",
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Effect": "Allow", "Action": "*", "Resource": "*" }
+  ]
+}

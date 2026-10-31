@@ -1,0 +1,94 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "UserLifecycle",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateUser",
+        "iam:GetUser",
+        "iam:ListUsers",
+        "iam:TagUser",
+        "iam:UntagUser",
+        "iam:CreateLoginProfile",
+        "iam:GetLoginProfile",
+        "iam:DeleteLoginProfile",
+        "iam:AddUserToGroup",
+        "iam:RemoveUserFromGroup",
+        "iam:ListGroups",
+        "iam:GetGroup",
+        "iam:ListGroupsForUser",
+        "iam:ListAccessKeys",
+        "iam:UpdateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:ListMFADevices",
+        "iam:DeactivateMFADevice",
+        "iam:DeleteVirtualMFADevice",
+        "iam:ListSSHPublicKeys",
+        "iam:DeleteSSHPublicKey",
+        "iam:ListServiceSpecificCredentials",
+        "iam:DeleteServiceSpecificCredential",
+        "iam:ListSigningCertificates",
+        "iam:DeleteSigningCertificate",
+        "iam:ListAttachedUserPolicies",
+        "iam:ListUserPolicies",
+        "iam:DetachUserPolicy",
+        "iam:DeleteUserPolicy"
+      ],
+      "Resource": [
+        "arn:aws:iam::123456789012:user/*",
+        "arn:aws:iam::123456789012:group/*",
+        "arn:aws:iam::123456789012:mfa/*"
+      ]
+    },
+    {
+      "Sid": "AuditAndVerify",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GenerateCredentialReport",
+        "iam:GetCredentialReport",
+        "iam:GetAccountAuthorizationDetails",
+        "iam:SimulatePrincipalPolicy",
+        "cloudtrail:LookupEvents"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AttachOnlyTheOffboardingDenyPolicy",
+      "Effect": "Allow",
+      "Action": "iam:AttachUserPolicy",
+      "Resource": "arn:aws:iam::123456789012:user/*",
+      "Condition": {
+        "ArnEquals": { "iam:PolicyARN": "arn:aws:iam::123456789012:policy/ShopFast-DenyAll" }
+      }
+    },
+    {
+      "Sid": "RevokeSessionsOfThisRole",
+      "Effect": "Allow",
+      "Action": "iam:PutRolePolicy",
+      "Resource": "arn:aws:iam::123456789012:role/ShopFast-IamAdmin"
+    },
+    {
+      "Sid": "NeverTouchGuardrailsOrThisRolesDefinition",
+      "Effect": "Deny",
+      "Action": [
+        "iam:CreatePolicyVersion",
+        "iam:SetDefaultPolicyVersion",
+        "iam:DeletePolicy",
+        "iam:DeletePolicyVersion",
+        "iam:AttachGroupPolicy",
+        "iam:DetachGroupPolicy",
+        "iam:PutGroupPolicy",
+        "iam:DeleteGroupPolicy",
+        "iam:UpdateAssumeRolePolicy",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRolePermissionsBoundary",
+        "iam:PutRolePermissionsBoundary",
+        "iam:PutUserPolicy",
+        "iam:CreateAccessKey"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

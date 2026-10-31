@@ -1,0 +1,29 @@
+{
+  "_ghi_chu": "Trích lược arn:aws:iam::aws:policy/job-function/ViewOnlyAccess - xem cấu hình/metadata, KHÔNG đọc dữ liệu (không có s3:GetObject, dynamodb:GetItem...).",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Describe*",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "rds:Describe*",
+        "dynamodb:ListTables",
+        "dynamodb:DescribeTable",
+        "lambda:List*",
+        "logs:DescribeLogGroups",
+        "cloudwatch:Describe*",
+        "cloudwatch:List*",
+        "ecs:Describe*",
+        "ecs:List*",
+        "iam:List*",
+        "iam:GetRole",
+        "backup:List*",
+        "backup:Describe*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

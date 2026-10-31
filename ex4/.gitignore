@@ -1,0 +1,7 @@
+node_modules/
+*.key
+*.pem
+*.csr
+*.srl
+.env
+.env.local

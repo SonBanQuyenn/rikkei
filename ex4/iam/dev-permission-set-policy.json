@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DevInvoiceBucketOnly",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject", "s3:ListBucket"],
+      "Resource": [
+        "arn:aws:s3:::shopfast-dev-invoices",
+        "arn:aws:s3:::shopfast-dev-invoices/*"
+      ]
+    },
+    {
+      "Sid": "DevDbSecretOnly",
+      "Effect": "Allow",
+      "Action": ["secretsmanager:GetSecretValue", "secretsmanager:DescribeSecret"],
+      "Resource": "arn:aws:secretsmanager:ap-southeast-1:123456789012:secret:shopfast/dev/db-app-??????"
+    },
+    {
+      "Sid": "NeverProdSecretsOrInvoices",
+      "Effect": "Deny",
+      "Action": ["secretsmanager:*", "s3:*"],
+      "Resource": [
+        "arn:aws:secretsmanager:*:123456789012:secret:shopfast/prod/*",
+        "arn:aws:s3:::shopfast-prod-*",
+        "arn:aws:s3:::shopfast-prod-*/*"
+      ]
+    }
+  ]
+}

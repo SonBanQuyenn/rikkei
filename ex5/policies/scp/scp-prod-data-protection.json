@@ -1,0 +1,64 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyBreakGlassMayDestroyProdData",
+      "Effect": "Deny",
+      "Action": [
+        "s3:DeleteBucket",
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:PutLifecycleConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:BypassGovernanceRetention",
+        "rds:DeleteDBInstance",
+        "rds:DeleteDBCluster",
+        "rds:DeleteDBSnapshot",
+        "rds:DeleteDBClusterSnapshot",
+        "dynamodb:DeleteTable",
+        "dynamodb:DeleteBackup",
+        "dynamodb:UpdateContinuousBackups",
+        "backup:DeleteBackupVault",
+        "backup:DeleteRecoveryPoint",
+        "backup:UpdateRecoveryPointLifecycle",
+        "backup:DeleteBackupPlan",
+        "ec2:DeleteSnapshot",
+        "ec2:DeleteVolume",
+        "kms:ScheduleKeyDeletion",
+        "kms:DisableKey"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_BreakGlass_*",
+            "arn:aws:iam::*:role/shopfast-prod-app-*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "BackupsCannotBeDestroyedByAnyone",
+      "Effect": "Deny",
+      "Action": [
+        "s3:DeleteBucket",
+        "s3:DeleteBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:PutBucketObjectLockConfiguration",
+        "backup:DeleteBackupVault",
+        "backup:DeleteBackupVaultLockConfiguration",
+        "backup:DeleteRecoveryPoint"
+      ],
+      "Resource": [
+        "arn:aws:s3:::shopfast-prod-backup",
+        "arn:aws:backup:*:*:backup-vault:shopfast-prod-vault",
+        "arn:aws:backup:*:*:recovery-point:*"
+      ],
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/shopfast-platform-security-automation"
+        }
+      }
+    }
+  ]
+}

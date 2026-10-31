@@ -1,0 +1,117 @@
+{
+  "_ghi_chu": "Định nghĩa vai trò cho NGƯỜI (IAM Identity Center permission sets). Không có IAM user nào. MFA bắt buộc ở mọi lần đăng nhập Identity Center.",
+  "accounts": {
+    "dev": "111111111111",
+    "prod": "222222222222",
+    "log-archive": "333333333333",
+    "management": "999999999999"
+  },
+  "permissionSets": {
+    "Intern": {
+      "mo_ta": "Thực tập sinh / người mới: xem dev, đọc ghi sandbox, không có gì ở prod",
+      "sessionDuration": "PT4H",
+      "awsManaged": [
+        "job-function/ViewOnlyAccess"
+      ],
+      "inline": "policies/permission-sets/intern-dev.json",
+      "assignments": [
+        {
+          "account": "dev",
+          "group": "shopfast-interns",
+          "type": "permanent"
+        }
+      ]
+    },
+    "Developer": {
+      "mo_ta": "Lập trình viên: toàn quyền dev (trừ IAM), không có quyền ghi ở prod",
+      "sessionDuration": "PT8H",
+      "awsManaged": [
+        "PowerUserAccess"
+      ],
+      "inline": null,
+      "assignments": [
+        {
+          "account": "dev",
+          "group": "shopfast-developers",
+          "type": "permanent"
+        },
+        {
+          "account": "dev",
+          "group": "shopfast-operators",
+          "type": "permanent"
+        }
+      ]
+    },
+    "DeveloperProdView": {
+      "mo_ta": "Lập trình viên xem cấu hình prod và đọc log ứng dụng để gỡ lỗi - không đọc dữ liệu khách hàng",
+      "sessionDuration": "PT4H",
+      "awsManaged": [
+        "job-function/ViewOnlyAccess"
+      ],
+      "inline": "policies/permission-sets/developer-prod-debug.json",
+      "assignments": [
+        {
+          "account": "prod",
+          "group": "shopfast-developers",
+          "type": "permanent"
+        }
+      ]
+    },
+    "Operator": {
+      "mo_ta": "Vận hành prod: khởi động lại, mở rộng, sao lưu, khôi phục - KHÔNG xoá dữ liệu",
+      "sessionDuration": "PT4H",
+      "awsManaged": [
+        "job-function/ViewOnlyAccess"
+      ],
+      "inline": "policies/permission-sets/operator-prod.json",
+      "assignments": [
+        {
+          "account": "prod",
+          "group": "shopfast-operators",
+          "type": "permanent"
+        }
+      ]
+    },
+    "SecurityAuditor": {
+      "mo_ta": "Kiểm toán / an ninh: chỉ đọc mọi tài khoản + nhật ký",
+      "sessionDuration": "PT8H",
+      "awsManaged": [
+        "SecurityAudit",
+        "job-function/ViewOnlyAccess"
+      ],
+      "inline": "policies/permission-sets/security-auditor.json",
+      "assignments": [
+        {
+          "account": "dev",
+          "group": "shopfast-security",
+          "type": "permanent"
+        },
+        {
+          "account": "prod",
+          "group": "shopfast-security",
+          "type": "permanent"
+        },
+        {
+          "account": "log-archive",
+          "group": "shopfast-security",
+          "type": "permanent"
+        }
+      ]
+    },
+    "BreakGlass": {
+      "mo_ta": "Khẩn cấp: thao tác phá huỷ dữ liệu prod. Không gán thường trực - chỉ gán tạm 2 giờ qua runbook-break-glass, người duyệt khác người dùng",
+      "sessionDuration": "PT1H",
+      "awsManaged": [
+        "PowerUserAccess"
+      ],
+      "inline": null,
+      "assignments": [
+        {
+          "account": "prod",
+          "type": "timed",
+          "maxMinutes": 120
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# crontab của user invoice-cron trên máy chủ ngoài cloud - chạy 01:30 mỗi đêm
+AWS_PROFILE=shopfast-onprem-cron
+AWS_REGION=ap-southeast-1
+INVOICE_BUCKET=shopfast-prod-invoices
+DB_SECRET_ID=shopfast/prod/db-app
+30 1 * * * cd /opt/shopfast-invoice && /usr/bin/node jobs/nightly-invoice-job.js >> /var/log/shopfast/invoice-cron.log 2>&1

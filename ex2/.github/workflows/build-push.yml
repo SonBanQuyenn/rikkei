@@ -1,0 +1,44 @@
+name: build-and-push-backend
+
+on:
+  push:
+    branches: [main]
+
+# Chỉ xin đúng quyền cần: id-token để lấy OIDC token, contents để checkout mã nguồn
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-1
+  ECR_REPOSITORY: shopfast/backend
+
+jobs:
+  build-push:
+    # Không khai báo "environment:" - nếu có, claim sub sẽ thành
+    # repo:shopfast/backend:environment:<ten> và không khớp trust policy.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Đổi OIDC token của GitHub lấy thông tin xác thực tạm thời (hết hạn sau 1 giờ),
+      # KHÔNG dùng AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY lưu trong secrets.
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/shopfast-backend-ecr-push
+          role-session-name: gha-${{ github.run_id }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image
+        env:
+          REGISTRY: ${{ steps.ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t "$REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" .
+          docker push "$REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

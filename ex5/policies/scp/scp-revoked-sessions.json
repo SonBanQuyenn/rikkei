@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "KillActiveSessionsOfRevokedPeople",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "aws:userid": ["*:__placeholder_khong_khop_ai__"]
+        }
+      }
+    }
+  ]
+}

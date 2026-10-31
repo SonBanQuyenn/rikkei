@@ -1,0 +1,8 @@
+# /home/invoice-cron/.aws/config trên MÁY CHỦ NGOÀI CLOUD (bẫy 2).
+# aws_signing_helper (công cụ của IAM Roles Anywhere) ký request bằng chứng chỉ X.509
+# và trả về credential tạm 1 giờ. SDK gọi lại tự động khi gần hết hạn.
+# Khoá riêng nằm trong file chỉ user invoice-cron đọc được (chmod 600) - hoặc trong TPM/PKCS#11.
+
+[profile shopfast-onprem-cron]
+region = ap-southeast-1
+credential_process = /usr/local/bin/aws_signing_helper credential-process --certificate /etc/shopfast/pki/invoice-cron.crt --private-key /etc/shopfast/pki/invoice-cron.key --trust-anchor-arn arn:aws:rolesanywhere:ap-southeast-1:123456789012:trust-anchor/0a1b2c3d-4e5f-4789-abcd-ef0123456789 --profile-arn arn:aws:rolesanywhere:ap-southeast-1:123456789012:profile/9f8e7d6c-5b4a-4321-9876-543210fedcba --role-arn arn:aws:iam::123456789012:role/shopfast-prod-cron-invoice

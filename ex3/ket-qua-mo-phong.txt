@@ -1,0 +1,98 @@
+KẾT QUẢ MÔ PHỎNG - ShopFast IAM (thời điểm mặc định 2026-11-15T09:00:00Z, hết hạn đối tác 2027-01-29)
+==========================================================================================================================
+#   | Nhóm       | Người          | Tình huống                               | Kết quả            | Mong đợi      | Đạt
+--------------------------------------------------------------------------------------------------------------------------
+1   | Backend    | dev-an         | Ghi object vào bucket dev                | ALLOW              | ALLOW         | OK
+      s3:PutObject  <-  identity:Backend-Developers/ShopFast-Dev-ReadWrite#DevBucketsAndObjects
+2   | Backend    | dev-an         | Ghi object vào bucket prod               | DENY (ngầm định)   | DENY          | OK
+      s3:PutObject  <-  không có chính sách nào Allow
+3   | Backend    | dev-an         | Đọc object bucket prod (chỉ đọc)         | ALLOW              | ALLOW         | OK
+      s3:GetObject  <-  identity:Backend-Developers/aws:ReadOnlyAccess#Statement[0]
+4   | Backend    | dev-an         | Huỷ máy chủ gắn thẻ dev                  | ALLOW              | ALLOW         | OK
+      ec2:TerminateInstances  <-  identity:Backend-Developers/ShopFast-Dev-ReadWrite#Ec2ManageDevInstances
+5   | Backend    | dev-an         | Huỷ máy chủ gắn thẻ prod                 | DENY (tường minh)  | DENY*         | OK
+      ec2:TerminateInstances  <-  identity:All-Staff/ShopFast-Guardrails#DenyProdEc2DeleteWithoutMfaTaggedResources
+6   | Backend    | dev-an         | Huỷ máy chủ prod (kể cả có MFA)          | DENY (ngầm định)   | DENY          | OK
+      ec2:TerminateInstances  <-  không có chính sách nào Allow
+7   | Backend    | dev-an         | Tạo máy chủ gắn thẻ prod                 | DENY (ngầm định)   | DENY          | OK
+      ec2:RunInstances  <-  không có chính sách nào Allow
+8   | Backend    | dev-an         | Gán role ứng dụng prod cho Lambda        | DENY (ngầm định)   | DENY          | OK
+      iam:PassRole  <-  không có chính sách nào Allow
+9   | Backend    | dev-an         | Cập nhật Lambda dev                      | ALLOW              | ALLOW         | OK
+      lambda:UpdateFunctionCode  <-  identity:Backend-Developers/ShopFast-Dev-ReadWrite#DevNamedServiceResources
+10  | Ops        | ops-khanh      | Tạo máy chủ prod                         | ALLOW              | ALLOW         | OK
+      ec2:RunInstances  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+11  | Ops        | ops-khanh      | Huỷ máy chủ prod KHÔNG có MFA            | DENY (tường minh)  | DENY*         | OK
+      ec2:TerminateInstances  <-  identity:All-Staff/ShopFast-Guardrails#DenyProdEc2DeleteWithoutMfaTaggedResources
+12  | Ops        | ops-khanh      | Huỷ máy chủ prod CÓ MFA                  | ALLOW              | ALLOW         | OK
+      ec2:TerminateInstances  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+13  | Ops        | ops-khanh      | Xoá bucket sao lưu prod KHÔNG MFA        | DENY (tường minh)  | DENY*         | OK
+      s3:DeleteBucket  <-  identity:All-Staff/ShopFast-Guardrails#DenyProdDeleteWithoutMfaNamedResources
+14  | Ops        | ops-khanh      | Xoá bucket sao lưu prod CÓ MFA           | ALLOW              | ALLOW         | OK
+      s3:DeleteBucket  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+15  | Ops        | ops-khanh      | Xoá bucket dev không MFA                 | ALLOW              | ALLOW         | OK
+      s3:DeleteBucket  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+16  | Ops        | ops-khanh      | Tự gắn AdministratorAccess               | DENY (ngầm định)   | DENY          | OK
+      iam:AttachUserPolicy  <-  không có chính sách nào Allow
+17  | Ops        | ops-khanh      | Tắt CloudTrail (kể cả có MFA)            | DENY (tường minh)  | DENY*         | OK
+      cloudtrail:StopLogging  <-  identity:All-Staff/ShopFast-Guardrails#ProtectAuditTrail
+18  | Ops        | ops-khanh      | Xoá file nhật ký kiểm toán               | DENY (tường minh)  | DENY*         | OK
+      s3:DeleteObject  <-  identity:All-Staff/ShopFast-Guardrails#ProtectAuditBucket
+19  | Data       | data-nam       | Đọc dữ liệu phân tích                    | ALLOW              | ALLOW         | OK
+      s3:GetObject  <-  identity:Data-Engineers/ShopFast-Data-AnalyticsRead#ReadAnalyticsObjects
+20  | Data       | data-nam       | Ghi vào bucket phân tích                 | DENY (ngầm định)   | DENY          | OK
+      s3:PutObject  <-  không có chính sách nào Allow
+21  | Data       | data-nam       | Đọc dữ liệu khách hàng prod              | DENY (ngầm định)   | DENY          | OK
+      s3:GetObject  <-  không có chính sách nào Allow
+22  | Data       | data-nam       | Xem danh sách máy chủ                    | DENY (ngầm định)   | DENY          | OK
+      ec2:DescribeInstances  <-  không có chính sách nào Allow
+23  | Finance    | ketoan-phuong  | Xem chi phí theo dịch vụ                 | ALLOW              | ALLOW         | OK
+      ce:GetCostAndUsage  <-  identity:Accountants/aws:AWSBillingReadOnlyAccess#Statement[0]
+24  | Finance    | ketoan-phuong  | Xem hoá đơn                              | ALLOW              | ALLOW         | OK
+      invoicing:ListInvoiceSummaries  <-  identity:Accountants/aws:AWSBillingReadOnlyAccess#Statement[0]
+25  | Finance    | ketoan-phuong  | Sửa phương thức thanh toán               | DENY (ngầm định)   | DENY          | OK
+      payments:UpdatePaymentPreferences  <-  không có chính sách nào Allow
+26  | Finance    | ketoan-phuong  | Đọc bucket dev                           | DENY (ngầm định)   | DENY          | OK
+      s3:GetObject  <-  không có chính sách nào Allow
+27  | Partner    | partner-quang  | Đọc log payment-gateway (còn hạn)        | ALLOW              | ALLOW         | OK
+      logs:GetLogEvents  <-  identity:External-Partners/ShopFast-Partner-LogRead#ReadPaymentGatewayLogsUntilExpiry
+28  | Partner    | partner-quang  | Đọc log order-service                    | DENY (ngầm định)   | DENY          | OK
+      logs:GetLogEvents  <-  không có chính sách nào Allow
+29  | Partner    | partner-quang  | Đọc log payment-gateway SAU 90 ngày      | DENY (tường minh)  | DENY*         | OK
+      logs:GetLogEvents  <-  identity:External-Partners/ShopFast-Partner-LogRead#DenyEverythingAfterExpiry
+30  | Partner    | partner-quang  | Đổi mật khẩu SAU 90 ngày                 | DENY (tường minh)  | DENY*         | OK
+      iam:ChangePassword  <-  identity:External-Partners/ShopFast-Partner-LogRead#DenyEverythingAfterExpiry
+31  | Partner    | partner-quang  | Tự tạo access key dài hạn                | DENY (tường minh)  | DENY*         | OK
+      iam:CreateAccessKey  <-  identity:External-Partners/ShopFast-Partner-LogRead#DenyLongTermKeysForPartners
+32  | Conflict   | dev-binh       | Dev+Data: đọc dữ liệu phân tích          | ALLOW              | ALLOW         | OK
+      s3:GetObject  <-  identity:Backend-Developers/aws:ReadOnlyAccess#Statement[0], identity:Data-Engineers/ShopFast-Data-AnalyticsRead#ReadAnalyticsObjects
+33  | Conflict   | dev-binh       | Dev+Data: ghi bucket prod                | DENY (ngầm định)   | DENY          | OK
+      s3:PutObject  <-  không có chính sách nào Allow
+34  | Conflict   | dev-binh       | Dev+Ops: ghi bucket prod                 | ALLOW              | ALLOW         | OK
+      s3:PutObject  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+35  | Conflict   | dev-binh       | Dev+Ops: huỷ máy prod không MFA          | DENY (tường minh)  | DENY*         | OK
+      ec2:TerminateInstances  <-  identity:All-Staff/ShopFast-Guardrails#DenyProdEc2DeleteWithoutMfaTaggedResources
+36  | Conflict   | ops-lam        | Ops+Partner: tạo máy chủ (còn hạn)       | ALLOW              | ALLOW         | OK
+      ec2:RunInstances  <-  identity:Ops-Engineers/aws:PowerUserAccess#Statement[0]
+37  | Conflict   | ops-lam        | Ops+Partner: tạo máy chủ (sau hạn)       | DENY (tường minh)  | DENY*         | OK
+      ec2:RunInstances  <-  identity:External-Partners/ShopFast-Partner-LogRead#DenyEverythingAfterExpiry
+38  | Offboard   | dev-hoa        | Đọc bucket dev sau thu hồi               | DENY (tường minh)  | DENY*         | OK
+      s3:GetObject  <-  identity:user/ShopFast-DenyAll#OffboardedUserDenyEverything
+39  | Offboard   | dev-hoa        | Tạo access key mới sau thu hồi           | DENY (tường minh)  | DENY*         | OK
+      iam:CreateAccessKey  <-  identity:user/ShopFast-DenyAll#OffboardedUserDenyEverything
+40  | IamAdmin   | IamAdmin(role) | Thêm user vào nhóm                       | ALLOW              | ALLOW         | OK
+      iam:AddUserToGroup  <-  identity:ShopFast-IamAdmin-Permissions#UserLifecycle
+41  | IamAdmin   | IamAdmin(role) | Gắn ShopFast-DenyAll cho user nghỉ       | ALLOW              | ALLOW         | OK
+      iam:AttachUserPolicy  <-  identity:ShopFast-IamAdmin-Permissions#AttachOnlyTheOffboardingDenyPolicy
+42  | IamAdmin   | IamAdmin(role) | Gắn AdministratorAccess cho user         | DENY (ngầm định)   | DENY          | OK
+      iam:AttachUserPolicy  <-  không có chính sách nào Allow
+43  | IamAdmin   | IamAdmin(role) | Sửa chính sách Guardrails                | DENY (tường minh)  | DENY*         | OK
+      iam:CreatePolicyVersion  <-  identity:ShopFast-IamAdmin-Permissions#NeverTouchGuardrailsOrThisRolesDefinition, boundary:ShopFast-IamAdmin-Permissions#NeverTouchGuardrailsOrThisRolesDefinition
+44  | AssumeRole | ops-khanh      | Ops assume IamAdmin có MFA               | ALLOW              | ALLOW         | OK
+      sts:AssumeRole  <-  identity:Ops-Engineers/ShopFast-Ops-PassRole#AssumeIamAdminRole, identity:Ops-Engineers/aws:PowerUserAccess#Statement[0], resource:ShopFast-IamAdmin.trust#OpsEngineersWithFreshMfaOnly
+45  | AssumeRole | ops-khanh      | Ops assume IamAdmin không MFA            | DENY (ngầm định)   | DENY          | OK
+      sts:AssumeRole  <-  trust policy không khớp
+46  | AssumeRole | dev-an         | Dev assume IamAdmin có MFA               | DENY (ngầm định)   | DENY          | OK
+      sts:AssumeRole  <-  không có chính sách nào Allow
+--------------------------------------------------------------------------------------------------------------------------
+Tổng: 46 tình huống, 46 đạt, 0 sai.   (DENY* = Deny tường minh)

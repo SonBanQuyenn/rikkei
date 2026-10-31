@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "ManagementEventsAll",
+    "FieldSelectors": [
+      { "Field": "eventCategory", "Equals": ["Management"] }
+    ]
+  },
+  {
+    "Name": "S3DataEventsSensitiveBuckets",
+    "FieldSelectors": [
+      { "Field": "eventCategory", "Equals": ["Data"] },
+      { "Field": "resources.type", "Equals": ["AWS::S3::Object"] },
+      {
+        "Field": "resources.ARN",
+        "StartsWith": [
+          "arn:aws:s3:::shopfast-prod-",
+          "arn:aws:s3:::shopfast-analytics/"
+        ]
+      }
+    ]
+  }
+]

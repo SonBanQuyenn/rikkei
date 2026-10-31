@@ -1,0 +1,56 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CloudTrailAclCheck",
+      "Effect": "Allow",
+      "Principal": { "Service": "cloudtrail.amazonaws.com" },
+      "Action": "s3:GetBucketAcl",
+      "Resource": "arn:aws:s3:::shopfast-org-cloudtrail-333333333333"
+    },
+    {
+      "Sid": "CloudTrailOrgWrite",
+      "Effect": "Allow",
+      "Principal": { "Service": "cloudtrail.amazonaws.com" },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::shopfast-org-cloudtrail-333333333333/AWSLogs/o-shopfast01/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control",
+          "aws:SourceArn": "arn:aws:cloudtrail:ap-southeast-1:999999999999:trail/shopfast-org-trail"
+        }
+      }
+    },
+    {
+      "Sid": "AuditorsReadOnly",
+      "Effect": "Allow",
+      "Principal": { "AWS": "arn:aws:iam::333333333333:root" },
+      "Action": ["s3:GetObject", "s3:ListBucket"],
+      "Resource": [
+        "arn:aws:s3:::shopfast-org-cloudtrail-333333333333",
+        "arn:aws:s3:::shopfast-org-cloudtrail-333333333333/*"
+      ],
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::333333333333:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_SecurityAuditor_*"
+        }
+      }
+    },
+    {
+      "Sid": "LogsAreImmutable",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:DeleteBucket",
+        "s3:PutBucketPolicy",
+        "s3:PutLifecycleConfiguration"
+      ],
+      "Resource": [
+        "arn:aws:s3:::shopfast-org-cloudtrail-333333333333",
+        "arn:aws:s3:::shopfast-org-cloudtrail-333333333333/*"
+      ]
+    }
+  ]
+}

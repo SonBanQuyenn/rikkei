@@ -1,0 +1,29 @@
+{
+  "_ghi_chu": "Trích lược chính sách AWS quản lý arn:aws:iam::aws:policy/AWSBillingReadOnlyAccess - chỉ dùng cho bộ mô phỏng.",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "aws-portal:View*",
+        "billing:Get*",
+        "billing:List*",
+        "ce:Get*",
+        "ce:Describe*",
+        "ce:List*",
+        "cur:Describe*",
+        "cur:Get*",
+        "budgets:ViewBudget",
+        "budgets:Describe*",
+        "invoicing:Get*",
+        "invoicing:List*",
+        "payments:Get*",
+        "payments:List*",
+        "tax:Get*",
+        "tax:List*",
+        "pricing:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "ImageId": "ami-0abcdef1234567890",
+  "InstanceType": "t3.small",
+  "IamInstanceProfile": { "Name": "shopfast-prod-app-invoice" },
+  "MetadataOptions": {
+    "HttpTokens": "required",
+    "HttpPutResponseHopLimit": 1,
+    "HttpEndpoint": "enabled",
+    "InstanceMetadataTags": "disabled"
+  },
+  "TagSpecifications": [
+    {
+      "ResourceType": "instance",
+      "Tags": [
+        { "Key": "Environment", "Value": "prod" },
+        { "Key": "Service", "Value": "invoice" }
+      ]
+    }
+  ],
+  "UserData": "IyEvYmluL2Jhc2gKIyBLaG9uZyBjbyBBV1NfQUNDRVNTX0tFWV9JRCBuYW8gLSBTREsgdHUgbGF5IGNyZWRlbnRpYWwgdGFtIHR1IElNRFN2MgpleHBvcnQgQVdTX1JFR0lPTj1hcC1zb3V0aGVhc3QtMQpleHBvcnQgSU5WT0lDRV9CVUNLRVQ9c2hvcGZhc3QtcHJvZC1pbnZvaWNlcwpleHBvcnQgREJfU0VDUkVUX0lEPXNob3BmYXN0L3Byb2QvZGItYXBwCmNkIC9vcHQvc2hvcGZhc3QtaW52b2ljZSAmJiBub2RlIHNyYy9zZXJ2ZXIuanMK"
+}
