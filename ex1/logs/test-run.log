@@ -1,0 +1,36 @@
+# Subtest: K1 - ban goc: 1 don nhan 5 email giong het nhau khi phan hoi nha cung cap bi timeout
+ok 1 - K1 - ban goc: 1 don nhan 5 email giong het nhau khi phan hoi nha cung cap bi timeout
+# {"calls":5,"emails":5}
+# Subtest: K1 - ban sua: van 5 lan goi nhung khach chi nhan 1 email
+ok 2 - K1 - ban sua: van 5 lan goi nhung khach chi nhan 1 email
+# {"calls":5,"emails":1}
+# Subtest: K2 - ban goc: worker chet sau khi gui, worker khac chay lai job -> khach nhan 2 email
+ok 3 - K2 - ban goc: worker chet sau khi gui, worker khac chay lai job -> khach nhan 2 email
+# {"calls":2,"emails":2}
+# Subtest: K2 - ban sua: job duoc chay lai nhung khach chi nhan 1 email
+ok 4 - K2 - ban sua: job duoc chay lai nhung khach chi nhan 1 email
+# {"calls":2,"emails":1}
+# Subtest: K3 - ban goc: 5 lan thu dien ra trong < 1s, job that bai, khach khong nhan email nao
+ok 5 - K3 - ban goc: 5 lan thu dien ra trong < 1s, job that bai, khach khong nhan email nao
+# {"calls":5,"spreadMs":14,"emails":0,"failed":1}
+# Subtest: K3 - ban sua: thu lai gian dan, vuot qua su co va gui dung 1 email
+ok 6 - K3 - ban sua: thu lai gian dan, vuot qua su co va gui dung 1 email
+# {"calls":3,"spreadMs":3066,"emails":1,"failed":0}
+# Subtest: K4 - ban goc: 300 don -> 300 job hoan tat van nam trong Redis (tang mai khong giam)
+ok 7 - K4 - ban goc: 300 don -> 300 job hoan tat van nam trong Redis (tang mai khong giam)
+# {"emails":300,"queueKeys":305,"completed":300}
+# Subtest: K4 - ban sua: 300 don -> khong con job hoan tat nao, chi con vai khoa quan tri cua hang doi
+ok 8 - K4 - ban sua: 300 don -> khong con job hoan tat nao, chi con vai khoa quan tri cua hang doi
+# {"emails":300,"queueKeys":4,"completed":0}
+# Subtest: Dau "da gui" luon co TTL nen cung khong lam Redis phinh
+ok 9 - Dau "da gui" luon co TTL nen cung khong lam Redis phinh
+# Subtest: Goi add() lap lai cho cung mot don chi tao 1 job (jobId co dinh)
+ok 10 - Goi add() lap lai cho cung mot don chi tao 1 job (jobId co dinh)
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8803.7103

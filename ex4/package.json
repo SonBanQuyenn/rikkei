@@ -1,0 +1,19 @@
+{
+  "name": "md6-l5-ex4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/src/main.js",
+    "bench": "tsc && node dist/src/benchmark.js",
+    "test": "tsc && node --test --test-concurrency=1 \"dist/test/**/*.test.js\""
+  },
+  "dependencies": {
+    "bullmq": "^6.5.3",
+    "ioredis": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,42 @@
+  +0.0s  Nap 4000 khach vao hang doi chien dich (lo 1.000 job)...
+  +0.4s  Da nap: {"total":4000,"queued":3860,"invalidFormat":121,"duplicates":19}
+  +0.4s  Khoi dong 4 tien trinh worker
+  +2.4s  [running  ]   2.5%  sent=96 invalid=1 failed=0 | 47/s ETA 80s | nha cung cap dinh 90/s, bi chan 0
+  +4.4s  [running  ]   6.4%  sent=245 invalid=2 failed=0 | 60.4/s ETA 60s | nha cung cap dinh 90/s, bi chan 0
+  +6.4s  [running  ]  10.3%  sent=395 invalid=3 failed=0 | 65.2/s ETA 53s | nha cung cap dinh 90/s, bi chan 0
+  +8.5s  [running  ]  14.1%  sent=540 invalid=3 failed=0 | 66.9/s ETA 50s | nha cung cap dinh 90/s, bi chan 0
+ +10.5s  [running  ]    18%  sent=691 invalid=4 failed=0 | 68.6/s ETA 46s | nha cung cap dinh 90/s, bi chan 0
+ +12.5s  [running  ]  21.9%  sent=841 invalid=5 failed=0 | 69.6/s ETA 43s | nha cung cap dinh 90/s, bi chan 0
+ +14.5s  [running  ]  25.7%  sent=986 invalid=6 failed=0 | 70/s ETA 41s | nha cung cap dinh 90/s, bi chan 0
+ +16.5s  [running  ]  29.6%  sent=1136 invalid=6 failed=0 | 70.6/s ETA 39s | nha cung cap dinh 90/s, bi chan 0
+ +18.5s  [running  ]  33.5%  sent=1285 invalid=7 failed=0 | 71/s ETA 36s | nha cung cap dinh 90/s, bi chan 0
+ +20.5s  [running  ]  37.3%  sent=1433 invalid=8 failed=0 | 71.3/s ETA 34s | nha cung cap dinh 90/s, bi chan 0
+ +22.5s  [running  ]  41.2%  sent=1583 invalid=9 failed=0 | 71.6/s ETA 32s | nha cung cap dinh 90/s, bi chan 0
+ +22.5s  >>> TAM DUNG chien dich (phat hien sai sot) - sent=1583
+ +25.5s  >>> Sau 3s tam dung: sent=1623 (chi tang 40 = job dang goi do luc dung)
+ +25.5s  >>> TIEP TUC chien dich
+ +27.5s  [running  ]    46%  sent=1766 invalid=10 failed=0 | 65.1/s ETA 32s | nha cung cap dinh 90/s, bi chan 0
+ +29.5s  [running  ]  49.9%  sent=1916 invalid=10 failed=0 | 65.8/s ETA 29s | nha cung cap dinh 90/s, bi chan 0
+ +31.5s  [running  ]  53.7%  sent=2060 invalid=11 failed=0 | 66.2/s ETA 27s | nha cung cap dinh 90/s, bi chan 0
+ +33.5s  [running  ]  57.5%  sent=2208 invalid=12 failed=0 | 66.6/s ETA 25s | nha cung cap dinh 90/s, bi chan 0
+ +35.6s  [running  ]  61.5%  sent=2361 invalid=13 failed=0 | 67.2/s ETA 22s | nha cung cap dinh 90/s, bi chan 0
+ +37.6s  [running  ]  65.3%  sent=2508 invalid=13 failed=0 | 67.5/s ETA 20s | nha cung cap dinh 90/s, bi chan 0
+ +39.6s  [running  ]  69.2%  sent=2658 invalid=13 failed=0 | 67.9/s ETA 18s | nha cung cap dinh 90/s, bi chan 0
+ +41.6s  [running  ]  73.1%  sent=2808 invalid=14 failed=0 | 68.2/s ETA 15s | nha cung cap dinh 90/s, bi chan 0
+ +43.6s  [running  ]  76.9%  sent=2954 invalid=15 failed=0 | 68.4/s ETA 13s | nha cung cap dinh 90/s, bi chan 0
+ +45.6s  [running  ]  80.8%  sent=3104 invalid=16 failed=0 | 68.6/s ETA 11s | nha cung cap dinh 90/s, bi chan 0
+ +47.6s  [running  ]  84.7%  sent=3255 invalid=16 failed=0 | 68.9/s ETA 9s | nha cung cap dinh 90/s, bi chan 0
+ +49.6s  [running  ]  88.7%  sent=3407 invalid=17 failed=0 | 69.2/s ETA 6s | nha cung cap dinh 90/s, bi chan 0
+ +51.7s  [running  ]  92.5%  sent=3554 invalid=18 failed=0 | 69.3/s ETA 4s | nha cung cap dinh 90/s, bi chan 0
+ +53.7s  [running  ]  96.1%  sent=3691 invalid=19 failed=0 | 69.3/s ETA 2s | nha cung cap dinh 90/s, bi chan 0
+ +55.7s  [running  ]  99.7%  sent=3830 invalid=19 failed=0 | 69.3/s ETA 0s | nha cung cap dinh 90/s, bi chan 0
+ +57.7s  [running  ]   100%  sent=3841 invalid=19 failed=0 | 67/s ETA 0s | nha cung cap dinh 90/s, bi chan 0
+
+================ KET QUA ================
+Danh sach: 4000 | nap vao hang doi: 3860 | sai dinh dang: 121 | trung: 19
+Gui thanh cong: 3841 | khong ton tai (khong thu lai): 19 | loi het lan thu: 0
+So email chien dich nha cung cap thuc su gui: 3841, trong do trung dia chi: 0
+Nha cung cap: 4392 lan goi, dinh 90 lan/giay (gioi han 100), bi chan: 0
+Thong luong chien dich dat duoc: 74.4 email/s (yeu cau toi thieu 69.4/s)
+Email giao dich: 532 | do tre p50=109ms p95=182ms max=625ms
+Ngoai suy 500.000 khach (~485000 hop le): 109 phut (han 120 phut)

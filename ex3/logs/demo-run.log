@@ -1,0 +1,63 @@
+>>> Tien trinh #1 bi dung dot ngot. Don 172a6130 dang o trang thai STOCK_RESERVED, buoc xong: [reserve-stock]
+>>> Tien trinh #2 khoi dong, recover() noi tiep 5 don chua ket thuc
+
+### Thanh cong tron ven  (don 39820fb5)
+  08:57:02.575  PLACED          Khach dat hang thanh cong
+  08:57:02.655  STOCK_RESERVED  Da giu hang (rsv-39820fb5-80dc-4afe-894f-65d1f85af21a)
+  08:57:02.665  PAID            Da xac nhan thanh toan (tx-1)
+  08:57:02.670  INVOICED        Da xuat hoa don HD-000001
+  08:57:02.679  READY_TO_SHIP   Da gui email va SMS cho khach
+  08:57:02.725  SHIPPED         Da ban giao van chuyen, ma van don GHN-1
+
+### Het hang (buoc 1)  (don 6155209f)
+  08:57:02.602  PLACED          Khach dat hang thanh cong
+  08:57:02.657  CANCELLED       Huy don: Het hang. Da hoan tien (rf-6155209f-1f8e-4cda-ace8-dab5f6356662)
+
+### Cong thanh toan tu choi (buoc 2)  (don 1d19b85c)
+  08:57:02.604  PLACED          Khach dat hang thanh cong
+  08:57:02.655  STOCK_RESERVED  Da giu hang (rsv-1d19b85c-5880-4378-a2ad-e1fa8243e0f8)
+  08:57:02.671  CANCELLED       Huy don: thanh toan that bai (Cong thanh toan tu choi). Da tra hang ve kho
+
+### Tru tien xong nhung phan hoi bi het gio (buoc 2)  (don f032f491)
+  08:57:02.606  PLACED          Khach dat hang thanh cong
+  08:57:02.656  STOCK_RESERVED  Da giu hang (rsv-f032f491-284c-43e9-a025-26b223654035)
+  08:57:04.746  PAID            Thanh toan da duoc tru o lan thu truoc (tx-2) - khong tru lai
+  08:57:04.751  INVOICED        Da xuat hoa don HD-000003
+  08:57:04.762  READY_TO_SHIP   Da gui email va SMS cho khach
+  08:57:04.770  SHIPPED         Da ban giao van chuyen, ma van don GHN-4
+
+### Hoa don dien tu hong ca 5 lan (buoc 3)  (don 3075f4b2)
+  08:57:02.608  PLACED          Khach dat hang thanh cong
+  08:57:02.656  STOCK_RESERVED  Da giu hang (rsv-3075f4b2-c35b-4754-94bd-41390782b15e)
+  08:57:02.673  PAID            Da xac nhan thanh toan (tx-3)
+  08:57:04.291  INVOICE_MANUAL  Xuat hoa don that bai 5 lan (He thong hoa don dien tu khong phan hoi) - da bao ke toan (task-E_INVOICE-3075f4b2-c35b-4754-94bd-41390782b15e), don tiep tuc
+  08:57:04.296  READY_TO_SHIP   Da gui email va SMS cho khach
+  08:57:04.299  SHIPPED         Da ban giao van chuyen, ma van don GHN-3
+
+### SMS that bai (buoc 4)  (don 921c45a1)
+  08:57:02.609  PLACED          Khach dat hang thanh cong
+  08:57:02.657  STOCK_RESERVED  Da giu hang (rsv-921c45a1-9df8-48ae-b710-60f71cc984b2)
+  08:57:02.673  PAID            Da xac nhan thanh toan (tx-4)
+  08:57:02.680  INVOICED        Da xuat hoa don HD-000002
+  08:57:03.070  READY_TO_SHIP   Thong bao khach that bai (Nha mang tu choi SMS) - khong anh huong don
+  08:57:03.075  SHIPPED         Da ban giao van chuyen, ma van don GHN-2
+
+### Tien trinh khoi dong lai giua buoc 2  (don 172a6130)
+  08:57:02.611  PLACED          Khach dat hang thanh cong
+  08:57:02.657  STOCK_RESERVED  Da giu hang (rsv-172a6130-7d3d-4af5-bcb6-24e22e3cc162)
+  08:57:04.750  PAID            Thanh toan da duoc tru o lan thu truoc (tx-5) - khong tru lai
+  08:57:04.757  INVOICED        Da xuat hoa don HD-000004
+  08:57:04.765  READY_TO_SHIP   Da gui email va SMS cho khach
+  08:57:04.775  SHIPPED         Da ban giao van chuyen, ma van don GHN-5
+
+### He thong ben ngoai
+  So lan tru tien that: 5 (moi don thanh toan thanh cong dung 1 lan)
+    Thanh cong tron ven                                tru 1 lan
+    Het hang (buoc 1)                                  tru 0 lan
+    Cong thanh toan tu choi (buoc 2)                   tru 0 lan
+    Tru tien xong nhung phan hoi bi het gio (buoc 2)   tru 1 lan
+    Hoa don dien tu hong ca 5 lan (buoc 3)             tru 1 lan
+    SMS that bai (buoc 4)                              tru 1 lan
+    Tien trinh khoi dong lai giua buoc 2               tru 1 lan
+  Hoan tien: 1, viec ke toan/van hanh: E_INVOICE
+  Giu hang do don "khoi dong lai": goi reserve 7 lan cho 7 don, ton AO con 94

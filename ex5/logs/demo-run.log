@@ -1,0 +1,127 @@
+
+=== 1. Hoat dong binh thuong: 30 OTP, 2 bao cao thang, 20 lo cap nhat gia, dong bo ton kho moi 2s ===
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   30 |   0 |      1 |        0% | -
+heavy     |    0 |    0 |       0 |    2 |   0 |      1 |        0% | -
+scheduled |    0 |    0 |       1 |    3 |   0 |      1 |        0% | -
+bulk      |    0 |    0 |       0 |   20 |   0 |      1 |        0% | -
+dinh ky "inventory-sync": thanh cong gan nhat cach day 0.2s
+canh bao dang mo: khong co
+
+=== 2. Bat bien khi lap: gui lai OTP otp-0 hai lan + them lai lo b0 (da xong) ===
+09:19:07.721 INFO  [demo] otp-0 duoc gui 1 lan; so lan ghi gia: 1000 (= 20 lo x 50 san pham, khong ghi lai lo b0)
+
+=== 3. Su co un tac: day 400 lo cap nhat gia (hang doi bulk chi xu ly 20 lo/giay) ===
+09:19:07.998 WARN  [control-center] [CANH BAO CRITICAL] Hang doi shopfast-bulk un tac: 373 job dang cho (nguong 100)
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   30 |   0 |      1 |        0% | -
+heavy     |    0 |    0 |       0 |    2 |   0 |      1 |        0% | -
+scheduled |    0 |    0 |       1 |    5 |   0 |      1 |        0% | -
+bulk      |  370 |    5 |       0 |   45 |   0 |      1 |        0% | 3.3s
+dinh ky "inventory-sync": thanh cong gan nhat cach day 1.1s
+canh bao dang mo: 
+  - [critical] Hang doi shopfast-bulk un tac: 375 job dang cho (nguong 100)
+
+=== 4. Su co nha mang SMS: 70% loi -> ti le that bai hang doi critical tang ===
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-104 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-105 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-110 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-114 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-115 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-117 that bai han sau 3 lan: SMS gateway 503
+09:19:11.926 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-118 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-122 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-124 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-126 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-133 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-127 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-131 that bai han sau 3 lan: SMS gateway 503
+09:19:11.987 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-132 that bai han sau 3 lan: SMS gateway 503
+09:19:12.017 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-145 that bai han sau 3 lan: SMS gateway 503
+09:19:12.017 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-147 that bai han sau 3 lan: SMS gateway 503
+09:19:12.017 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-150 that bai han sau 3 lan: SMS gateway 503
+09:19:12.017 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-156 that bai han sau 3 lan: SMS gateway 503
+09:19:12.038 WARN  [control-center] [CANH BAO CRITICAL] Ti le that bai shopfast-critical = 56% trong 20s gan nhat (89/159 lan chay, nguong 20%)
+09:19:12.042 ERROR [control-center] critical/send-otp otp-otp-demo-d8c5fd-151 that bai han sau 3 lan: SMS gateway 503
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   71 |  19 |      1 |       56% | -
+heavy     |    0 |    0 |       0 |    2 |   0 |      1 |        0% | -
+scheduled |    0 |    0 |       1 |    7 |   0 |      1 |        0% | -
+bulk      |  345 |    5 |       0 |   70 |   0 |      1 |        0% | 7.3s
+dinh ky "inventory-sync": thanh cong gan nhat cach day 1.1s
+canh bao dang mo: 
+  - [critical] Hang doi shopfast-bulk un tac: 345 job dang cho (nguong 100)
+  - [critical] Ti le that bai shopfast-critical = 56% trong 20s gan nhat (90/161 lan chay, nguong 20%)
+
+=== 5. Su co ERP: dong bo ton kho dinh ky that bai lien tuc (bai hoc "chet 3 ngay ma khong ai biet") ===
+09:19:16.448 ERROR [control-center] scheduled/inventory-sync repeat:inventory-sync:1793438355928 that bai han sau 2 lan: ERP khong phan hoi (ECONNREFUSED)
+09:19:18.465 ERROR [control-center] scheduled/inventory-sync repeat:inventory-sync:1793438357928 that bai han sau 2 lan: ERP khong phan hoi (ECONNREFUSED)
+09:19:20.129 WARN  [control-center] [CANH BAO CRITICAL] Viec dinh ky "inventory-sync" khong chay thanh cong 6s (lich 2s, nguong 6s)
+09:19:20.389 ERROR [control-center] scheduled/inventory-sync repeat:inventory-sync:1793438359928 that bai han sau 2 lan: ERP khong phan hoi (ECONNREFUSED)
+09:19:21.135 WARN  [control-center] [CANH BAO WARNING] Ti le that bai shopfast-scheduled = 55% trong 20s gan nhat (6/11 lan chay, nguong 50%)
+09:19:22.401 ERROR [control-center] scheduled/inventory-sync repeat:inventory-sync:1793438361928 that bai han sau 2 lan: ERP khong phan hoi (ECONNREFUSED)
+09:19:23.156 WARN  [control-center] [CANH BAO WARNING] Job cu nhat trong shopfast-bulk da cho 15s (nguong 15s)
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   71 |  19 |      1 |       69% | -
+heavy     |    0 |    0 |       0 |    2 |   0 |      1 |        0% | -
+scheduled |    0 |    0 |       1 |    7 |   4 |      1 |       62% | -
+bulk      |  290 |    5 |       0 |  125 |   0 |      1 |        0% | 15.3s
+dinh ky "inventory-sync": thanh cong gan nhat cach day 9.1s
+canh bao dang mo: 
+  - [critical] Hang doi shopfast-bulk un tac: 290 job dang cho (nguong 100)
+  - [critical] Ti le that bai shopfast-critical = 69% trong 20s gan nhat (90/131 lan chay, nguong 20%)
+  - [critical] Viec dinh ky "inventory-sync" khong chay thanh cong 9s (lich 2s, nguong 6s)
+  - [warning] Ti le that bai shopfast-scheduled = 62% trong 20s gan nhat (8/13 lan chay, nguong 50%)
+  - [warning] Job cu nhat trong shopfast-bulk da cho 15s (nguong 15s)
+
+=== 6. Mat worker hang doi heavy (tien trinh bi tat) trong khi van co bao cao moi ===
+09:19:24.163 WARN  [control-center] [CANH BAO CRITICAL] Khong co worker nao dang xu ly shopfast-heavy trong khi con 3 job
+09:19:24.420 ERROR [control-center] scheduled/inventory-sync repeat:inventory-sync:1793438363928 that bai han sau 2 lan: ERP khong phan hoi (ECONNREFUSED)
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   71 |  19 |      1 |       69% | -
+heavy     |    3 |    0 |       0 |    2 |   0 |      0 |        0% | 2.5s
+scheduled |    0 |    0 |       1 |    7 |   5 |      1 |       83% | -
+bulk      |  275 |    5 |       0 |  140 |   0 |      1 |        0% | 17.9s
+dinh ky "inventory-sync": thanh cong gan nhat cach day 11.7s
+canh bao dang mo: 
+  - [critical] Hang doi shopfast-bulk un tac: 275 job dang cho (nguong 100)
+  - [critical] Ti le that bai shopfast-critical = 69% trong 20s gan nhat (90/131 lan chay, nguong 20%)
+  - [critical] Viec dinh ky "inventory-sync" khong chay thanh cong 11s (lich 2s, nguong 6s)
+  - [warning] Ti le that bai shopfast-scheduled = 83% trong 20s gan nhat (10/12 lan chay, nguong 50%)
+  - [warning] Job cu nhat trong shopfast-bulk da cho 17s (nguong 15s)
+  - [critical] Khong co worker nao dang xu ly shopfast-heavy trong khi con 3 job
+
+=== 7. Ngoai le: job du lieu hong va job khong ro loai - danh dau that bai, khong thu lai, khong sap ===
+
+=== 8. Khoi phuc: nha mang SMS va ERP hoat dong lai, bat lai worker heavy ===
+09:19:25.718 ERROR [control-center] bulk/xoa-toan-bo-du-lieu 422 that bai han sau 1 lan: Hang doi bulk khong xu ly tac vu "xoa-toan-bo-du-lieu"
+09:19:25.719 ERROR [control-center] bulk/bulk-price-update 423 that bai han sau 1 lan: Du lieu khong hop le: Gia khong hop le cho A
+09:19:26.183 INFO  [control-center] [CANH BAO DA HET] Viec dinh ky "inventory-sync" khong chay thanh cong 11s (lich 2s, nguong 6s) -> da tro lai binh thuong
+09:19:26.183 INFO  [control-center] [CANH BAO DA HET] Khong co worker nao dang xu ly shopfast-heavy trong khi con 3 job -> da tro lai binh thuong
+09:19:26.625 ERROR [control-center] heavy/export-report 6 that bai han sau 1 lan: Du lieu khong hop le: Thang khong hop le: thang-muoi
+09:19:30.224 INFO  [control-center] [CANH BAO DA HET] Ti le that bai shopfast-critical = 69% trong 20s gan nhat (90/131 lan chay, nguong 20%) -> da tro lai binh thuong
+09:19:35.275 INFO  [control-center] [CANH BAO DA HET] Ti le that bai shopfast-scheduled = 67% trong 20s gan nhat (10/15 lan chay, nguong 50%) -> da tro lai binh thuong
+09:19:52.452 INFO  [control-center] [CANH BAO DA HET] Hang doi shopfast-bulk un tac: 105 job dang cho (nguong 100) -> da tro lai binh thuong
+09:20:06.583 INFO  [control-center] [CANH BAO DA HET] Job cu nhat trong shopfast-bulk da cho 58s (nguong 15s) -> da tro lai binh thuong
+hang doi  | cho  | chay | thu lai | xong | loi | worker | ti le loi | cho lau nhat
+critical  |    0 |    0 |       0 |   71 |  19 |      1 |        0% | -
+heavy     |    0 |    0 |       0 |    5 |   1 |      1 |        0% | -
+scheduled |    0 |    0 |       1 |   28 |   5 |      1 |        0% | -
+bulk      |    0 |    5 |       0 |  415 |   2 |      1 |        0% | -
+dinh ky "inventory-sync": thanh cong gan nhat cach day 1.0s
+canh bao dang mo: khong co
+
+=== Lich su canh bao ===
+09:19:07 firing   BACKLOG        Hang doi shopfast-bulk un tac: 373 job dang cho (nguong 100)
+09:19:12 firing   FAILURE_RATE   Ti le that bai shopfast-critical = 56% trong 20s gan nhat (89/159 lan chay, nguong 20%)
+09:19:20 firing   STALE_SCHEDULE Viec dinh ky "inventory-sync" khong chay thanh cong 6s (lich 2s, nguong 6s)
+09:19:21 firing   FAILURE_RATE   Ti le that bai shopfast-scheduled = 55% trong 20s gan nhat (6/11 lan chay, nguong 50%)
+09:19:23 firing   SLOW_QUEUE     Job cu nhat trong shopfast-bulk da cho 15s (nguong 15s)
+09:19:24 firing   NO_WORKER      Khong co worker nao dang xu ly shopfast-heavy trong khi con 3 job
+09:19:26 resolved STALE_SCHEDULE Viec dinh ky "inventory-sync" khong chay thanh cong 11s (lich 2s, nguong 6s) -> da tro lai binh thuong
+09:19:26 resolved NO_WORKER      Khong co worker nao dang xu ly shopfast-heavy trong khi con 3 job -> da tro lai binh thuong
+09:19:30 resolved FAILURE_RATE   Ti le that bai shopfast-critical = 69% trong 20s gan nhat (90/131 lan chay, nguong 20%) -> da tro lai binh thuong
+09:19:35 resolved FAILURE_RATE   Ti le that bai shopfast-scheduled = 67% trong 20s gan nhat (10/15 lan chay, nguong 50%) -> da tro lai binh thuong
+09:19:52 resolved BACKLOG        Hang doi shopfast-bulk un tac: 105 job dang cho (nguong 100) -> da tro lai binh thuong
+09:20:06 resolved SLOW_QUEUE     Job cu nhat trong shopfast-bulk da cho 58s (nguong 15s) -> da tro lai binh thuong
+09:20:07.082 INFO  [demo] Trang HTML bang dieu khien (ban chup cuoi): 4380 byte
