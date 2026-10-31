@@ -1,0 +1,11 @@
+# Khong dua vao build context nhung thu khong can de build/chay
+node_modules
+dist
+logs
+.git
+.gitignore
+.env
+.env.*
+*.md
+Dockerfile*
+.dockerignore

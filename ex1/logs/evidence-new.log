@@ -1,0 +1,25 @@
+$ docker image ls shopfast
+IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
+shopfast:new   67fdd99da99a        200MB         49.2MB        
+shopfast:old   5536b1a392a0       1.71GB          425MB        
+
+$ docker history --no-trunc shopfast:new | grep -E "DATABASE_URL|JWT_SECRET|MatKhau"  (khong co ket qua)
+
+$ docker image inspect shopfast:new --format "{{json .Config.Env}}"
+["PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin","NODE_VERSION=20.20.2","YARN_VERSION=1.22.22","NODE_ENV=production","PORT=3000"]
+
+$ docker run --rm shopfast:new whoami
+node
+
+$ docker run --rm shopfast:new ls /app /app/node_modules/.bin
+dist
+node_modules
+package.json
+---
+mime
+
+$ docker run --rm shopfast:new du -sh /app
+5.5M	/app
+
+$ docker run --rm shopfast:old du -sh /app
+76M	/app

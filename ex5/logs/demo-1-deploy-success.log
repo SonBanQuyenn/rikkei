@@ -1,0 +1,15 @@
+[deploy 18:04:38] staging: v1 -> v2
+ Image localhost:5000/shopfast/api:v2 Pulling 
+ Image localhost:5000/shopfast/api:v2 Pulled 
+ Container shopfast-demo-api-1 Recreate 
+ Container shopfast-demo-api-1 Recreated 
+ Container shopfast-demo-api-1 Starting 
+ Container shopfast-demo-api-1 Started 
+ Container shopfast-demo-api-1 Waiting 
+ Container shopfast-demo-api-1 Healthy 
+[verify 18:04:47] Quan sat http://127.0.0.1:3300 trong 20s (version v2)
+[verify 18:04:47] Nguong: health loi lien tiep < 3, loi <= 5%, p95 <= 800ms
+[verify 18:05:15] Probe: 40 request, 0 loi (0%), p95 21ms
+[verify 18:05:15] Luu luong that (/metrics): 65 request, 0 loi 5xx (0%)
+[verify 18:05:15] DAT: phien ban v2 on dinh
+[deploy 18:05:15] Trien khai v2 thanh cong

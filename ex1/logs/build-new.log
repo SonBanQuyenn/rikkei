@@ -1,0 +1,113 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.26kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 1.3s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e 0.0s done
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:20-alpine
+#4 DONE 1.2s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 188B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [build 1/7] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#7 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.0s done
+#7 DONE 0.0s
+
+#8 [build 2/7] WORKDIR /app
+#8 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 159B done
+#6 DONE 0.0s
+
+#9 [build 3/7] COPY package.json package-lock.json ./
+#9 DONE 0.1s
+
+#10 [build 4/7] RUN npm ci
+#10 2.326 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#10 3.296 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#10 3.516 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#10 8.485 
+#10 8.485 added 405 packages, and audited 406 packages in 8s
+#10 8.485 
+#10 8.485 53 packages are looking for funding
+#10 8.485   run `npm fund` for details
+#10 8.534 
+#10 8.534 23 vulnerabilities (4 low, 19 moderate)
+#10 8.534 
+#10 8.534 To address issues that do not require attention, run:
+#10 8.534   npm audit fix
+#10 8.534 
+#10 8.534 To address all issues possible (including breaking changes), run:
+#10 8.534   npm audit fix --force
+#10 8.534 
+#10 8.534 Some issues need review, and may require choosing
+#10 8.534 a different dependency.
+#10 8.534 
+#10 8.534 Run `npm audit` for details.
+#10 8.536 npm notice
+#10 8.536 npm notice New major version of npm available! 10.8.2 -> 12.2.1
+#10 8.536 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+#10 8.536 npm notice To update run: npm install -g npm@12.2.1
+#10 8.536 npm notice
+#10 DONE 8.7s
+
+#11 [build 5/7] COPY tsconfig.json ./
+#11 DONE 0.2s
+
+#12 [build 6/7] COPY src ./src
+#12 DONE 0.1s
+
+#13 [build 7/7] RUN npm run build  && npm prune --omit=dev
+#13 0.415 
+#13 0.415 > shopfast-api@1.0.0 build
+#13 0.415 > tsc -p tsconfig.json
+#13 0.415 
+#13 4.754 
+#13 4.754 up to date, audited 83 packages in 2s
+#13 4.754 
+#13 4.754 18 packages are looking for funding
+#13 4.754   run `npm fund` for details
+#13 4.756 
+#13 4.756 found 0 vulnerabilities
+#13 DONE 4.8s
+
+#14 [production 3/5] COPY --from=build --chown=node:node /app/package.json ./
+#14 DONE 0.1s
+
+#15 [production 4/5] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#15 DONE 0.2s
+
+#16 [production 5/5] COPY --from=build --chown=node:node /app/dist ./dist
+#16 DONE 0.1s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 0.3s done
+#17 exporting manifest sha256:82f9aa1097d7742ad03e36cff6629a6c0a3e91f75155b90a41771b3c79796379 0.0s done
+#17 exporting config sha256:0e192f59fe44374868e034a4819c9ec03334e056dca20b63064faa42a35200dd 0.0s done
+#17 exporting attestation manifest sha256:ef61f011dc6f91ad1182e0bf6b18692d0ff7d67bc79101e8062845d0c05b0cb7 0.1s done
+#17 exporting manifest list sha256:d5118f6595199035aa6f27e1c1074af75dc10399aace1dc933a5c46e2bfba615
+#17 exporting manifest list sha256:d5118f6595199035aa6f27e1c1074af75dc10399aace1dc933a5c46e2bfba615 0.0s done
+#17 naming to docker.io/library/shopfast:new done
+#17 unpacking to docker.io/library/shopfast:new
+#17 unpacking to docker.io/library/shopfast:new 0.2s done
+#17 DONE 0.7s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/fk35e4jbqo5itpup62b08zfvn
+
+real	0m18.932s
+user	0m0.106s
+sys	0m0.060s

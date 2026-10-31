@@ -1,0 +1,85 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.26kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 0.4s
+
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
+#3 resolve docker.io/docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e 0.0s done
+#3 CACHED
+
+#4 [internal] load metadata for docker.io/library/node:20-alpine
+#4 DONE 0.3s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 188B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [build 1/7] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#7 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.0s done
+#7 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 1.23kB done
+#6 DONE 0.0s
+
+#8 [build 2/7] WORKDIR /app
+#8 CACHED
+
+#9 [build 3/7] COPY package.json package-lock.json ./
+#9 CACHED
+
+#10 [build 4/7] RUN npm ci
+#10 CACHED
+
+#11 [build 5/7] COPY tsconfig.json ./
+#11 CACHED
+
+#12 [build 6/7] COPY src ./src
+#12 DONE 0.1s
+
+#13 [build 7/7] RUN npm run build  && npm prune --omit=dev
+#13 0.435 
+#13 0.435 > shopfast-api@1.0.0 build
+#13 0.435 > tsc -p tsconfig.json
+#13 0.435 
+#13 5.109 
+#13 5.109 up to date, audited 83 packages in 2s
+#13 5.109 
+#13 5.109 18 packages are looking for funding
+#13 5.109   run `npm fund` for details
+#13 5.111 
+#13 5.111 found 0 vulnerabilities
+#13 DONE 5.2s
+
+#14 [production 3/5] COPY --from=build --chown=node:node /app/package.json ./
+#14 CACHED
+
+#15 [production 4/5] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#15 CACHED
+
+#16 [production 5/5] COPY --from=build --chown=node:node /app/dist ./dist
+#16 DONE 0.1s
+
+#17 exporting to image
+#17 exporting layers 0.1s done
+#17 exporting manifest sha256:44b8ef9add061fa29bac18809c7dab716fa20b104b9f3e8f0b822a9d7c84a1b1 0.0s done
+#17 exporting config sha256:12762bde09076b4d7b70a23f04647eda5f72e1d6991a5124ea3152d9484c907d 0.0s done
+#17 exporting attestation manifest sha256:f795d1e72e14b1f9235bb762a3c1ea2af387e736db468a703a29e067e116758c 0.1s done
+#17 exporting manifest list sha256:67fdd99da99a767ad5a9bd9d65b26e274315ebe5fcb56a6966c188c75f7c8e6d
+#17 exporting manifest list sha256:67fdd99da99a767ad5a9bd9d65b26e274315ebe5fcb56a6966c188c75f7c8e6d 0.0s done
+#17 naming to docker.io/library/shopfast:new done
+#17 unpacking to docker.io/library/shopfast:new 0.0s done
+#17 DONE 0.4s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mp859ik6a9ffgvq54vudn9g86
+
+real	0m8.037s
+user	0m0.106s
+sys	0m0.106s

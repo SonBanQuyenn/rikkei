@@ -1,0 +1,23 @@
+$ docker stats --no-stream sf-old sf-new
+NAME      MEM USAGE / LIMIT     PIDS
+sf-old    238.1MiB / 3.709GiB   30
+sf-new    13.38MiB / 3.709GiB   7
+
+$ docker top sf-old
+PID                 USER                COMMAND
+2634                root                npm run start:dev
+2659                root                sh -c ts-node-dev --respawn src/main.ts
+2660                root                node /app/node_modules/.bin/ts-node-dev --respawn src/main.ts
+2706                root                /usr/local/bin/node -r /tmp/ts-node-dev-hook-5126499846662775.js /app/node_modules/ts-node-dev/lib/wrap.js src/main.ts
+
+$ docker top sf-new
+PID                 USER                COMMAND
+2699                1000                node dist/main.js
+
+$ docker exec sf-new wget -qO- http://127.0.0.1:3000/health
+{"status":"ok"}
+$ docker logs sf-old
+> ts-node-dev --respawn src/main.ts
+
+[INFO] 10:27:48 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+ShopFast API dang chay tai cong 3000

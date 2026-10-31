@@ -1,0 +1,32 @@
+[deploy 18:05:15] staging: v2 -> v3
+ Image localhost:5000/shopfast/api:v3 Pulling 
+ Image localhost:5000/shopfast/api:v3 Pulled 
+ Container shopfast-demo-api-1 Recreate 
+ Container shopfast-demo-api-1 Recreated 
+ Container shopfast-demo-api-1 Starting 
+ Container shopfast-demo-api-1 Started 
+ Container shopfast-demo-api-1 Waiting 
+ Container shopfast-demo-api-1 Healthy 
+[verify 18:05:24] Quan sat http://127.0.0.1:3300 trong 20s (version v3)
+[verify 18:05:24] Nguong: health loi lien tiep < 3, loi <= 5%, p95 <= 800ms
+[verify 18:05:52] Probe: 40 request, 20 loi (50%), p95 5ms
+[verify 18:05:52] Luu luong that (/metrics): 65 request, 20 loi 5xx (30%)
+[verify 18:05:52] THAT BAI: ti le loi probe 50% > 5%
+[verify 18:05:52] THAT BAI: ti le 5xx that 30% > 5%
+[deploy 18:05:52] TU DONG QUAY LUI ve v2
+ Container shopfast-demo-api-1 Recreate 
+ Container shopfast-demo-api-1 Recreated 
+ Container shopfast-demo-api-1 Starting 
+ Container shopfast-demo-api-1 Started 
+ Container shopfast-demo-api-1 Waiting 
+ Container shopfast-demo-api-1 Healthy 
+[verify 18:05:58] Quan sat http://127.0.0.1:3300 trong 10s (version v2)
+[verify 18:05:58] Nguong: health loi lien tiep < 3, loi <= 5%, p95 <= 800ms
+[verify 18:06:13] Probe: 20 request, 0 loi (0%), p95 14ms
+[verify 18:06:13] Luu luong that (/metrics): 32 request, 0 loi 5xx (0%)
+[verify 18:06:13] DAT: phien ban v2 on dinh
+[deploy 18:06:13] Da quay lui ve v2 sau 21s
+
+real	0m57.756s
+user	0m4.673s
+sys	0m5.816s

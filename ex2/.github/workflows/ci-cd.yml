@@ -1,0 +1,72 @@
+name: CI/CD
+on: push
+
+env:
+  IMAGE: ghcr.io/shopfast/api
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    # Kiem thu tich hop can Postgres va Redis that -> cung cap bang service container
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: shopfast
+          POSTGRES_PASSWORD: shopfast
+          POSTGRES_DB: shopfast_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U shopfast"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          # (1) Bat bo nho dem cho phu thuoc: cache thu muc ~/.npm theo hash cua package-lock.json
+          cache: npm
+
+      # npm ci: cai dung theo package-lock.json, tan dung cache ~/.npm o tren
+      - run: npm ci
+
+      # (2) Kiem thu la dieu kien tien quyet: buoc nao fail thi job dung, khong toi buoc dong goi
+      - name: Unit test
+        run: npm test
+      - name: Integration test (Postgres + Redis)
+        run: npm run test:integration
+        env:
+          DATABASE_URL: postgres://shopfast:shopfast@localhost:5432/shopfast_test
+          REDIS_URL: redis://localhost:6379
+
+      # (5) Gan the phien ban theo ma commit (co dinh, dung de quay lui) kem "latest"
+      - run: docker build -t "$IMAGE:${{ github.sha }}" -t "$IMAGE:latest" .
+
+      # (3) Khoa bi mat lay tu GitHub Secrets, truyen qua stdin, khong xuat hien trong tep cau hinh
+      # (4) Chi dang nhap va day image khi chay tren nhanh chinh
+      - name: Login ghcr.io
+        if: github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+
+      - name: Push image
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker push "$IMAGE:${{ github.sha }}"
+          docker push "$IMAGE:latest"

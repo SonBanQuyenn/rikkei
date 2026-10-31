@@ -1,0 +1,133 @@
+# ShopFast - nen tang trien khai tu dong
+#
+#   [1 validate] ─┐
+#   [2 test    ] ─┼─> [4 build + scan] ─> [5 staging + verify] ─> [6 production + verify]
+#   [3 security] ─┘          (PR: dung o day)        (tu dong quay lui neu verify that bai)
+#
+# PR vao main  : chay 1-4 (build nhung khong day image) -> la required checks, khoa merge neu do
+# Push vao main: chay 1-6
+# Ngan sach thoi gian: <= 10 phut (moi job co timeout-minutes, xem bao-cao.md)
+name: ShopFast Pipeline
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: ghcr.io/shopfast/api
+
+jobs:
+  # ---------- Giai doan 1: kiem tra dinh dang + kieu ----------
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run typecheck
+
+  # ---------- Giai doan 2: kiem thu + CONG DO PHU (>= 80% lines) ----------
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      # coverageThreshold trong package.json: lines/statements/functions >= 80%, branches >= 70%
+      # Duoi nguong -> jest thoat ma 1 -> job do -> pipeline dung
+      - run: npm run test:coverage
+      - name: Ghi do phu vao tom tat
+        if: always()
+        run: |
+          if [ -f coverage/coverage-summary.json ]; then
+            node -e "const t=require('./coverage/coverage-summary.json').total;
+              console.log('### Do phu kiem thu');
+              for (const k of ['lines','statements','functions','branches']) console.log('- ' + k + ': ' + t[k].pct + '%');" \
+              >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  # ---------- Giai doan 3: bao mat ma nguon (CONG LO HONG + lo bi mat) ----------
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      # Phu thuoc production co lo hong muc high/critical -> chan
+      - run: npm audit --audit-level=high --omit=dev
+      # Co khoa bi mat bi commit vao lich su git -> chan
+      - name: Quet bi mat (gitleaks)
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.21.2 detect --source /repo --redact --exit-code 1
+
+  # ---------- Giai doan 4: build image + quet image (CONG LO HONG) + day len kho ----------
+  build:
+    needs: [validate, test, security]
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image (chua day)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          build-args: APP_VERSION=${{ github.sha }}
+          tags: ${{ env.IMAGE }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      # Image co lo hong HIGH/CRITICAL da co ban va -> chan, khong day len kho
+      - name: Quet image (trivy)
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.57.1 \
+            image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --no-progress \
+            "$IMAGE:${{ github.sha }}"
+      - name: Day image len kho (chi nhanh main)
+        if: github.event_name == 'push'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker push "$IMAGE:${{ github.sha }}"
+
+  # ---------- Giai doan 5: staging + kiem tra sau trien khai ----------
+  deploy-staging:
+    needs: build
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: staging
+      image_tag: ${{ needs.build.outputs.image_tag }}
+    secrets: inherit
+
+  # ---------- Giai doan 6: production + kiem tra + tu dong quay lui ----------
+  deploy-production:
+    needs: [build, deploy-staging]
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: production
+      image_tag: ${{ needs.build.outputs.image_tag }}
+    secrets: inherit

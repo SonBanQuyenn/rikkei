@@ -1,0 +1,75 @@
+# Workflow dung chung: trien khai mot image tag len mot moi truong qua SSH
+name: _deploy
+
+on:
+  workflow_call:
+    inputs:
+      deploy_env:
+        description: staging | production
+        type: string
+        required: true
+      github_environment:
+        description: Ten GitHub Environment (quyet dinh secrets va quy tac phe duyet)
+        type: string
+        required: true
+      image_tag:
+        type: string
+        required: true
+      mode:
+        description: "deploy | --rollback"
+        type: string
+        default: deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.github_environment }}
+      url: ${{ vars.APP_URL }}
+    # Moi moi truong chi co 1 lan trien khai tai mot thoi diem (ke ca rollback).
+    # cancel-in-progress: false -> lan sau XEP HANG cho lan truoc xong, khong huy giua chung.
+    concurrency:
+      group: deploy-${{ inputs.deploy_env }}
+      cancel-in-progress: false
+    timeout-minutes: 15
+    env:
+      TARGET: ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cai SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Ghi .env cua moi truong tu GitHub Secrets / Variables
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+        run: |
+          umask 077
+          {
+            echo "NODE_ENV=production"
+            echo "DATABASE_URL=$DATABASE_URL"
+            echo "REDIS_URL=$REDIS_URL"
+            echo "JWT_SECRET=$JWT_SECRET"
+            echo "LOG_LEVEL=$LOG_LEVEL"
+          } > .env.deploy
+
+      - name: Chep cau hinh len server
+        run: |
+          scp deploy/docker-compose.yml deploy/deploy.sh "$TARGET:/opt/shopfast/"
+          scp .env.deploy "$TARGET:/opt/shopfast/.env"
+          rm .env.deploy
+
+      - name: Trien khai ${{ inputs.image_tag }} (${{ inputs.mode }})
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | ssh "$TARGET" "docker login ghcr.io -u '${{ github.actor }}' --password-stdin"
+          ssh "$TARGET" "cd /opt/shopfast && chmod +x deploy.sh && \
+            DEPLOY_ENV=${{ inputs.deploy_env }} ./deploy.sh ${{ inputs.image_tag }} ${{ inputs.mode }}"

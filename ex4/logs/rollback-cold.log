@@ -1,0 +1,50 @@
+[17:53:31] Quay lui: blue (v1) -> green (v2)
+[17:53:31] green da tat -> bat lai v2
+ Container shopfast-green-api-4 Creating 
+ Container shopfast-green-api-2 Creating 
+ Container shopfast-green-api-1 Creating 
+ Container shopfast-green-api-3 Creating 
+ Container shopfast-green-api-4 Created 
+ Container shopfast-green-api-2 Created 
+ Container shopfast-green-api-1 Created 
+ Container shopfast-green-api-3 Created 
+ Container shopfast-green-api-3 Starting 
+ Container shopfast-green-api-3 Started 
+ Container shopfast-green-api-1 Starting 
+ Container shopfast-green-api-1 Started 
+ Container shopfast-green-api-2 Starting 
+ Container shopfast-green-api-2 Started 
+ Container shopfast-green-api-4 Starting 
+ Container shopfast-green-api-4 Started 
+ Container shopfast-green-api-3 Waiting 
+ Container shopfast-green-api-1 Waiting 
+ Container shopfast-green-api-2 Waiting 
+ Container shopfast-green-api-4 Waiting 
+ Container shopfast-green-api-3 Healthy 
+ Container shopfast-green-api-1 Healthy 
+ Container shopfast-green-api-2 Healthy 
+ Container shopfast-green-api-4 Healthy 
+2026/10/31 10:53:39 [notice] 256#256: signal process started
+[17:53:39] Da chuyen luong sang green
+[17:53:39] Da quay lui ve v2 sau 8s
+ Container shopfast-blue-api-1 Stopping 
+ Container shopfast-blue-api-3 Stopping 
+ Container shopfast-blue-api-4 Stopping 
+ Container shopfast-blue-api-2 Stopping 
+ Container shopfast-blue-api-4 Stopped 
+ Container shopfast-blue-api-4 Removing 
+ Container shopfast-blue-api-4 Removed 
+ Container shopfast-blue-api-1 Stopped 
+ Container shopfast-blue-api-1 Removing 
+ Container shopfast-blue-api-2 Stopped 
+ Container shopfast-blue-api-2 Removing 
+ Container shopfast-blue-api-1 Removed 
+ Container shopfast-blue-api-2 Removed 
+ Container shopfast-blue-api-3 Stopped 
+ Container shopfast-blue-api-3 Removing 
+ Container shopfast-blue-api-3 Removed 
+[17:53:52] Da tat blue (v1)
+
+real	0m21.705s
+user	0m0.695s
+sys	0m0.771s

@@ -1,0 +1,22 @@
+# Hop nhat vao develop -> tu dong build va trien khai len staging
+name: Deploy staging
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_build.yml
+    permissions:
+      contents: read
+      packages: write
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      deploy_env: staging
+      github_environment: staging
+      image_tag: ${{ needs.build.outputs.image_tag }}
+    secrets: inherit

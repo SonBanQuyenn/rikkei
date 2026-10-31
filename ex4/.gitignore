@@ -1,0 +1,5 @@
+node_modules
+dist
+deploy/.env
+deploy/state
+deploy/nginx/upstream/active.conf.bak

@@ -1,0 +1,22 @@
+[17:47:50] Drain va tat blue (v1)
+ Container shopfast-blue-api-2 Stopping 
+ Container shopfast-blue-api-3 Stopping 
+ Container shopfast-blue-api-4 Stopping 
+ Container shopfast-blue-api-1 Stopping 
+ Container shopfast-blue-api-2 Stopped 
+ Container shopfast-blue-api-2 Removing 
+ Container shopfast-blue-api-4 Stopped 
+ Container shopfast-blue-api-4 Removing 
+ Container shopfast-blue-api-2 Removed 
+ Container shopfast-blue-api-4 Removed 
+ Container shopfast-blue-api-3 Stopped 
+ Container shopfast-blue-api-3 Removing 
+ Container shopfast-blue-api-3 Removed 
+ Container shopfast-blue-api-1 Stopped 
+ Container shopfast-blue-api-1 Removing 
+ Container shopfast-blue-api-1 Removed 
+[17:47:57] Xong. Dang chay: green (v2), tong container: 4
+
+real	0m6.923s
+user	0m0.377s
+sys	0m0.438s

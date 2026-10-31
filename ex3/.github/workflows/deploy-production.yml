@@ -1,0 +1,23 @@
+# Hop nhat vao main -> build, day image, CHO PHE DUYET roi moi trien khai production.
+# GitHub Environment "production" bat "Required reviewers" (truong nhom / tech lead).
+name: Deploy production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_build.yml
+    permissions:
+      contents: read
+      packages: write
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      deploy_env: production
+      github_environment: production
+      image_tag: ${{ needs.build.outputs.image_tag }}
+    secrets: inherit

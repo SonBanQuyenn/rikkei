@@ -1,0 +1,77 @@
+# Chay cho moi yeu cau hop nhat vao develop/main.
+# 3 job duoi day duoc dat la "required status checks" trong branch protection
+# -> bat ky job nao fail thi nut Merge bi khoa.
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+
+# Commit moi tren cung PR thi huy lan CI cu (chi ap dung cho CI, khong ap dung cho deploy)
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    name: format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run test:unit
+
+  integration-test:
+    name: integration-test
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: shopfast
+          POSTGRES_PASSWORD: shopfast
+          POSTGRES_DB: shopfast_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U shopfast"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://shopfast:shopfast@localhost:5432/shopfast_test
+      REDIS_URL: redis://localhost:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      # Gom ca kiem thu migration (loi giua chung phai ROLLBACK) chay that tren Postgres
+      - run: npm run test:integration

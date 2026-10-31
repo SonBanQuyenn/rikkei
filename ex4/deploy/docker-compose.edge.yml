@@ -1,0 +1,22 @@
+# Lop bien: nginx dung truoc, khong bao gio bi dung trong luc trien khai.
+# Mang dung chung (tao 1 lan, truoc ca edge lan app):  docker network create shopfast
+#   docker compose -p shopfast-edge -f docker-compose.edge.yml up -d
+name: shopfast-edge
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # Mount ca thu muc (khong mount file) de file active.conf ghi lai van duoc thay
+      - ./nginx/upstream:/etc/nginx/upstream:ro
+    networks:
+      - shopfast
+    restart: unless-stopped
+
+networks:
+  shopfast:
+    external: true
+    name: shopfast

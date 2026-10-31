@@ -1,0 +1,10 @@
+# Dat tai /opt/shopfast tren server staging va production.
+# IMAGE_TAG do deploy.sh truyen vao (ma commit), .env do pipeline ghi tu GitHub Secrets.
+services:
+  api:
+    image: ghcr.io/shopfast/api:${IMAGE_TAG:?IMAGE_TAG chua duoc dat}
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    stop_grace_period: 30s

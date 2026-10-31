@@ -1,0 +1,77 @@
+# Workflow dung chung cho giai doan 5 va 6.
+# Chep cau hinh (dung chung + rieng moi truong) va bi mat len server, chay deploy.sh:
+#   deploy.sh -> doi phien ban -> verify.sh -> that bai thi TU DONG QUAY LUI (ma thoat 2)
+name: _deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: staging | production
+        type: string
+        required: true
+      image_tag:
+        type: string
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ steps.cfg.outputs.app_url }}
+    # Khong bao gio co 2 lan trien khai cung moi truong chay chong nhau
+    concurrency:
+      group: deploy-${{ inputs.environment }}
+      cancel-in-progress: false
+    env:
+      TARGET: ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: cfg
+        name: Doc cau hinh moi truong
+        run: echo "app_url=$(grep '^APP_URL=' config/${{ inputs.environment }}.env | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+
+      - name: Cai SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+      # Bi mat chi ton tai trong GitHub Environment secrets -> ghi thanh .env quyen 600 tren server
+      - name: Ghi bi mat cua moi truong
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          umask 077
+          printf 'NODE_ENV=production\nJWT_SECRET=%s\n' "$JWT_SECRET" > .env.secret
+
+      - name: Chep cau hinh len server
+        run: |
+          scp deploy/docker-compose.yml deploy/deploy.sh deploy/verify.sh "$TARGET:/opt/shopfast/"
+          scp config/shared.env "$TARGET:/opt/shopfast/shared.env"
+          scp "config/${{ inputs.environment }}.env" "$TARGET:/opt/shopfast/env.env"
+          scp .env.secret "$TARGET:/opt/shopfast/.env"
+          rm .env.secret
+
+      - name: Trien khai ${{ inputs.image_tag }} + verify
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$GHCR_TOKEN" | ssh "$TARGET" "docker login ghcr.io -u '${{ github.actor }}' --password-stdin"
+          set +e
+          ssh "$TARGET" "cd /opt/shopfast && chmod +x deploy.sh verify.sh && ./deploy.sh ${{ inputs.image_tag }}" | tee deploy.log
+          code=${PIPESTATUS[0]}
+          {
+            echo "### ${{ inputs.environment }}: ${{ inputs.image_tag }}"
+            echo '```'
+            grep -E '^\[(deploy|verify)' deploy.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$code" -eq 2 ]; then
+            echo "::error::Verify that bai - da TU DONG QUAY LUI ve phien ban truoc"
+          fi
+          exit "$code"

@@ -1,0 +1,12 @@
+# Dat tai /opt/shopfast tren server. Bien lay tu shared.env + <moi truong>.env (deploy.sh nap),
+# bi mat lay tu .env do pipeline ghi tu GitHub Environment secrets.
+services:
+  api:
+    image: ${IMAGE}:${IMAGE_TAG:?IMAGE_TAG chua dat}
+    env_file: .env
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}"
+    mem_limit: ${MEM_LIMIT}
+    restart: unless-stopped

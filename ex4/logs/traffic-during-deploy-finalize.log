@@ -1,0 +1,4 @@
+0.1s WS hello from v1
+54.5s WS reconnect requested, retry in 4228 ms
+58.8s WS hello from v2
+SUMMARY {"ok":1951,"fail":0,"byVersion":{"v1":190,"v2":1761},"wsOpens":2,"wsReconnectMsgs":1,"wsUnexpectedClose":0}

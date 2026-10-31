@@ -1,0 +1,33 @@
+[17:53:52] Dang chay: green (v2) | se trien khai v2 len blue
+NOTICE:  relation "schema_migrations" already exists, skipping
+[17:53:55] Bo qua 003_contract_unit_price.sql (contract - chay o lan trien khai sau)
+[17:53:55] Migration xong
+ Container shopfast-blue-api-4 Creating 
+ Container shopfast-blue-api-2 Creating 
+ Container shopfast-blue-api-3 Creating 
+ Container shopfast-blue-api-1 Creating 
+ Container shopfast-blue-api-4 Created 
+ Container shopfast-blue-api-2 Created 
+ Container shopfast-blue-api-3 Created 
+ Container shopfast-blue-api-1 Created 
+ Container shopfast-blue-api-1 Starting 
+ Container shopfast-blue-api-1 Started 
+ Container shopfast-blue-api-3 Starting 
+ Container shopfast-blue-api-3 Started 
+ Container shopfast-blue-api-2 Starting 
+ Container shopfast-blue-api-2 Started 
+ Container shopfast-blue-api-4 Starting 
+ Container shopfast-blue-api-4 Started 
+ Container shopfast-blue-api-1 Waiting 
+ Container shopfast-blue-api-3 Waiting 
+ Container shopfast-blue-api-2 Waiting 
+ Container shopfast-blue-api-4 Waiting 
+ Container shopfast-blue-api-1 Healthy 
+ Container shopfast-blue-api-3 Healthy 
+ Container shopfast-blue-api-2 Healthy 
+ Container shopfast-blue-api-4 Healthy 
+[17:54:03] 4 container blue healthy sau 7s (tong container: 8)
+2026/10/31 10:54:04 [notice] 282#282: signal process started
+[17:54:04] Da chuyen luong sang blue
+[17:54:38] Trien khai v2 thanh cong. green (v2) van chay de quay lui tuc thi.
+[17:54:38] Sau cua so quan sat (15 phut) chay: scripts/finalize.sh

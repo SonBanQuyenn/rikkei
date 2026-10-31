@@ -1,0 +1,24 @@
+$ npm run test:coverage   # them src/coupon.ts khong co test
+Statements   : 74.25% ( 75/101 )
+Branches     : 57.57% ( 19/33 )
+Functions    : 90.47% ( 19/21 )
+Lines        : 76.19% ( 64/84 )
+Jest: "global" coverage threshold for statements (80%) not met: 74.25%
+Jest: "global" coverage threshold for branches (70%) not met: 57.57%
+Jest: "global" coverage threshold for lines (80%) not met: 76.19%
+Tests:       10 passed, 10 total
+exit code: 1
+
+$ npm audit --audit-level=high --omit=dev   # them lodash@4.17.20
+# npm audit report
+lodash  <=4.17.23
+Severity: high
+Command Injection in lodash - https://github.com/advisories/GHSA-35jh-r3h4-6jhm
+Regular Expression Denial of Service (ReDoS) in lodash - https://github.com/advisories/GHSA-29mw-wpgm-hmr9
+lodash vulnerable to Code Injection via `_.template` imports key names - https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+lodash vulnerable to Prototype Pollution via array path bypass in `_.unset` and `_.omit` - https://github.com/advisories/GHSA-f23m-r3pf-42rh
+Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions - https://github.com/advisories/GHSA-xxjr-mmjv-4gpg
+fix available via `npm audit fix`
+node_modules/lodash
+1 high severity vulnerability
+To address all issues, run:

@@ -1,0 +1,84 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.old
+#1 transferring dockerfile: 323B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:20
+#2 DONE 1.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/node:20@sha256:8f693eaa7e0a8e71560c9a82b55fd54c2ae920a2ba5d2cde28bac7d1c01c9ba5
+#4 resolve docker.io/library/node:20@sha256:8f693eaa7e0a8e71560c9a82b55fd54c2ae920a2ba5d2cde28bac7d1c01c9ba5 0.0s done
+#4 DONE 0.0s
+
+#5 [2/5] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 14.35kB 0.3s done
+#6 DONE 0.3s
+
+#7 [3/5] COPY . .
+#7 DONE 0.0s
+
+#8 [4/5] RUN npm install
+#8 2.601 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#8 3.484 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#8 3.785 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#8 9.323 
+#8 9.323 added 405 packages, and audited 406 packages in 9s
+#8 9.323 
+#8 9.323 53 packages are looking for funding
+#8 9.323   run `npm fund` for details
+#8 9.363 
+#8 9.363 23 vulnerabilities (4 low, 19 moderate)
+#8 9.363 
+#8 9.363 To address issues that do not require attention, run:
+#8 9.363   npm audit fix
+#8 9.363 
+#8 9.363 To address all issues possible (including breaking changes), run:
+#8 9.363   npm audit fix --force
+#8 9.363 
+#8 9.363 Some issues need review, and may require choosing
+#8 9.363 a different dependency.
+#8 9.363 
+#8 9.363 Run `npm audit` for details.
+#8 9.366 npm notice
+#8 9.366 npm notice New major version of npm available! 10.8.2 -> 12.2.1
+#8 9.366 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+#8 9.366 npm notice To update run: npm install -g npm@12.2.1
+#8 9.366 npm notice
+#8 DONE 9.7s
+
+#9 [5/5] RUN npm run build
+#9 0.443 
+#9 0.443 > shopfast-api@1.0.0 build
+#9 0.443 > tsc -p tsconfig.json
+#9 0.443 
+#9 DONE 1.9s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 3.0s done
+#10 exporting manifest sha256:9379efd49f68afdb01c85a28dcc29c271ad0293d9e41e7c8700ba7e6cb07db9c 0.0s done
+#10 exporting config sha256:3dc99f316413cd5353a980befd3b095d2f4858af2b2ffbb9fee5c1c10cfb8fb0 0.0s done
+#10 exporting attestation manifest sha256:1139439e0c9a63d0c0192663596b7135df5f04d3d4eae3d7cac457fe5fc3b209 0.1s done
+#10 exporting manifest list sha256:5b714cf549c4e96715571efbf39ac2274de3c467127ad7eac60bd7eaf2f37f1a
+#10 exporting manifest list sha256:5b714cf549c4e96715571efbf39ac2274de3c467127ad7eac60bd7eaf2f37f1a 0.0s done
+#10 naming to docker.io/library/shopfast:old 0.0s done
+#10 unpacking to docker.io/library/shopfast:old
+#10 unpacking to docker.io/library/shopfast:old 2.0s done
+#10 DONE 5.2s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "JWT_SECRET") (line 11)
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ndz45ddtlo9i2edkem8wfxola
+
+real	0m19.589s
+user	0m0.030s
+sys	0m0.122s

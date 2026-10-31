@@ -1,0 +1,42 @@
+# Quay lui thu cong: chon moi truong + ma commit cua phien ban muon quay ve.
+# Khong build, khong test, khong migration -> chi keo image co san va doi container (< 3 phut).
+name: Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Moi truong can quay lui
+        type: choice
+        options: [staging, production]
+        required: true
+      image_tag:
+        description: Ma commit (the image) cua phien ban muon quay ve
+        type: string
+        required: true
+
+jobs:
+  verify-image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Kiem tra image ton tai tren kho
+        run: docker manifest inspect "ghcr.io/shopfast/api:${{ inputs.image_tag }}" > /dev/null
+
+  rollback:
+    needs: verify-image
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      deploy_env: ${{ inputs.environment }}
+      # production-rollback: cung secrets voi production nhung KHONG cho phe duyet
+      # (chi nguoi co quyen Maintain moi chay duoc workflow_dispatch)
+      github_environment: ${{ inputs.environment == 'production' && 'production-rollback' || 'staging' }}
+      image_tag: ${{ inputs.image_tag }}
+      mode: --rollback
+    secrets: inherit

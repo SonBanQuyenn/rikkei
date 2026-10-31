@@ -1,0 +1,29 @@
+# Mot moi truong ung dung (blue hoac green), moi moi truong 4 container.
+#   COLOR=green IMAGE_TAG=<sha> docker compose -p shopfast-green -f docker-compose.app.yml up -d --wait
+services:
+  api:
+    image: ghcr.io/shopfast/api:${IMAGE_TAG:?IMAGE_TAG chua dat}
+    env_file: .env
+    environment:
+      DRAIN_TIMEOUT_MS: "45000"
+    deploy:
+      replicas: 4
+    # Thoi gian cho drain ket noi realtime truoc khi bi kill (> DRAIN_TIMEOUT_MS)
+    stop_grace_period: 60s
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/health"]
+      interval: 5s
+      timeout: 3s
+      start_period: 30s
+      retries: 3
+    networks:
+      shopfast:
+        # nginx goi "api-blue" / "api-green" -> DNS tra ve IP cua ca 4 container
+        aliases:
+          - api-${COLOR:?COLOR chua dat}
+    restart: unless-stopped
+
+networks:
+  shopfast:
+    external: true
+    name: shopfast

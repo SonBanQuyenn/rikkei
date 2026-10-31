@@ -1,0 +1,25 @@
+[17:54:38] Quay lui: blue (v2) -> green (v2)
+2026/10/31 10:54:39 [notice] 362#362: signal process started
+[17:54:39] Da chuyen luong sang green
+[17:54:39] Da quay lui ve v2 sau 1s
+ Container shopfast-blue-api-4 Stopping 
+ Container shopfast-blue-api-3 Stopping 
+ Container shopfast-blue-api-1 Stopping 
+ Container shopfast-blue-api-2 Stopping 
+ Container shopfast-blue-api-2 Stopped 
+ Container shopfast-blue-api-2 Removing 
+ Container shopfast-blue-api-1 Stopped 
+ Container shopfast-blue-api-1 Removing 
+ Container shopfast-blue-api-2 Removed 
+ Container shopfast-blue-api-3 Stopped 
+ Container shopfast-blue-api-3 Removing 
+ Container shopfast-blue-api-1 Removed 
+ Container shopfast-blue-api-3 Removed 
+ Container shopfast-blue-api-4 Stopped 
+ Container shopfast-blue-api-4 Removing 
+ Container shopfast-blue-api-4 Removed 
+[17:54:51] Da tat blue (v2)
+
+real	0m12.917s
+user	0m0.515s
+sys	0m0.470s
